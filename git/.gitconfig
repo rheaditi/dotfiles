@@ -1,0 +1,42 @@
+[user]
+	name = Aditi Mohanty
+	email = rheaditi@users.noreply.github.com
+
+[github]
+	user = rheaditi
+
+[core]
+	# Use custom `.gitignore` and `.gitattributes`
+	excludesfile = ~/.gitignore
+	hideDotFiles = false
+	whitespace = space-before-tab,trailing-space
+	# Make `git rebase` safer on macOS
+	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	trustctime = false
+
+[alias]
+	co = checkout
+	st = status
+	sts = status -sb
+	lp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lm = log --pretty=format:'* %s (%h)'
+	grepl = grep --break --heading --line-number
+	amend = commit --amend --reuse-message=HEAD
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	visual = !gitk
+
+[pager]
+	diff = diff-so-fancy | less --tabs=4 -RFX
+	show = diff-so-fancy | less --tabs=4 -RFX
+
+[color]
+	# Use colors in Git commands that are capable of colored output when
+	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+	ui = auto
+
+[grep]
+	lineNumber = true
+
+[help]
+	autocorrect = 5
