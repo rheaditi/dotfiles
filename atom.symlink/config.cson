@@ -1,0 +1,33 @@
+"*":
+  core:
+    ignoredNames: [
+      ".git"
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      "build"
+      "node_components"
+      "bower_components"
+    ]
+    projectHome: "~/dev"
+    telemetryConsent: "no"
+    useCustomTitleBar: true
+  "exception-reporting":
+    userId: "a976e774-8f05-c9ed-2ec6-269d540c6e29"
+  "git-plus":
+    general:
+      _analyticsUserId: "5a9d231c-e4cc-4648-8475-f56b75df4ba3"
+  "split-diff":
+    ignoreWhitespace: true
+  "tree-view":
+    hideIgnoredNames: true
+  welcome:
+    showOnStartup: false
+".coffee.jsx.source":
+  editor:
+    scrollPastEnd: true
+    showIndentGuide: true
+    showInvisibles: true
+    softWrap: true
