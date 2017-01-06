@@ -30,3 +30,8 @@
 # If you are unfamiliar with CSON, you can read more about it in the
 # Atom Flight Manual:
 # http://flight-manual.atom.io/using-atom/sections/basic-customization/#_cson
+'atom-text-editor':
+  'alt-cmd-enter': 'goto-definition:go'
+
+'atom-text-editor[data-grammar="text html liquid"]:not([mini])':
+    'tab': 'emmet:expand-abbreviation-with-tab'
