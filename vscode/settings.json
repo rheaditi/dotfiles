@@ -1,0 +1,31 @@
+// Place your settings in this file to overwrite the default settings
+{
+  "atomKeymap.promptV3Features": true,
+  "editor.fontSize": 13,
+  "editor.renderWhitespace": "all",
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "python.formatting.provider": "yapf",
+  "window.zoomLevel": 0,
+  "workbench.colorTheme": "Ayu One Dark",
+  "editor.fontFamily": "'Fira Code', 'Hasklig', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.rulers": [
+      80,
+      120
+  ],
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "css.validate": false,
+  "scss.validate": false,
+  "javascript.validate.enable": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "gitlens.advanced.messages": {
+      "suppressShowKeyBindingsNotice": true
+  },
+  "files.associations": {
+      "*.jsx": "javascriptreact",
+      "*rc": "shellscript",
+      "zshrc_default": "shellscript"
+  }
+}
