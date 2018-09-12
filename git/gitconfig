@@ -25,6 +25,7 @@
 	amend = commit --amend
 	amendr = commit --amend --reuse-message=HEAD
 	unstage = reset HEAD --
+	uncommit = reset --soft HEAD^
 	last = log -1 HEAD
 	visual = !gitk
 	p = push
@@ -44,3 +45,8 @@
 
 [help]
 	autocorrect = 5
+[push]
+	default = current
+[pager]
+	branch = false
+	stash = false

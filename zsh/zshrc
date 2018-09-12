@@ -52,6 +52,8 @@ alias find-dangling='git fsck | grep "dangling commit" | awk "{print $3;}"'
 
 # Development 🖥
 DEV_DIRECTORY='/Volumes/Transcend/repos'
+DEV_LOCAL_DIRECTORY='~/repos'
+
 alias dev="cd $DEV_DIRECTORY"
 alias fe="cd $DEV_DIRECTORY/cleartax-frontend"
 alias static="cd $DEV_DIRECTORY/cleartax-static-pages"
@@ -63,14 +65,15 @@ alias ctax="cd $DEV_DIRECTORY/cleartax-dev"
 alias ctui="cd $DEV_DIRECTORY/ct-ui-components"
 alias mp="cd $DEV_DIRECTORY/marketplace"
 alias mpf="cd $DEV_DIRECTORY/marketplace/ct-marketplace-website"
+alias mpf2="cd $DEV_DIRECTORY/marketplace/services-frontend && nvm use"
 alias mpc="cd $DEV_DIRECTORY/marketplace/ct-marketplace-cms"
 alias mpat="cd $DEV_DIRECTORY/marketplace/ct-marketplace-agent-tools"
 alias mppf="cd $DEV_DIRECTORY/marketplace/ct-profile-website"
 alias retcon="cd $DEV_DIRECTORY/retcon"
 alias retb="cd $DEV_DIRECTORY/retcon"
 alias retf="cd $DEV_DIRECTORY/retcon-frontend"
-alias zoids="cd $DEV_DIRECTORY/zoids"
-alias cgst="cd $DEV_DIRECTORY/cleargst-frontend"
+alias zoids="cd $DEV_LOCAL_DIRECTORY/zoids"
+alias cgst="cd $DEV_LOCAL_DIRECTORY/cleargst-frontend && nvm use 10"
 
 # Typos 👻
 alias got='git'
@@ -86,4 +89,7 @@ alias pmlog='pm2 logs --lines 200'
 alias zreload='source ~/.zshrc'
 alias zsource='source ~/.zshrc'
 alias nr='npm run'
-alias code='code .'
+alias nt='npm run test'
+alias ns='npm start'
+alias nb='npm run build'
+alias gbdd='git branch -D'
