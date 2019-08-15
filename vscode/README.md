@@ -6,7 +6,7 @@
 
 ```bash
 rm ~/Library/Application\ Support/Code/User/settings.json
-ln -s ~/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+ln -s ~/dev/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
 ```
 
 ## add `code` to command line

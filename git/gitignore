@@ -20,7 +20,6 @@ Thumbs.db
 # npm & bower
 bower_components
 node_modules
-npm-debug.log
 
 # IDEs stuff
 .idea
@@ -31,3 +30,8 @@ npm-debug.log
 # private files
 private
 userdata
+
+# cache & log files
+*.log
+*.cache
+.eslintcache

@@ -68,7 +68,7 @@ alias zreload='source ~/.zshrc'
 alias zsource='source ~/.zshrc'
 
 # Development 🖥
-DIR_DEV='~/repos'
+export DIR_DEV='~/repos'
 
 # source remaining files
 # source ~/.profile
