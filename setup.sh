@@ -24,6 +24,7 @@ function doIt() {
 }
 
 echo ""
+
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
   doIt;
 else
@@ -37,4 +38,19 @@ else
   fi;
 fi;
 echo ""
+
+read -p "Apply macOS settings overrides? (y/n) " -n 1;
+  echo "";
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    ./scripts/macos.settings.sh;
+    echo "✅ Done"
+  else
+    echo "🚫 Ok. Skipping macOS settings overrides."
+  fi;
+echo ""
+
 unset doIt;
+unset removeAndSymlink;
+unset getAbsolutePath;
+
+./scripts/macos.misc.sh
