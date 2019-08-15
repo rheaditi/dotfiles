@@ -79,5 +79,3 @@ source "$DIR_DEV/dotfiles/private/work.sh"
 
 # mooooo
 moo
-
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
