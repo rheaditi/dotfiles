@@ -1,5 +1,5 @@
-export ZSH=/Users/aditi/.oh-my-zsh
-export UPDATE_ZSH_DAYS=1
+export ZSH=/Users/${USER}/.oh-my-zsh
+export UPDATE_ZSH_DAYS=2
 
 # zsh stuff
 COMPLETION_WAITING_DOTS="true"
@@ -9,39 +9,34 @@ ZSH_THEME=""
 plugins=(git zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
-source ~/.profile
 
 # User configuration
 export LANG=en_US.UTF-8
-export rvmsudo_secure_path=0 # rvm error: check `/etc/sudoers` for `secure_path`
 export SSH_KEY_PATH="~/.ssh/rsa_id"
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_161`
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# may not be required anymore
+# export rvmsudo_secure_path=0 # rvm error: check `/etc/sudoers` for `secure_path`
+# export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_161`
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-## Prompt String Stuff
-autoload -U promptinit; promptinit
-PURE_PROMPT_SYMBOL="⚡️"
-PURE_GIT_DOWN_ARROW="↓"
-PURE_GIT_UP_ARROW="↑"
-prompt pure
-
 # Shell Functions
 mkcd() { mkdir -p "$@" && cd "$@"; }
+get-extension-source() {
+  curl -L -o "$1.zip" "https://clients2.google.com/service/update2/crx?response=redirect&os=mac&arch=x86-64&nacl_arch=x86-64&prod=chromecrx&prodchannel=stable&prodversion=44.0.2403.130&x=id%3D$1%26uc" 
+  unzip -d "$1-source" "$1.zip"
+  rm -rf "$1.zip"
+}
 
-# Aliases - Generic
+# alias: generic
 alias ohmyzsh="code ~/.oh-my-zsh"
 alias zshconfig="code ~/.zshrc"
 alias dotfiles='cd ~/dotfiles'
 alias moo='fortune | cowsay | lolcat'
 alias filedate='date +%Y_%m_%d__%H_%M_%S'
 alias uuid='uuidgen | tr "[:upper:]" "[:lower:]"'
-alias bastion="ssh $BASTION_HOST"
 
 # Git things 🌲
 alias delete-branches='git branch >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -D </tmp/merged-branches'
@@ -49,41 +44,35 @@ alias clean-merged-branches='git branch --merged >/tmp/merged-branches && vi /tm
 alias clean-remote-branches='git branch -a >/tmp/remote-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches'
 alias reflog='gitk --all --date-order $(git log -g --pretty=%H)'
 alias find-dangling='git fsck | grep "dangling commit" | awk "{print $3;}"'
+alias gbdd='git branch -D'
 
-# Development 🖥
-DEV_DIRECTORY='/Volumes/Transcend/repos'
-alias dev="cd $DEV_DIRECTORY"
-alias fe="cd $DEV_DIRECTORY/cleartax-frontend"
-alias static="cd $DEV_DIRECTORY/cleartax-static-pages"
-alias biz="cd $DEV_DIRECTORY/cleartax-business"
-alias sharedfe="cd $DEV_DIRECTORY/cleartax-shared-fe"
-alias save="cd $DEV_DIRECTORY/clearsave-frontend"
-alias taxcloud="cd $DEV_DIRECTORY/taxcloud-dev"
-alias ctax="cd $DEV_DIRECTORY/cleartax-dev"
-alias ctui="cd $DEV_DIRECTORY/ct-ui-components"
-alias mp="cd $DEV_DIRECTORY/marketplace"
-alias mpf="cd $DEV_DIRECTORY/marketplace/ct-marketplace-website"
-alias mpc="cd $DEV_DIRECTORY/marketplace/ct-marketplace-cms"
-alias mpat="cd $DEV_DIRECTORY/marketplace/ct-marketplace-agent-tools"
-alias mppf="cd $DEV_DIRECTORY/marketplace/ct-profile-website"
-alias retcon="cd $DEV_DIRECTORY/retcon"
-alias retb="cd $DEV_DIRECTORY/retcon"
-alias retf="cd $DEV_DIRECTORY/retcon-frontend"
-alias zoids="cd $DEV_DIRECTORY/zoids"
-alias cgst="cd $DEV_DIRECTORY/cleargst-frontend"
-
-# Typos 👻
+# alias: typos 👻
 alias got='git'
 alias tit='git'
 alias hit='git'
 alias hot='git'
 
-# Other Convenience Things 🤗
+# alias: npm
+alias nr='npm run'
+alias nt='npm run test'
+alias ns='npm start'
+alias nb='npm run build'
+alias nplease='rm -rf node_modules && rm package-lock.json && npm i'
+
+# alias: other 🤗
 alias pra='pm2 restart all'
 alias pka='pm2 kill all'
 alias pda='pm2 delete all'
 alias pmlog='pm2 logs --lines 200'
 alias zreload='source ~/.zshrc'
 alias zsource='source ~/.zshrc'
-alias nr='npm run'
-alias code='code .'
+
+# Development 🖥
+DIR_DEV='~/repos'
+
+# source remaining files
+# source ~/.profile
+source ./private/work.sh
+
+# mooooo
+moo
