@@ -1,0 +1,12 @@
+.github
+.next
+.vscode
+build
+node_modules
+private
+
+!.eslintrc.js
+!.prettierrc.js
+!babel.config.js
+!jest.config.js
+!next.config.js
