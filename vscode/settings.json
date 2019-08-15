@@ -60,5 +60,7 @@
     "gitlens.views.lineHistory.location": "explorer",
     "gitlens.views.compare.location": "gitlens",
     "gitlens.views.search.location": "gitlens",
-    "workbench.iconTheme": "material-icon-theme"
+    "workbench.iconTheme": "material-icon-theme",
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false
 }

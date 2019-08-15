@@ -50,3 +50,6 @@ nvm use default
 npm i -g npm-merge-driver
 npm i -g tldr
 npm install --global pure-prompt
+
+# Remove outdated versions from the cellar
+brew cleanup
