@@ -1,6 +1,6 @@
 # rheaditi's dotfiles
 
-<!-- TODO: screenshot when done -->
+![image](https://user-images.githubusercontent.com/6426069/63123690-30d25a80-bfc7-11e9-9f73-9dcf249ce3dd.png)
 
 ## Installation
 

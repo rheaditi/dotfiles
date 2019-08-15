@@ -62,5 +62,6 @@
     "gitlens.views.search.location": "gitlens",
     "workbench.iconTheme": "material-icon-theme",
     "telemetry.enableTelemetry": false,
-    "telemetry.enableCrashReporter": false
+    "telemetry.enableCrashReporter": false,
+    "git.autofetch": true
 }
