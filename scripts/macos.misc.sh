@@ -26,7 +26,8 @@ brew upgrade
 # GNU core utilities (those that come with macOS are outdated)
 brew install coreutils
 
-brew install zsh-syntax-highlighting
+# very important commands for daily functioning
+brew install fortune cowsay lolcat
 
 NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -48,3 +49,4 @@ nvm use default
 # npm stuff
 npm i -g npm-merge-driver
 npm i -g tldr
+npm install --global pure-prompt

@@ -7,8 +7,11 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 ZSH_THEME=""
 
 plugins=(git zsh-syntax-highlighting)
-
 source $ZSH/oh-my-zsh.sh
+
+# pure prompt
+autoload -U promptinit; promptinit
+prompt pure
 
 # User configuration
 export LANG=en_US.UTF-8
@@ -25,7 +28,7 @@ export NVM_DIR="$HOME/.nvm"
 # Shell Functions
 mkcd() { mkdir -p "$@" && cd "$@"; }
 get-extension-source() {
-  curl -L -o "$1.zip" "https://clients2.google.com/service/update2/crx?response=redirect&os=mac&arch=x86-64&nacl_arch=x86-64&prod=chromecrx&prodchannel=stable&prodversion=44.0.2403.130&x=id%3D$1%26uc" 
+  curl -L -o "$1.zip" "https://clients2.google.com/service/update2/crx?response=redirect&os=mac&arch=x86-64&nacl_arch=x86-64&prod=chromecrx&prodchannel=stable&prodversion=44.0.2403.130&x=id%3D$1%26uc"
   unzip -d "$1-source" "$1.zip"
   rm -rf "$1.zip"
 }
@@ -68,11 +71,13 @@ alias zreload='source ~/.zshrc'
 alias zsource='source ~/.zshrc'
 
 # Development 🖥
-export DIR_DEV='~/repos'
+export DIR_DEV="$HOME/dev"
 
 # source remaining files
 # source ~/.profile
-source ./private/work.sh
+source "$DIR_DEV/dotfiles/private/work.sh"
 
 # mooooo
 moo
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
