@@ -25,6 +25,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+export PATH="/usr/local/opt/ruby/bin:/$HOME/.gem/ruby/2.6.0/bin:$PATH"
+
 # Shell Functions
 mkcd() { mkdir -p "$@" && cd "$@"; }
 get-extension-source() {
@@ -76,6 +78,11 @@ alias zsource='source ~/.zshrc'
 # source remaining files
 # source ~/.profile
 source "$DIR_DEV/dotfiles/private/work.sh"
+
+
+# other exports
+
+export EDITOR=vim
 
 # mooooo
 moo

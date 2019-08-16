@@ -12,6 +12,7 @@
   whitespace = space-before-tab,trailing-space
   # Make `git rebase` safer on macOS, more info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
   trustctime = false
+  editor = vim
 
 [alias]
   co = checkout
@@ -39,6 +40,12 @@
 [color]
   # Use colors in Git commands that are capable of colored output when outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
   ui = auto
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
+  pager = true
 [color "branch"]
   current = yellow reverse
   local = yellow
@@ -49,8 +56,10 @@
 
 [help]
   autocorrect = 5
+
 [push]
   default = current
+
 [pager]
   branch = false
   stash = false

@@ -17,6 +17,7 @@ function doIt() {
   removeAndSymlink ./git/gitconfig ~/.gitconfig
   removeAndSymlink ./git/gitignore ~/.gitignore
   removeAndSymlink ./zsh/zshrc ~/.zshrc
+  removeAndSymlink ./.vimrc ~/.vimrc
 
   removeAndSymlink ./.editorconfig ~/.editorconfig
   removeAndSymlink ./.eslintignore ~/.eslintignore
@@ -49,12 +50,19 @@ read -p "Apply macOS settings overrides? (y/n) " -n 1;
   fi;
 echo ""
 
+read -p "Install brew, nvm & other packages? (y/n) " -n 1;
+  echo "";
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    ./scripts/macos.misc.sh;
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    echo "✅ Done"
+  else
+    echo "🚫 Ok. Skipping macOS settings overrides."
+  fi;
+echo ""
+
 unset doIt;
 unset removeAndSymlink;
 unset getAbsolutePath;
-
-./scripts/macos.misc.sh
-
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 source ~/.zshrc

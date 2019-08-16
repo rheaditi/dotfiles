@@ -26,8 +26,12 @@ brew upgrade
 # GNU core utilities (those that come with macOS are outdated)
 brew install coreutils
 
+# work-related
+brew install git-tracker # pivotal tracker
+
 # very important commands for daily functioning
 brew install fortune cowsay lolcat
+
 
 NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
