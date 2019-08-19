@@ -24,7 +24,7 @@ brew update
 brew upgrade
 
 # GNU core utilities (those that come with macOS are outdated)
-brew install coreutils
+brew install coreutils tree
 
 # work-related
 brew install git-tracker # pivotal tracker
