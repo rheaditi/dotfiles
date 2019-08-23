@@ -35,6 +35,10 @@ get-extension-source() {
   rm -rf "$1.zip"
 }
 
+format-money() {
+  printf "%'.3f\n" $1
+}
+
 # Development 🖥
 export DIR_DEV="$HOME/dev"
 
