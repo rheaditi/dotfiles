@@ -26,6 +26,9 @@ brew upgrade
 # GNU core utilities (those that come with macOS are outdated)
 brew install coreutils tree
 
+# gpg for signing commits
+brew install gpg
+
 # work-related
 brew install git-tracker # pivotal tracker
 
