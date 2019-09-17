@@ -1,6 +1,7 @@
 [user]
   name = Aditi Mohanty
   email = rheaditi@users.noreply.github.com
+  signingkey = 4ED717BDBDEA08FD
 
 [github]
   user = rheaditi
@@ -63,3 +64,5 @@
 [pager]
   branch = false
   stash = false
+[commit]
+  gpgsign = true
