@@ -63,5 +63,8 @@
     "workbench.iconTheme": "material-icon-theme",
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
-    "git.autofetch": true
+    "git.autofetch": true,
+    "editor.gotoLocation.multiple": "goto",
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "es5"
 }
