@@ -66,5 +66,14 @@
     "git.autofetch": true,
     "editor.gotoLocation.multiple": "goto",
     "prettier.singleQuote": true,
-    "prettier.trailingComma": "es5"
+    "prettier.trailingComma": "es5",
+    "eslint.autoFixOnSave": true,
+    "editor.renderControlCharacters": true,
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "vsicons.dontShowNewVersionMessage": true
 }

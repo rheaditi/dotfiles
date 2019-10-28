@@ -27,25 +27,14 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH="/usr/local/opt/ruby/bin:/$HOME/.gem/ruby/2.6.0/bin:$PATH"
 
-# Shell Functions
-mkcd() { mkdir -p "$@" && cd "$@"; }
-get-extension-source() {
-  curl -L -o "$1.zip" "https://clients2.google.com/service/update2/crx?response=redirect&os=mac&arch=x86-64&nacl_arch=x86-64&prod=chromecrx&prodchannel=stable&prodversion=44.0.2403.130&x=id%3D$1%26uc"
-  unzip -d "$1-source" "$1.zip"
-  rm -rf "$1.zip"
-}
-
-format-money() {
-  printf "%'.3f\n" $1
-}
-
 # Development 🖥
-export DIR_DEV="$HOME/dev"
+DIR_DEV="$HOME/dev"
+DIR_DOTFILES="$DIR_DEV/dotfiles"
 
 # alias: generic
 alias ohmyzsh="code ~/.oh-my-zsh"
-alias zshconfig="code ~/.zshrc"
-alias dotfiles="cd $DIR_DEV/dotfiles"
+alias dotfiles="cd $DIR_DOTFILES"
+alias edit-dotfiles="code $DIR_DOTFILES"
 alias moo='fortune | cowsay | lolcat'
 alias filedate='date +%Y_%m_%d__%H_%M_%S'
 alias uuid='uuidgen | tr "[:upper:]" "[:lower:]"'
@@ -80,12 +69,10 @@ alias zreload='source ~/.zshrc'
 alias zsource='source ~/.zshrc'
 
 # source remaining files
-# source ~/.profile
-source "$DIR_DEV/dotfiles/private/work.sh"
-
+source "$DIR_DOTFILES/zsh/shell-functions.sh"
+source "$DIR_DOTFILES/private/work.sh"
 
 # other exports
-
 export EDITOR=vim
 
 # mooooo
