@@ -8,7 +8,7 @@
     "window.zoomLevel": 0,
     "editor.fontFamily": "'Fira Code', 'Hasklig', Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": true,
-    "editor.rulers": [ 120 ],
+    "editor.rulers": [ 100, 120 ],
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
     "eslint.validate": [
@@ -17,8 +17,8 @@
         { "language": "typescript", "autoFix": true },
         { "language": "typescriptreact", "autoFix": true }
     ],
-    "css.validate": false,
-    "scss.validate": false,
+    // "css.validate": false,
+    // "scss.validate": false,
     "javascript.validate.enable": false,
     "gitlens.advanced.messages": {
         "suppressShowKeyBindingsNotice": true
@@ -41,7 +41,6 @@
     "[javascript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
     },
-    "[plaintext]": {},
     "workbench.colorTheme": "Night Owl",
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -65,8 +64,6 @@
     "telemetry.enableCrashReporter": false,
     "git.autofetch": true,
     "editor.gotoLocation.multiple": "goto",
-    "prettier.singleQuote": true,
-    "prettier.trailingComma": "es5",
     "eslint.autoFixOnSave": true,
     "editor.renderControlCharacters": true,
     "[javascriptreact]": {
@@ -75,5 +72,12 @@
     "[html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "vsicons.dontShowNewVersionMessage": true
+    "vsicons.dontShowNewVersionMessage": true,
+    "gitlens.gitCommands.closeOnFocusOut": true,
+    "workbench.sideBar.location": "right",
+    "editor.minimap.enabled": false,
+    "workbench.activityBar.visible": true,
+    "workbench.startupEditor": "newUntitledFile",
+    // to be able to use a / shift + a for new file / new folder
+    "workbench.list.automaticKeyboardNavigation": false
 }

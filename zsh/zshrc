@@ -59,6 +59,7 @@ alias nt='npm run test'
 alias ns='npm start'
 alias nb='npm run build'
 alias npmplease='rm -rf node_modules && rm package-lock.json && npm i'
+alias npmnuke='rm -rf node_modules && npm i && lerna exec -- "rm -rf node_modules && npm i"'
 
 # alias: other 🤗
 alias pra='pm2 restart all'
