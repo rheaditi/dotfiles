@@ -79,5 +79,7 @@
     "workbench.activityBar.visible": true,
     "workbench.startupEditor": "newUntitledFile",
     // to be able to use a / shift + a for new file / new folder
-    "workbench.list.automaticKeyboardNavigation": false
+    "workbench.list.automaticKeyboardNavigation": false,
+    "jest.runAllTestsFirst": false,
+    "jest.showCoverageOnLoad": false
 }
