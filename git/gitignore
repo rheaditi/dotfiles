@@ -35,3 +35,4 @@ userdata
 *.log
 *.cache
 .eslintcache
+~/.pivotalflowrc

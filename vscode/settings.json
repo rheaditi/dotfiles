@@ -14,8 +14,8 @@
     "eslint.validate": [
         "javascript",
         "javascriptreact",
-        { "language": "typescript", "autoFix": true },
-        { "language": "typescriptreact", "autoFix": true }
+        "typescript",
+        "typescriptreact"
     ],
     // "css.validate": false,
     // "scss.validate": false,
@@ -63,8 +63,6 @@
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "git.autofetch": true,
-    "editor.gotoLocation.multiple": "goto",
-    "eslint.autoFixOnSave": true,
     "editor.renderControlCharacters": true,
     "[javascriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -78,8 +76,11 @@
     "editor.minimap.enabled": false,
     "workbench.activityBar.visible": true,
     "workbench.startupEditor": "newUntitledFile",
-    // to be able to use a / shift + a for new file / new folder
+    // to be able to use a / shift + a for new file / new folder editor.editor.gotoLocation.multipleImplementations
     "workbench.list.automaticKeyboardNavigation": false,
     "jest.runAllTestsFirst": false,
-    "jest.showCoverageOnLoad": false
+    "jest.showCoverageOnLoad": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
 }
