@@ -1,4 +1,3 @@
-// Place your settings in this file to overwrite the default settings
 {
     "atomKeymap.promptV3Features": true,
     "editor.fontSize": 13,
@@ -80,7 +79,5 @@
     "workbench.list.automaticKeyboardNavigation": false,
     "jest.runAllTestsFirst": false,
     "jest.showCoverageOnLoad": true,
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
+    "jest.autoEnable": false
 }

@@ -81,5 +81,5 @@ export WORKON_HOME=~/Envs
 source /usr/local/bin/virtualenvwrapper.sh
 export PATH="/usr/local/sbin:$PATH"
 
-# mooooo
-moo
+# mysql@5.7
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
