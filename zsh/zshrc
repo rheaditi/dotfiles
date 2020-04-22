@@ -1,4 +1,4 @@
-export ZSH=/Users/${USER}/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 export UPDATE_ZSH_DAYS=2
 
 # zsh stuff
@@ -8,6 +8,12 @@ ZSH_THEME=""
 
 plugins=(git zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
+
+# WSL
+if [ "$(expr substr $(uname -s) 1 5)" '==' "Linux" ]; then
+  fpath+=$HOME/.zsh/pure
+  export PURE_PROMPT_SYMBOL="❭"
+fi
 
 # pure prompt
 autoload -U promptinit; promptinit
@@ -71,15 +77,15 @@ alias zsource='source ~/.zshrc'
 
 # source remaining files
 source "$DIR_DOTFILES/zsh/shell-functions.sh"
-source "$DIR_DOTFILES/private/work.sh"
+[ -f "$DIR_DOTFILES/private/work.sh" ] && source "$DIR_DOTFILES/private/work.sh" || false
 
 # other exports
 export EDITOR=vim
 
 # python shit
-export WORKON_HOME=~/Envs
-source /usr/local/bin/virtualenvwrapper.sh
-export PATH="/usr/local/sbin:$PATH"
+# export WORKON_HOME=~/Envs
+# source /usr/local/bin/virtualenvwrapper.sh
+# export PATH="/usr/local/sbin:$PATH"
 
 # mysql@5.7
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
