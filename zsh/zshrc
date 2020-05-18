@@ -68,12 +68,9 @@ alias npmplease='rm -rf node_modules && rm package-lock.json && npm i'
 alias npmnuke='rm -rf node_modules && npm i && lerna exec -- "rm -rf node_modules && npm i"'
 
 # alias: other 🤗
-alias pra='pm2 restart all'
-alias pka='pm2 kill all'
-alias pda='pm2 delete all'
-alias pmlog='pm2 logs --lines 200'
 alias zreload='source ~/.zshrc'
 alias zsource='source ~/.zshrc'
+alias personal='cd ~/dev/personal'
 
 # source remaining files
 source "$DIR_DOTFILES/zsh/shell-functions.sh"
