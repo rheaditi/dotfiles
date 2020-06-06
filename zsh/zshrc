@@ -43,6 +43,7 @@ alias dotfiles="cd $DIR_DOTFILES"
 alias edit-dotfiles="code $DIR_DOTFILES"
 alias moo='fortune | cowsay | lolcat'
 alias filedate='date +%Y_%m_%d__%H_%M_%S'
+alias commitdate='date "+%A - %d %B %Y - %T"'
 alias uuid='uuidgen | tr "[:upper:]" "[:lower:]"'
 
 # Git things 🌲
@@ -72,7 +73,9 @@ alias zreload='source ~/.zshrc'
 alias zsource='source ~/.zshrc'
 alias personal='cd ~/dev/personal'
 
+
 # source remaining files
+source "$DIR_DOTFILES/zsh/play.sh" # all play 🎮⛏
 source "$DIR_DOTFILES/zsh/shell-functions.sh"
 [ -f "$DIR_DOTFILES/private/work.sh" ] && source "$DIR_DOTFILES/private/work.sh" || false
 
