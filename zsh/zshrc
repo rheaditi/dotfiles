@@ -10,10 +10,10 @@ plugins=(git zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # WSL
-if [ "$(expr substr $(uname -s) 1 5)" '==' "Linux" ]; then
-  fpath+=$HOME/.zsh/pure
-  export PURE_PROMPT_SYMBOL="❭"
-fi
+# if [ "$(expr substr $(uname -s) 1 5)" '==' "Linux" ]; then
+#   fpath+=$HOME/.zsh/pure
+#   export PURE_PROMPT_SYMBOL="❭"
+# fi
 
 # pure prompt
 autoload -U promptinit; promptinit
@@ -65,6 +65,7 @@ alias nr='npm run'
 alias nt='npm run test'
 alias ns='npm start'
 alias nb='npm run build'
+alias ni='npm install'
 alias npmplease='rm -rf node_modules && rm package-lock.json && npm i'
 alias npmnuke='rm -rf node_modules && npm i && lerna exec -- "rm -rf node_modules && npm i"'
 
