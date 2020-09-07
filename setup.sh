@@ -57,7 +57,17 @@ read -p "Install brew, nvm & other packages? (y/n) " -n 1;
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
     echo "✅ Done"
   else
-    echo "🚫 Ok. Skipping macOS settings overrides."
+    echo "🚫 Ok. Skipping brew/nvm installation."
+  fi;
+echo ""
+
+read -p "Setup vscode? (y/n) " -n 1;
+  echo "";
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    ./scripts/vscode.settings.sh;
+    echo "✅ Done"
+  else
+    echo "🚫 Ok. Skipping vscode setup."
   fi;
 echo ""
 
