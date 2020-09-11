@@ -74,10 +74,10 @@
   "vsicons.dontShowNewVersionMessage": true,
   "window.zoomLevel": 0,
   "workbench.activityBar.visible": true,
-  "workbench.colorTheme": "Halcyon",
   "workbench.iconTheme": "vscode-icons",
   "workbench.list.automaticKeyboardNavigation": false,
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "newUntitledFile",
-  "editor.gotoLocation.multipleDefinitions": "goto"
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "workbench.colorTheme": "Halcyon"
 }
