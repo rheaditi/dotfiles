@@ -42,7 +42,8 @@
     "*.jsx": "javascriptreact",
     "*.tsx": "typescriptreact",
     "*rc": "shellscript",
-    "zshrc_default": "shellscript"
+    "zshrc_default": "shellscript",
+    "*.itermcolors": "xml"
   },
   "files.defaultLanguage": "markdown",
   "git.autofetch": true,
@@ -79,5 +80,5 @@
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "newUntitledFile",
   "editor.gotoLocation.multipleDefinitions": "goto",
-  "workbench.colorTheme": "Halcyon"
+  "workbench.colorTheme": "Overnight Slumber Italics"
 }
