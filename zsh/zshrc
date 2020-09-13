@@ -1,5 +1,5 @@
 export ZSH=$HOME/.oh-my-zsh
-export UPDATE_ZSH_DAYS=2
+export UPDATE_ZSH_DAYS=30
 
 # zsh stuff
 COMPLETION_WAITING_DOTS="true"
@@ -67,10 +67,8 @@ alias npmplease='rm -rf node_modules && rm package-lock.json && npm i'
 alias npmnuke='rm -rf node_modules && npm i && lerna exec -- "rm -rf node_modules && npm i"'
 
 # alias: other 🤗
-alias zreload='source ~/.zshrc'
 alias zsource='source ~/.zshrc'
 alias personal='cd ~/dev/personal'
-
 
 # source remaining files
 source "$DIR_DOTFILES/zsh/play.sh" # all play 🎮⛏
