@@ -23,13 +23,6 @@ prompt pure
 export LANG=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PATH="/usr/local/opt/ruby/bin:/$HOME/.gem/ruby/2.6.0/bin:$PATH"
-
 # Development 🖥
 DIR_DEV="$HOME/dev"
 DIR_DOTFILES="$DIR_DEV/dotfiles"
@@ -42,6 +35,11 @@ alias moo='fortune | cowsay | lolcat'
 alias filedate='date +%Y_%m_%d__%H_%M_%S'
 alias commitdate='date "+%A - %d %B %Y - %T"'
 alias uuid='uuidgen | tr "[:upper:]" "[:lower:]"'
+
+# dir aliases 📁
+alias dev="cd $DIR_DEV"
+alias play="cd $DIR_DEV/play"
+alias personal="cd $DIR_DEV/personal"
 
 # Git things 🌲
 alias delete-branches='git branch >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -D </tmp/merged-branches'
@@ -76,11 +74,16 @@ source "$DIR_DOTFILES/zsh/shell-functions.sh"
 [ -f "$DIR_DOTFILES/private/work.sh" ] && source "$DIR_DOTFILES/private/work.sh" || false
 
 # other exports
-export EDITOR=vim
+export EDITOR=vim # use vim for git
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="/usr/local/opt/ruby/bin:/$HOME/.gem/ruby/2.6.0/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
 
 # deno
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
-# mysql@5.7
-export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
