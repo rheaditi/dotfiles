@@ -23,9 +23,6 @@ prompt pure
 export LANG=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# may not be required anymore
-# export rvmsudo_secure_path=0 # rvm error: check `/etc/sudoers` for `secure_path`
-# export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_161`
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -83,10 +80,9 @@ source "$DIR_DOTFILES/zsh/shell-functions.sh"
 # other exports
 export EDITOR=vim
 
-# python shit
-# export WORKON_HOME=~/Envs
-# source /usr/local/bin/virtualenvwrapper.sh
-# export PATH="/usr/local/sbin:$PATH"
+# deno
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 # mysql@5.7
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
