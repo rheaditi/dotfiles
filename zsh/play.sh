@@ -11,8 +11,8 @@ alias mineserver="cd $MINECRAFT_SERVER"
 
 # functions
 push-server() {
+  mineserver
   git status
-  git pull --rebase --autostash
 
   git add .
   git commit -m "$(commitdate)"
