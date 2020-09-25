@@ -1,7 +1,6 @@
 [user]
   name = Aditi Mohanty
   email = rheaditi@users.noreply.github.com
-  signingkey = 4ED717BDBDEA08FD
 
 [github]
   user = rheaditi
@@ -11,6 +10,7 @@
   excludesfile = ~/.gitignore
   hideDotFiles = false
   whitespace = space-before-tab,trailing-space
+
   # Make `git rebase` safer on macOS, more info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
   trustctime = false
   editor = vim
@@ -47,6 +47,7 @@
   interactive = auto
   ui = true
   pager = true
+
 [color "branch"]
   current = yellow reverse
   local = yellow
@@ -64,5 +65,10 @@
 [pager]
   branch = false
   stash = false
+
 [commit]
-	gpgsign = false
+  gpgsign = false
+
+# include work config
+[includeIf "gitdir:~/dev/atlassian/"]
+  path = ~/dev/atlassian/.gitconfig

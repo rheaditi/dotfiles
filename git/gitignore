@@ -29,10 +29,12 @@ node_modules
 
 # private files
 private
-userdata
 
 # cache & log files
 *.log
 *.cache
 .eslintcache
-~/.pivotalflowrc
+
+# output
+dist
+build
