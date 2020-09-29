@@ -10,6 +10,9 @@ VSCODE_EXTENSIONS=(
   "naumovs.color-highlight"
   "davidanson.vscode-markdownlint"
   "vscode-icons-team.vscode-icons"
+  "chakrounanas.turbo-console-log"
+  "dbaeumer.vscode-eslint"
+  "alefragnani.bookmarks"
 
   # themes/color schemes
   "brittanychiang.halcyon-vscode"
