@@ -80,5 +80,6 @@
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "newUntitledFile",
   "editor.gotoLocation.multipleDefinitions": "goto",
-  "workbench.colorTheme": "Overnight Slumber Italics"
+  "extensions.ignoreRecommendations": false,
+  "workbench.colorTheme": "Material Theme Ocean"
 }

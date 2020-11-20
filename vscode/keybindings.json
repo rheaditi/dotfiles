@@ -3,5 +3,5 @@
   {
     "key": "cmd+,",
     "command": "workbench.action.openSettingsJson"
-  },
+  }
 ]

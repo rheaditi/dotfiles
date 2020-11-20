@@ -14,12 +14,11 @@ format-money() {
 }
 
 # list all published versions of an npm package
-pkg-versions() {
+npm-all-versions() {
   npm view $1 versions --json
 }
 
-# change default nvm node version to this version
-# move-node-version() {
-#   current=$(nvm ls default)
-#   echo "$current"
-# }
+# recently changed files git
+git-sort-modified() {
+  while read file; do echo $(git log --pretty=format:%ad -n 1 --date=raw -- $file) $file; done < <(git ls-tree -r --name-only HEAD) | sort -k1,1n
+}

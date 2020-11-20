@@ -1,5 +1,5 @@
 export ZSH=$HOME/.oh-my-zsh
-export UPDATE_ZSH_DAYS=30
+export UPDATE_ZSH_DAYS=10
 
 # zsh stuff
 COMPLETION_WAITING_DOTS="true"
@@ -9,12 +9,6 @@ ZSH_THEME=""
 plugins=(git zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
-# WSL
-# if [ "$(expr substr $(uname -s) 1 5)" '==' "Linux" ]; then
-#   fpath+=$HOME/.zsh/pure
-#   export PURE_PROMPT_SYMBOL="❭"
-# fi
-
 # pure prompt
 autoload -U promptinit; promptinit
 prompt pure
@@ -23,52 +17,8 @@ prompt pure
 export LANG=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# Development 🖥
-DIR_DEV="$HOME/dev"
-DIR_DOTFILES="$DIR_DEV/dotfiles"
-
-# alias: generic
-alias ohmyzsh="code ~/.oh-my-zsh"
-alias dotfiles="cd $DIR_DOTFILES"
-alias edit-dotfiles="code $DIR_DOTFILES"
-alias moo='fortune | cowsay | lolcat'
-alias filedate='date +%Y_%m_%d__%H_%M_%S'
-alias commitdate='date "+%A - %d %B %Y - %T"'
-alias uuid='uuidgen | tr "[:upper:]" "[:lower:]"'
-
-# dir aliases 📁
-alias dev="cd $DIR_DEV"
-alias play="cd $DIR_DEV/play"
-alias personal="cd $DIR_DEV/personal"
-
-# Git things 🌲
-alias delete-branches='git branch >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -D </tmp/merged-branches'
-alias clean-merged-branches='git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches'
-alias clean-remote-branches='git branch -a >/tmp/remote-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches'
-alias reflog='gitk --all --date-order $(git log -g --pretty=%H)'
-alias find-dangling='git fsck | grep "dangling commit" | awk "{print $3;}"'
-alias gbdd='git branch -D'
-
-# alias: typos 👻
-alias got='git'
-alias tit='git'
-alias hit='git'
-alias hot='git'
-
-# alias: npm
-alias nr='npm run'
-alias nt='npm run test'
-alias ns='npm start'
-alias nb='npm run build'
-alias ni='npm install'
-alias npmplease='rm -rf node_modules && rm package-lock.json && npm i'
-alias npmnuke='rm -rf node_modules && npm i && lerna exec -- "rm -rf node_modules && npm i"'
-
-# alias: other 🤗
-alias zsource='source ~/.zshrc'
-alias personal='cd ~/dev/personal'
-
 # source remaining files
+source "$DIR_DOTFILES/zsh/alias.sh"
 source "$DIR_DOTFILES/zsh/play.sh" # all play 🎮⛏
 source "$DIR_DOTFILES/zsh/shell-functions.sh"
 [ -f "$DIR_DOTFILES/private/work.sh" ] && source "$DIR_DOTFILES/private/work.sh" || false
