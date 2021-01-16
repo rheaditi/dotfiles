@@ -81,5 +81,24 @@
   "workbench.startupEditor": "newUntitledFile",
   "editor.gotoLocation.multipleDefinitions": "goto",
   "extensions.ignoreRecommendations": false,
-  "workbench.colorTheme": "Material Theme Ocean"
+  "workbench.colorTheme": "Material Theme Ocean",
+  "yaml.schemas": {
+    "file:///Users/amohanty/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+  },
+  "atlascode.jira.jqlList": [
+    {
+      "id": "f36a79c1-0546-4fab-a457-e625fd18a8c7",
+      "enabled": true,
+      "name": "My ecosystem Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "fff89a1a-52c8-11e5-91b2-3c15c2bd8caa-ecosystem",
+      "monitor": true
+    }
+  ],
+  "atlascode.jira.startWorkBranchTemplate.customPrefixes": [],
+  "atlascode.jira.startWorkBranchTemplate.customTemplate": "am/{{{issueKey}}}-{{{summary}}}",
+  "atlascode.bitbucket.pipelines.monitorEnabled": false,
+  "atlascode.bitbucket.pipelines.refreshInterval": 0,
+  "atlascode.bitbucket.pipelines.explorerEnabled": false,
+  "editor.smoothScrolling": true
 }

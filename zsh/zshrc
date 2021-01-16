@@ -9,16 +9,17 @@ ZSH_THEME=""
 plugins=(git zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
-# pure prompt
-autoload -U promptinit; promptinit
-prompt pure
 
 # User configuration
 export LANG=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
+DIR_DEV="$HOME/dev"
+DIR_DOTFILES="$DIR_DEV/dotfiles"
+
 # source remaining files
-source "$DIR_DOTFILES/zsh/alias.sh"
+source "$DIR_DOTFILES/zsh/alias.sh" # this needs to be the first
+source "$DIR_DOTFILES/zsh/prompt.sh"
 source "$DIR_DOTFILES/zsh/play.sh" # all play 🎮⛏
 source "$DIR_DOTFILES/zsh/shell-functions.sh"
 [ -f "$DIR_DOTFILES/private/work.sh" ] && source "$DIR_DOTFILES/private/work.sh" || false
@@ -36,4 +37,3 @@ export PATH="/usr/local/sbin:$PATH"
 # deno
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
-
