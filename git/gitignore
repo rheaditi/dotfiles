@@ -38,3 +38,6 @@ private
 # output
 dist
 build
+
+# python
+.venv

@@ -73,7 +73,6 @@
   "typescript.preferences.quoteStyle": "single",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "vsicons.dontShowNewVersionMessage": true,
-  "window.zoomLevel": 0,
   "workbench.activityBar.visible": true,
   "workbench.iconTheme": "vscode-icons",
   "workbench.list.automaticKeyboardNavigation": false,
@@ -81,7 +80,6 @@
   "workbench.startupEditor": "newUntitledFile",
   "editor.gotoLocation.multipleDefinitions": "goto",
   "extensions.ignoreRecommendations": false,
-  "workbench.colorTheme": "Material Theme Ocean",
   "yaml.schemas": {
     "file:///Users/amohanty/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
@@ -100,5 +98,11 @@
   "atlascode.bitbucket.pipelines.monitorEnabled": false,
   "atlascode.bitbucket.pipelines.refreshInterval": 0,
   "atlascode.bitbucket.pipelines.explorerEnabled": false,
-  "editor.smoothScrolling": true
+  "editor.smoothScrolling": true,
+  "atlascode.jira.lastCreateSiteAndProject": {
+    "siteId": "fff89a1a-52c8-11e5-91b2-3c15c2bd8caa-ecosystem",
+    "projectKey": "AA"
+  },
+  "workbench.colorTheme": "Tokyo Night",
+  "window.zoomLevel": 1
 }
