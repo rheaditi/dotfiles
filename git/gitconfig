@@ -72,3 +72,5 @@
 # include work config
 [includeIf "gitdir:~/dev/atlassian/"]
   path = ~/dev/atlassian/.gitconfig
+[pull]
+  ff = only

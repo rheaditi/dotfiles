@@ -38,6 +38,10 @@ private
 # output
 dist
 build
+# bin
 
 # python
 .venv
+
+# scala
+.metals
