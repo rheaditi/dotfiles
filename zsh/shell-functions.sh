@@ -22,3 +22,11 @@ npm-all-versions() {
 git-sort-modified() {
   while read file; do echo $(git log --pretty=format:%ad -n 1 --date=raw -- $file) $file; done < <(git ls-tree -r --name-only HEAD) | sort -k1,1n
 }
+
+ytw() {
+  yarn test $1 --watch --verbose
+}
+
+ytcov() {
+  yarn test $1 --collectCoverage
+}
