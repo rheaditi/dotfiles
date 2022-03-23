@@ -75,4 +75,9 @@ unset doIt;
 unset removeAndSymlink;
 unset getAbsolutePath;
 
+cat << EOF
+Other things to manually setup:
+→ Font: Fira Code (https://github.com/tonsky/FiraCode/releases)
+EOF
+
 source ~/.zshrc
