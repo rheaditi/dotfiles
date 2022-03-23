@@ -1,108 +1,128 @@
 {
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "gitlens.gitCommands.closeOnFocusOut" : true,
+  "files.associations" : {
+    ".env.*" : "properties",
+    ".env" : "properties",
+    "*.flow" : "javascript",
+    "*.itermcolors" : "xml",
+    "*.jsx" : "javascriptreact",
+    "*.tsx" : "typescriptreact",
+    "*rc" : "shellscript",
+    "zshrc_default" : "shellscript",
   },
-  "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+  "typescript.preferences.quoteStyle" : "single",
+  "[typescriptreact]" : {
+    "editor.defaultFormatter" : "esbenp.prettier-vscode"
   },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "extensions.ignoreRecommendations" : false,
+  "editor.rulers" : [
+    100,
+    120
+  ],
+  "editor.smoothScrolling" : true,
+  "atlascode.jira.startWorkBranchTemplate.customPrefixes" : [
+
+  ],
+  "editor.gotoLocation.multipleDefinitions" : "goto",
+  "redhat.telemetry.enabled" : false,
+  "editor.renderWhitespace" : "all",
+  "javascript.validate.enable" : false,
+  "[jsonc]" : {
+    "editor.defaultFormatter" : "esbenp.prettier-vscode"
   },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.fontLigatures" : true,
+  "terminal.integrated.copyOnSelection" : true,
+  "workbench.sideBar.location" : "right",
+  "[javascript]" : {
+    "editor.defaultFormatter" : "vscode.typescript-language-features"
   },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "git.confirmSync" : true,
+  "javascript.updateImportsOnFileMove.enabled" : "always",
+  "atlascode.bitbucket.pipelines.monitorEnabled" : false,
+  "[javascriptreact]" : {
+    "editor.defaultFormatter" : "esbenp.prettier-vscode"
   },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "atomKeymap.promptV3Features": true,
-  "diffEditor.ignoreTrimWhitespace": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "editor.cursorSmoothCaretAnimation": true,
-  "editor.fontFamily": "'Fira Code', 'Hasklig', Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontLigatures": true,
-  "editor.fontSize": 15,
-  "editor.insertSpaces": true,
-  "editor.minimap.enabled": false,
   "editor.renderControlCharacters": true,
-  "editor.renderWhitespace": "all",
-  "editor.rulers": [100, 120],
-  "editor.tabSize": 2,
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-  "files.associations": {
-    ".env": "properties",
-    ".env.*": "properties",
-    "*.jsx": "javascriptreact",
-    "*.tsx": "typescriptreact",
-    "*rc": "shellscript",
-    "zshrc_default": "shellscript",
-    "*.itermcolors": "xml"
+  "editor.codeActionsOnSave" : {
+    "source.fixAll.eslint" : true
   },
-  "files.defaultLanguage": "markdown",
-  "git.autofetch": true,
-  "git.confirmSync": true,
-  "git.enableSmartCommit": true,
-  "gitlens.advanced.fileHistoryFollowsRenames": true,
-  "gitlens.advanced.messages": {
-    "suppressShowKeyBindingsNotice": true
+  "workbench.list.automaticKeyboardNavigation" : false,
+  "atlascode.jira.startWorkBranchTemplate.customTemplate" : "am\/{{{issueKey}}}-{{{summary}}}",
+  "[html]" : {
+    "editor.defaultFormatter" : "esbenp.prettier-vscode"
   },
-  "gitlens.gitCommands.closeOnFocusOut": true,
-  "gitlens.views.compare.location": "gitlens",
-  "gitlens.views.fileHistory.enabled": true,
-  "gitlens.views.fileHistory.location": "explorer",
-  "gitlens.views.lineHistory.enabled": true,
-  "gitlens.views.lineHistory.location": "explorer",
-  "gitlens.views.repositories.location": "scm",
-  "gitlens.views.search.location": "gitlens",
-  "javascript.preferences.quoteStyle": "single",
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "javascript.validate.enable": false,
-  "jest.autoEnable": false,
-  "jest.runAllTestsFirst": false,
-  "jest.showCoverageOnLoad": true,
-  "telemetry.enableCrashReporter": false,
-  "telemetry.enableTelemetry": false,
-  "terminal.integrated.copyOnSelection": true,
-  "typescript.preferences.quoteStyle": "single",
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "vsicons.dontShowNewVersionMessage": true,
-  "workbench.activityBar.visible": true,
-  "workbench.iconTheme": "vscode-icons",
-  "workbench.list.automaticKeyboardNavigation": false,
-  "workbench.sideBar.location": "right",
-  "workbench.startupEditor": "newUntitledFile",
-  "editor.gotoLocation.multipleDefinitions": "goto",
-  "extensions.ignoreRecommendations": false,
-  "yaml.schemas": {
-    "file:///Users/amohanty/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+  "diffEditor.ignoreTrimWhitespace" : false,
+  "atlascode.jira.lastCreateSiteAndProject" : {
+    "siteId" : "fff89a1a-52c8-11e5-91b2-3c15c2bd8caa-ecosystem",
+    "projectKey" : "AA"
   },
-  "atlascode.jira.jqlList": [
+  "yaml.schemas" : {
+    "file:///Users/amohanty/.vscode/extensions/atlassian.atlascode-2.10.11/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+  },
+  "eslint.validate" : [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "graphql"
+  ],
+  "editor.fontFamily" : "'Fira Code', 'Hasklig', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize" : 14,
+  "atlascode.bitbucket.pipelines.explorerEnabled" : false,
+  "javascript.preferences.quoteStyle" : "single",
+  "workbench.activityBar.visible" : true,
+  "files.defaultLanguage" : "markdown",
+  "terminal.integrated.fontSize" : 13,
+  "vsicons.dontShowNewVersionMessage" : true,
+  "atlascode.jira.jqlList" : [
     {
+      "siteId": "fff89a1a-52c8-11e5-91b2-3c15c2bd8caa-ecosystem",
       "id": "f36a79c1-0546-4fab-a457-e625fd18a8c7",
       "enabled": true,
-      "name": "My ecosystem Issues",
       "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
-      "siteId": "fff89a1a-52c8-11e5-91b2-3c15c2bd8caa-ecosystem",
+      "name": "My ecosystem Issues",
       "monitor": true
     }
   ],
-  "atlascode.jira.startWorkBranchTemplate.customPrefixes": [],
-  "atlascode.jira.startWorkBranchTemplate.customTemplate": "am/{{{issueKey}}}-{{{summary}}}",
-  "atlascode.bitbucket.pipelines.monitorEnabled": false,
-  "atlascode.bitbucket.pipelines.refreshInterval": 0,
-  "atlascode.bitbucket.pipelines.explorerEnabled": false,
-  "editor.smoothScrolling": true,
-  "atlascode.jira.lastCreateSiteAndProject": {
-    "siteId": "fff89a1a-52c8-11e5-91b2-3c15c2bd8caa-ecosystem",
-    "projectKey": "AA"
+  "atomKeymap.promptV3Features" : true,
+  "files.watcherExclude" : {
+    "**\/.ammonite" : true,
+    "**\/.bloop" : true,
+    "**\/.metals" : true
   },
-  "workbench.colorTheme": "Tokyo Night",
+  "editor.insertSpaces" : true,
+  "[typescript]" : {
+    "editor.defaultFormatter" : "esbenp.prettier-vscode"
+  },
+  "files.exclude" : {
+    "**\/.project" : true,
+    "**\/.settings" : true,
+    "**\/.classpath" : true,
+    "**\/.factorypath" : true
+  },
+  "workbench.startupEditor" : "newUntitledFile",
+  "jest.autoEnable" : false,
+  "atlascode.bitbucket.pipelines.refreshInterval" : 0,
+  "workbench.iconTheme" : "vscode-icons",
+  "gitlens.advanced.fileHistoryFollowsRenames" : true,
+  "typescript.suggest.autoImports" : false,
+  "typescript.updateImportsOnFileMove.enabled" : "always",
+  "git.autofetch" : true,
+  "editor.suggestSelection" : "first",
+  "gitlens.views.search.location" : "gitlens",
+  "editor.cursorSmoothCaretAnimation" : true,
+  "editor.tabSize" : 2,
+  "editor.accessibilitySupport" : "off",
+  "telemetry.telemetryLevel": "off",
+  "[json]" : {
+    "editor.defaultFormatter" : "esbenp.prettier-vscode"
+  },
+  "workbench.colorTheme" : "The unnamed (No Italics)",
+  "editor.minimap.enabled" : false,
+  "gitlens.views.fileHistory.location" : "explorer",
+  "git.enableSmartCommit": true,
+  "terminal.integrated.env.osx": {
+    "FIG_NEW_SESSION": "1"
+  },
   "window.zoomLevel": 1
 }
