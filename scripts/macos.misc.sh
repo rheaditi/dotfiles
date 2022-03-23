@@ -46,5 +46,23 @@ npm i -g npm-merge-driver
 npm i -g tldr
 npm install --global pure-prompt
 
+# yarn & bolt
+read -p "Setup yarn & bolt? (y/n) " -n 1;
+  echo "";
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    npx check-node-version --node '>= 16' >> /dev/null
+    if [ $? -eq 1 ]; then
+      corepack enable
+    else
+      npm i -g corepack
+    fi
+    npm i -g bolt
+    echo "✅ Done"
+  else
+    echo "🚫 Ok. Skipping vscode setup."
+  fi;
+echo ""
+
+
 # Remove outdated versions from the cellar
 brew cleanup
