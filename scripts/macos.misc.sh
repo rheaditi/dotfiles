@@ -2,17 +2,12 @@
 
 # Installs some stuff
 
-# # Ask for the administrator password upfront
-# sudo -v
-
-# Install Homebrew
-#command -v brew >/dev/null 2>&1 || ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
 echo ""
 if command -v brew 2>/dev/null; then
   echo "✅ Homebrew already installed."
 else
   echo "▶️ Installing HomeBrew.."
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   echo "✅ done installing homebrew"
 fi
 echo ""
@@ -29,13 +24,6 @@ brew install coreutils tree
 # gpg for signing commits
 brew install gpg
 
-# work-related
-brew install git-tracker # pivotal tracker
-
-# very important commands for daily functioning
-brew install fortune cowsay lolcat
-
-
 NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
@@ -43,7 +31,7 @@ echo ""
 if command -v nvm 2>/dev/null; then
   echo "✅ nvm already installed."
 else
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+  /bin/bash -c "$(curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh)"
   echo "✅ Done installing nvm."
 fi
 echo ""
