@@ -1,7 +1,11 @@
 VSCODE_DIR=~/Library/Application\ Support/Code
 VSCODE_DOWNLOAD="https://code.visualstudio.com/download"
+
 VSCODE_USER_SETTINGS_SRC=~/dev/dotfiles/vscode/settings.json
+VSCODE_KEYBINDINGS_SRC=~/dev/dotfiles/vscode/keybindings.json
 VSCODE_USER_SETTINGS_DEST="$VSCODE_DIR/User/settings.json"
+VSCODE_KEYBINDINGS_DEST="$VSCODE_DIR/User/keybindings.json"
+
 VSCODE_EXTENSIONS=(
   "ms-vscode.atom-keybindings"
   "editorconfig.editorconfig"
@@ -32,6 +36,7 @@ if [ -f "$VSCODE_USER_SETTINGS_DEST" ]; then
     echo ""
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         rm "$VSCODE_USER_SETTINGS_DEST"
+        rm "$VSCODE_KEYBINDINGS_DEST"
     else
         echo "🚫 Ok. Skipping vscode setup."
         exit 0
@@ -39,6 +44,7 @@ if [ -f "$VSCODE_USER_SETTINGS_DEST" ]; then
 fi
 
 ln -s "$VSCODE_USER_SETTINGS_SRC" "$VSCODE_USER_SETTINGS_DEST"
+ln -s "$VSCODE_KEYBINDINGS_SRC" "$VSCODE_KEYBINDINGS_DEST"
 
 read -p "Install default extensions? (y/n) " -n 1;
   echo ""
