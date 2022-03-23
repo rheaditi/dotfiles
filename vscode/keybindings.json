@@ -3,15 +3,5 @@
   {
     "key": "cmd+,",
     "command": "workbench.action.openSettingsJson"
-  },
-  {
-    "key": "a",
-    "command": "explorer.newFile",
-    "when": "explorerViewletFocus"
-  },
-  {
-    "key": "shift+a",
-    "command": "explorer.newFolder",
-    "when": "explorerViewletFocus"
   }
 ]

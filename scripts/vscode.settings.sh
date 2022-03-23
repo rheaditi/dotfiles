@@ -19,9 +19,9 @@ VSCODE_EXTENSIONS=(
   "alefragnani.bookmarks"
 
   # themes/color schemes
-  "brittanychiang.halcyon-vscode"
   "cev.overnight"
   "sdras.night-owl"
+  "enkia.tokyo-night"
 )
 
 if [ ! -d "$VSCODE_DIR" ]; then
