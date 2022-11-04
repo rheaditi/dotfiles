@@ -16,6 +16,7 @@ function removeAndSymlink() {
 function doIt() {
   removeAndSymlink ./git/gitconfig ~/.gitconfig
   removeAndSymlink ./git/gitignore ~/.gitignore
+  removeAndSymlink ./ssh/config ~/.ssh/config
   removeAndSymlink ./zsh/zshrc ~/.zshrc
   removeAndSymlink ./.vimrc ~/.vimrc
 
