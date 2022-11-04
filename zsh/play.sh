@@ -4,7 +4,7 @@ if [ ! -d "$MINECRAFT_MOUNT_DIR" ]; then
   return 0
 fi
 
-MINECRAFT_SERVER="$MINECRAFT_MOUNT_DIR/remote-server"
+MINECRAFT_SERVER="$MINECRAFT_MOUNT_DIR/vanilla-server"
 
 # aliases
 alias mineserver="cd $MINECRAFT_SERVER"
