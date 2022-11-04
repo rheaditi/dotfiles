@@ -27,19 +27,14 @@ function doIt() {
 
 echo ""
 
-if [ "$1" == "--force" -o "$1" == "-f" ]; then
+read -p "Copy over config files? This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
+echo "";
+if [[ $REPLY =~ ^[Yy]$ ]]; then
   doIt;
+  echo "✅ Done"
 else
-  read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
-  echo "";
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
-    doIt;
-    echo "✅ Done"
-  else
-    echo "🚫 Ok. Skipping setup."
-  fi;
+  echo "🚫 Ok. Skipping config file setup."
 fi;
-echo ""
 
 read -p "Apply macOS settings overrides? (y/n) " -n 1;
   echo "";
