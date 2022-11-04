@@ -124,5 +124,6 @@
   "terminal.integrated.env.osx": {
     "FIG_NEW_SESSION": "1"
   },
-  "window.zoomLevel": 1
+  "window.zoomLevel": 1,
+  "gitlens.statusBar.enabled": false
 }

@@ -63,6 +63,5 @@ read -p "Setup yarn & bolt? (y/n) " -n 1;
   fi;
 echo ""
 
-
 # Remove outdated versions from the cellar
 brew cleanup
