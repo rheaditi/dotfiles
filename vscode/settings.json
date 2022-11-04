@@ -36,7 +36,7 @@
   "[javascript]" : {
     "editor.defaultFormatter" : "vscode.typescript-language-features"
   },
-  "git.confirmSync" : true,
+  "git.confirmSync" : false,
   "javascript.updateImportsOnFileMove.enabled" : "always",
   "atlascode.bitbucket.pipelines.monitorEnabled" : false,
   "[javascriptreact]" : {
