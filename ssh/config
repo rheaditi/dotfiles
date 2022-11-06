@@ -7,3 +7,13 @@ Host bitbucket.org
   AddKeysToAgent yes
   UseKeychain yes
   IdentityFile ~/.ssh/id_ed25519.atlassian
+
+Host stash.atlassian.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519.atlassian
+
+Host bitbucket-mirror-au.internal.atlassian.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519.atlassian

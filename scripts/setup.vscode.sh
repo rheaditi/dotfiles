@@ -29,6 +29,13 @@ function installExtensions() {
     "chakrounanas.turbo-console-log"
     "dbaeumer.vscode-eslint"
     "alefragnani.bookmarks"
+    "mquandalle.graphql"
+    "redhat.vscode-yaml"
+
+    "styled-components.vscode-styled-components"
+    "flowtype.flow-for-vscode"
+    "Atlassian.atlascode"
+    "Orta.vscode-jest"
 
     # themes/color schemes
     "cev.overnight"
