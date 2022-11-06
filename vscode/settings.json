@@ -57,7 +57,7 @@
     "projectKey" : "AA"
   },
   "yaml.schemas" : {
-    "file:///Users/amohanty/.vscode/extensions/atlassian.atlascode-2.10.11/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/amohanty/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   "eslint.validate" : [
     "javascript",

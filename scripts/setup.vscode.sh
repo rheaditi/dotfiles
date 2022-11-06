@@ -31,6 +31,7 @@ function installExtensions() {
     "alefragnani.bookmarks"
     "mquandalle.graphql"
     "redhat.vscode-yaml"
+    "timonwong.shellcheck"
 
     "styled-components.vscode-styled-components"
     "flowtype.flow-for-vscode"

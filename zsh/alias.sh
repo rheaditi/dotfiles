@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Development 🖥
 DIR_DEV="$HOME/dev"
 DIR_DOTFILES="$DIR_DEV/dotfiles"
@@ -21,7 +23,6 @@ alias delete-branches='git branch >/tmp/merged-branches && vi /tmp/merged-branch
 alias clean-merged-branches='git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches'
 alias clean-remote-branches='git branch -a >/tmp/remote-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches'
 alias reflog='gitk --all --date-order $(git log -g --pretty=%H)'
-alias find-dangling='git fsck | grep "dangling commit" | awk "{print $3;}"'
 alias gbdd='git branch -D'
 
 # alias: typos 👻
@@ -52,3 +53,5 @@ alias personal='cd ~/dev/personal'
 
 # alias: python 🐍
 alias venv-activate='source ./.venv/bin/activate'
+
+unset DIR_DEV DIR_DOTFILES

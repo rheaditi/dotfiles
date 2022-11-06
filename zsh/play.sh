@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 MINECRAFT_MOUNT_DIR="/mnt/d/Minecraft"
 
 if [ ! -d "$MINECRAFT_MOUNT_DIR" ]; then
@@ -19,3 +20,5 @@ push-server() {
 
   git push
 }
+
+unset MINECRAFT_MOUNT_DIR MINECRAFT_MOUNT_DIR

@@ -1,5 +1,7 @@
+#!/usr/bin/env bash
+
 # create a directory & cd into it
-mkcd() { mkdir -p "$@" && cd "$@"; }
+mkcd() { mkdir -p "$@" && cd "$@" || return; }
 
 # get the source code of a chrome extensions
 get-extension-source() {

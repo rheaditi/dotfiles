@@ -31,6 +31,12 @@ function symlinkDotFiles() {
   fi
 
   removeAndSymlink ./git/atlassian.gitconfig ~/dev/atlassian/.gitconfig
+
+  local TMUX_CONFIG_FILE="$HOME/dev/dotfiles-private/atlassian/tmuxinator/config.yml"
+  if [ -f "$TMUX_CONFIG_FILE" ]; then
+    mkdir -p ~/.config/tmuxinator
+    removeAndSymlink "$TMUX_CONFIG_FILE" ~/.config/tmuxinator/config.yml
+  fi
 }
 
 runIfYes \
