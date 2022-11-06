@@ -5,6 +5,9 @@
 [github]
   user = rheaditi
 
+[init]
+	defaultBranch = main
+
 [core]
   # Use custom `.gitignore` and `.gitattributes`
   excludesfile = ~/.gitignore
