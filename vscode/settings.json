@@ -117,7 +117,7 @@
   "[json]" : {
     "editor.defaultFormatter" : "esbenp.prettier-vscode"
   },
-  "workbench.colorTheme" : "Tokyo Night",
+  "workbench.colorTheme" : "Overnight Slumber",
   "editor.minimap.enabled" : false,
   "gitlens.views.fileHistory.location" : "explorer",
   "git.enableSmartCommit": true,
