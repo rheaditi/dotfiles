@@ -6,6 +6,7 @@ echo ""
 ./scripts/setup.macos.sh
 ./scripts/setup.dotfiles.sh
 ./scripts/setup.brew-nvm.sh
+./scripts/setup.zsh.sh
 
 cat << EOF
 Other things to manually setup:
