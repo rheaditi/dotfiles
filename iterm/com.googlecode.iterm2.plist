@@ -1634,6 +1634,8 @@
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
 	<false/>
+	<key>OpenTmuxWindowsIn</key>
+	<integer>2</integer>
 	<key>PerPaneBackgroundImage</key>
 	<false/>
 	<key>PointerActions</key>

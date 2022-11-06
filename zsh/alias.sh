@@ -46,6 +46,7 @@ alias yarnplease='rm -rf node_modules && rm yarn.lock && yarn install'
 # alias: other 🤗
 alias zsource='source ~/.zshrc'
 alias personal='cd ~/dev/personal'
+alias tx=tmuxinator
 
 # alias: python 🐍
 alias venv-activate='source ./.venv/bin/activate'
