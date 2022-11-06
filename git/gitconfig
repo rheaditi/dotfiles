@@ -74,5 +74,3 @@
   path = ~/dev/atlassian/.gitconfig
 [pull]
   ff = only
-[sequence]
-	editor = code --wait
