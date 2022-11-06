@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# Development 🖥
-DIR_DEV="$HOME/dev"
-DIR_DOTFILES="$DIR_DEV/dotfiles"
-
 # alias: generic
 # alias ohmyzsh="code ~/.oh-my-zsh"
 alias dotfiles="cd $DIR_DOTFILES"
@@ -53,5 +49,3 @@ alias personal='cd ~/dev/personal'
 
 # alias: python 🐍
 alias venv-activate='source ./.venv/bin/activate'
-
-unset DIR_DEV DIR_DOTFILES

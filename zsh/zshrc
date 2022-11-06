@@ -50,3 +50,4 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 # export PATH="$HOME/.jenv/bin:$PATH"
 # eval "$(jenv init -)"
 
+unset DIR_DEV DIR_DOTFILES
