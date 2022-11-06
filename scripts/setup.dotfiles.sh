@@ -16,6 +16,7 @@ function removeAndSymlink() {
 function symlinkDotFiles() {
   removeAndSymlink ./git/gitconfig ~/.gitconfig
   removeAndSymlink ./git/gitignore ~/.gitignore
+
   removeAndSymlink ./ssh/config ~/.ssh/config
   removeAndSymlink ./zsh/zshrc ~/.zshrc
   removeAndSymlink ./.vimrc ~/.vimrc
@@ -23,6 +24,13 @@ function symlinkDotFiles() {
   removeAndSymlink ./.editorconfig ~/.editorconfig
   removeAndSymlink ./.eslintignore ~/.eslintignore
   removeAndSymlink ./.prettierrc.js ~/.prettierrc.js
+
+  # Atlassian
+  if [ ! -d ~/dev/atlassian ]; then
+    mkdir -p ~/dev/atlassian
+  fi
+
+  removeAndSymlink ./git/atlassian.gitconfig ~/dev/atlassian/.gitconfig
 }
 
 runIfYes \
