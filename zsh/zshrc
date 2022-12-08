@@ -41,6 +41,7 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH="/usr/local/opt/ruby/bin:/$HOME/.gem/ruby/2.6.0/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/opt/homebrew/opt/mongodb-community@4.4/bin:$PATH"
 
 # deno
 export DENO_INSTALL="$HOME/.deno"

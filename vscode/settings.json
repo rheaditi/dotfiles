@@ -117,7 +117,7 @@
   "[json]" : {
     "editor.defaultFormatter" : "esbenp.prettier-vscode"
   },
-  "workbench.colorTheme" : "Overnight Slumber",
+  "workbench.colorTheme" : "Winter is Coming (Dark Blue)",
   "editor.minimap.enabled" : false,
   "gitlens.views.fileHistory.location" : "explorer",
   "git.enableSmartCommit": true,
@@ -125,5 +125,6 @@
     "FIG_NEW_SESSION": "1"
   },
   "window.zoomLevel": 1,
-  "gitlens.statusBar.enabled": false
+  "gitlens.statusBar.enabled": false,
+  "jest.showTerminalOnLaunch": false,
 }
