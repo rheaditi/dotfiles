@@ -47,7 +47,7 @@
     "source.fixAll.eslint" : true
   },
   "workbench.list.automaticKeyboardNavigation" : false,
-  "atlascode.jira.startWorkBranchTemplate.customTemplate" : "am\/{{{issueKey}}}-{{{summary}}}",
+  "atlascode.jira.startWorkBranchTemplate.customTemplate" : "am/{{{issueKey}}}-{{{summary}}}",
   "[html]" : {
     "editor.defaultFormatter" : "esbenp.prettier-vscode"
   },
@@ -127,4 +127,7 @@
   "window.zoomLevel": 1,
   "gitlens.statusBar.enabled": false,
   "jest.showTerminalOnLaunch": false,
+  "atlascode.bitbucket.explorer.defaultPullRequestFilter": "createdByMe",
+  "atlascode.bitbucket.explorer.notifications.pullRequestCreated": false,
+  "atlascode.outputLevel": "errors",
 }

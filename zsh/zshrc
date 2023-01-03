@@ -29,6 +29,7 @@ source "$DIR_DOTFILES/zsh/alias.sh" # this needs to be the first
 source "$DIR_DOTFILES/zsh/prompt.sh"
 source "$DIR_DOTFILES/zsh/play.sh" # all play 🎮⛏
 source "$DIR_DOTFILES/zsh/shell-functions.sh"
+test -f "$DIR_DOTFILES/zsh/private/work.sh" && source "$DIR_DOTFILES/zsh/private/work.sh"
 
 [ -f "$DIR_DOTFILES_PRIVATE/entry.sh" ] && source "$DIR_DOTFILES_PRIVATE/entry.sh" || false
 

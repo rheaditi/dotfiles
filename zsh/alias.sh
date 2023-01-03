@@ -20,6 +20,7 @@ alias clean-merged-branches='git branch --merged >/tmp/merged-branches && vi /tm
 alias clean-remote-branches='git branch -a >/tmp/remote-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches'
 alias reflog='gitk --all --date-order $(git log -g --pretty=%H)'
 alias gbdd='git branch -D'
+alias grbim='git rebase -i $(git_main_branch)'
 
 # alias: typos 👻
 alias got='git'
