@@ -26,7 +26,7 @@ source $ZSH/oh-my-zsh.sh
 
 # source remaining files
 source "$DIR_DOTFILES/zsh/alias.sh" # this needs to be the first
-# source "$DIR_DOTFILES/zsh/prompt.sh" # disable since warp doesn't support it yet
+source "$DIR_DOTFILES/zsh/prompt.sh"
 source "$DIR_DOTFILES/zsh/play.sh" # all play 🎮⛏
 source "$DIR_DOTFILES/zsh/shell-functions.sh"
 test -f "$DIR_DOTFILES/zsh/private/work.sh" && source "$DIR_DOTFILES/zsh/private/work.sh"
