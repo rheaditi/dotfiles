@@ -51,13 +51,9 @@
   "[html]" : {
     "editor.defaultFormatter" : "esbenp.prettier-vscode"
   },
-  "diffEditor.ignoreTrimWhitespace" : false,
-  "atlascode.jira.lastCreateSiteAndProject" : {
-    "siteId" : "fff89a1a-52c8-11e5-91b2-3c15c2bd8caa-ecosystem",
-    "projectKey" : "AA"
-  },
+  "diffEditor.ignoreTrimWhitespace": false,
   "yaml.schemas" : {
-    "file:///Users/amohanty/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/amohanty/.vscode/extensions/atlassian.atlascode-3.0.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   "eslint.validate" : [
     "javascript",
@@ -110,7 +106,7 @@
   "git.autofetch" : true,
   "editor.suggestSelection" : "first",
   "gitlens.views.search.location" : "gitlens",
-  "editor.cursorSmoothCaretAnimation" : true,
+  "editor.cursorSmoothCaretAnimation" : "on",
   "editor.tabSize" : 2,
   "editor.accessibilitySupport" : "off",
   "telemetry.telemetryLevel": "off",
@@ -124,10 +120,18 @@
   "terminal.integrated.env.osx": {
     "FIG_NEW_SESSION": "1"
   },
-  "window.zoomLevel": 1,
   "gitlens.statusBar.enabled": false,
   "jest.showTerminalOnLaunch": false,
   "atlascode.bitbucket.explorer.defaultPullRequestFilter": "createdByMe",
   "atlascode.bitbucket.explorer.notifications.pullRequestCreated": false,
   "atlascode.outputLevel": "errors",
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "atlascode.jira.lastCreateSiteAndProject": {
+    "siteId": "fff89a1a-52c8-11e5-91b2-3c15c2bd8caa-ecosystem",
+    "projectKey": "MC"
+  },
+  "terminal.external.osxExec": "Warp.app",
+  "window.zoomLevel": 1
 }
