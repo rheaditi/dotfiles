@@ -6,7 +6,7 @@
   user = rheaditi
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
 
 [core]
   # Use custom `.gitignore` and `.gitattributes`
@@ -72,9 +72,9 @@
 [commit]
   gpgsign = false
 
+[pull]
+  ff = only
+
 # include work config
 [includeIf "gitdir:~/dev/atlassian/"]
   path = ~/dev/atlassian/.gitconfig
-
-[pull]
-  ff = only
