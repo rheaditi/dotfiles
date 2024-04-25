@@ -1,76 +1,64 @@
 {
-  "gitlens.gitCommands.closeOnFocusOut" : true,
-  "files.associations" : {
-    ".env.*" : "properties",
-    ".env" : "properties",
-    "*.flow" : "javascript",
-    "*.itermcolors" : "xml",
-    "*.jsx" : "javascriptreact",
-    "*.tsx" : "typescriptreact",
-    "*rc" : "shellscript",
-    "zshrc_default" : "shellscript",
+  "gitlens.gitCommands.closeOnFocusOut": true,
+  "files.associations": {
+    ".env.*": "properties",
+    ".env": "properties",
+    "*.flow": "javascript",
+    "*.itermcolors": "xml",
+    "*.jsx": "javascriptreact",
+    "*.tsx": "typescriptreact",
+    "*rc": "shellscript",
+    "zshrc_default": "shellscript",
+    "*.nadel": "graphql"
   },
-  "typescript.preferences.quoteStyle" : "single",
-  "[typescriptreact]" : {
-    "editor.defaultFormatter" : "esbenp.prettier-vscode"
+  "typescript.preferences.quoteStyle": "single",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "extensions.ignoreRecommendations" : false,
-  "editor.rulers" : [
-    100,
-    120
-  ],
-  "editor.smoothScrolling" : true,
-  "atlascode.jira.startWorkBranchTemplate.customPrefixes" : [
-
-  ],
-  "editor.gotoLocation.multipleDefinitions" : "goto",
-  "redhat.telemetry.enabled" : false,
-  "editor.renderWhitespace" : "all",
-  "javascript.validate.enable" : false,
-  "[jsonc]" : {
-    "editor.defaultFormatter" : "esbenp.prettier-vscode"
+  "extensions.ignoreRecommendations": false,
+  "editor.rulers": [100, 120],
+  "editor.smoothScrolling": true,
+  "atlascode.jira.startWorkBranchTemplate.customPrefixes": [],
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "redhat.telemetry.enabled": false,
+  "editor.renderWhitespace": "all",
+  "javascript.validate.enable": false,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.fontLigatures" : true,
-  "terminal.integrated.copyOnSelection" : true,
-  "workbench.sideBar.location" : "right",
-  "[javascript]" : {
-    "editor.defaultFormatter" : "vscode.typescript-language-features"
+  "editor.fontLigatures": true,
+  "terminal.integrated.copyOnSelection": true,
+  "workbench.sideBar.location": "right",
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
-  "git.confirmSync" : false,
-  "javascript.updateImportsOnFileMove.enabled" : "always",
-  "atlascode.bitbucket.pipelines.monitorEnabled" : false,
-  "[javascriptreact]" : {
-    "editor.defaultFormatter" : "esbenp.prettier-vscode"
+  "git.confirmSync": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "atlascode.bitbucket.pipelines.monitorEnabled": false,
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.renderControlCharacters": true,
-  "editor.codeActionsOnSave" : {
-    "source.fixAll.eslint" : true
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
   },
-  "workbench.list.automaticKeyboardNavigation" : false,
-  "atlascode.jira.startWorkBranchTemplate.customTemplate" : "am/{{{issueKey}}}-{{{summary}}}",
-  "[html]" : {
-    "editor.defaultFormatter" : "esbenp.prettier-vscode"
+  "workbench.list.automaticKeyboardNavigation": false,
+  "atlascode.jira.startWorkBranchTemplate.customTemplate": "am/{{{issueKey}}}-{{{summary}}}",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "diffEditor.ignoreTrimWhitespace": false,
-  "yaml.schemas" : {
-    "file:///Users/amohanty/.vscode/extensions/atlassian.atlascode-3.0.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+  "yaml.schemas": {
+    "file:///Users/amohanty/.vscode/extensions/atlassian.atlascode-3.0.10/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
-  "eslint.validate" : [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "graphql"
-  ],
-  "editor.fontFamily" : "'Fira Code', 'Hasklig', Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontSize" : 14,
-  "atlascode.bitbucket.pipelines.explorerEnabled" : false,
-  "javascript.preferences.quoteStyle" : "single",
-  "workbench.activityBar.visible" : true,
-  "files.defaultLanguage" : "markdown",
-  "terminal.integrated.fontSize" : 13,
-  "vsicons.dontShowNewVersionMessage" : true,
-  "atlascode.jira.jqlList" : [
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "graphql"],
+  "editor.fontFamily": "'Fira Code', 'Hasklig', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 14,
+  "atlascode.bitbucket.pipelines.explorerEnabled": false,
+  "javascript.preferences.quoteStyle": "single",
+  "files.defaultLanguage": "markdown",
+  "terminal.integrated.fontSize": 13,
+  "vsicons.dontShowNewVersionMessage": true,
+  "atlascode.jira.jqlList": [
     {
       "siteId": "fff89a1a-52c8-11e5-91b2-3c15c2bd8caa-ecosystem",
       "id": "f36a79c1-0546-4fab-a457-e625fd18a8c7",
@@ -78,44 +66,252 @@
       "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
       "name": "My ecosystem Issues",
       "monitor": true
+    },
+    {
+      "id": "2a2585bf-c72e-4ed5-87a7-86142dd23387",
+      "enabled": true,
+      "name": "My asecurityteam-sandbox-931 Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "05edda9e-67ea-4133-9ad0-04389de28929",
+      "monitor": true
+    },
+    {
+      "id": "4fbd7066-ef05-4b51-a482-c060fc50ee09",
+      "enabled": true,
+      "name": "My softwareteams Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "12e73ff5-8b07-4b31-be8e-67ee0666fc43",
+      "monitor": true
+    },
+    {
+      "id": "ef05b3ce-1863-4348-917f-0b753b4068e4",
+      "enabled": true,
+      "name": "My jbusiness Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "18d7b07e-4039-4ebf-b4df-b7202d8e0e15",
+      "monitor": true
+    },
+    {
+      "id": "35780105-4cce-49a7-8116-af9017d5683f",
+      "enabled": true,
+      "name": "My sre-ehlo Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "2d62af1b-a066-44b7-a3d2-1c2071b8aa22",
+      "monitor": true
+    },
+    {
+      "id": "f8868988-b9e5-448a-b56b-6cc88fa68219",
+      "enabled": true,
+      "name": "My atlassian-public Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "2f1451f1-4b6c-4c95-bb20-796c4e0d6d9a",
+      "monitor": true
+    },
+    {
+      "id": "36fed5e4-1db8-4e3d-96ec-35be56b39a16",
+      "enabled": true,
+      "name": "My donut-world-dogfood Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "3b3a3590-39d8-4431-ae1b-8be27cfeeb5d",
+      "monitor": true
+    },
+    {
+      "id": "75547518-45eb-4a79-8b9a-7e335233700c",
+      "enabled": true,
+      "name": "My trello Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "3f48f622-28b8-44f0-aa32-c9d048870b40",
+      "monitor": true
+    },
+    {
+      "id": "d63392ef-e856-4bca-9ff6-8f7b9dc62853",
+      "enabled": true,
+      "name": "My asecurityteam Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "4d7f3154-1d7b-4a16-b859-f1904a19b11f",
+      "monitor": true
+    },
+    {
+      "id": "6be612c7-7f52-4dec-9b1d-41166c064fc2",
+      "enabled": true,
+      "name": "My marketplace Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "726034fc-1015-4ccb-a89e-c05dfab26c8b",
+      "monitor": true
+    },
+    {
+      "id": "c943bd36-95ee-453c-a898-ac305c3230aa",
+      "enabled": true,
+      "name": "My chartio Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "84762ead-56f8-46e6-9ce6-240b5c97d1db",
+      "monitor": true
+    },
+    {
+      "id": "158123c0-5989-48da-8d6d-46aae1551304",
+      "enabled": true,
+      "name": "My businesssystems Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "9902367a-570a-473c-9c5d-7b93db382712",
+      "monitor": true
+    },
+    {
+      "id": "e1945b69-c875-4e85-b341-4c53de894e75",
+      "enabled": true,
+      "name": "My experimentation-platform Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "9c6d06ea-9b84-4307-9e69-dc1e140aeacf",
+      "monitor": true
+    },
+    {
+      "id": "67059120-1e04-4c4f-8c27-48edddcb0412",
+      "enabled": true,
+      "name": "My hello Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "a436116f-02ce-4520-8fbb-7301462a1674",
+      "monitor": true
+    },
+    {
+      "id": "0ec85cab-48e2-42a7-9ec4-7385553fa797",
+      "enabled": true,
+      "name": "My fin-ops Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "a9b08913-3eb0-46cc-8158-2918addec35e",
+      "monitor": true
+    },
+    {
+      "id": "f0aeabec-8bad-41bf-815a-d5369c865f38",
+      "enabled": true,
+      "name": "My riskmanagement Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "cc82f518-193f-4eac-af55-62db19255a78",
+      "monitor": true
+    },
+    {
+      "id": "5225fdf6-f5fe-4b73-9f1f-d2ffcaaaa5f5",
+      "enabled": true,
+      "name": "My bonfire Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "d4cff1d8-7176-488c-b0ec-abe732c34ce5",
+      "monitor": true
+    },
+    {
+      "id": "36964437-7c3b-412c-adcf-796cc31a56d7",
+      "enabled": true,
+      "name": "My translation Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "d9be0a8a-944d-43f1-9d4d-a890f849894a",
+      "monitor": true
+    },
+    {
+      "id": "5c0f58c7-347b-4f37-9373-5de707830890",
+      "enabled": true,
+      "name": "My jplat Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "dba847a5-da95-43c3-b39f-69e9d5be7b5e",
+      "monitor": true
+    },
+    {
+      "id": "8cea2aef-7061-4802-9f5c-dd79b860a096",
+      "enabled": true,
+      "name": "My peopleops Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "dd7c08c5-5a8a-4ec5-857e-3f916d37fd10",
+      "monitor": true
+    },
+    {
+      "id": "577768a9-960b-45d3-b0dd-9e933696abcf",
+      "enabled": true,
+      "name": "My product-fabric Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "DUMMY-158c8204-ff3b-47c2-adbb-a0906ccc722b",
+      "monitor": true
+    },
+    {
+      "id": "2b11576a-6728-41c2-a37b-aaac6b97f54c",
+      "enabled": true,
+      "name": "My foundation Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "DUMMY-73ac74ec-fb97-4bd8-b964-46a95ea9ae3c",
+      "monitor": true
+    },
+    {
+      "id": "a611849e-d6b6-4cee-bbba-aab4719dffee",
+      "enabled": true,
+      "name": "My shipit Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "DUMMY-a47acf29-5d0c-498e-8363-7f921035c535",
+      "monitor": true
+    },
+    {
+      "id": "f60482b8-52fc-4825-b5ea-7d3035037ca4",
+      "enabled": true,
+      "name": "My a11y-internal Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "e106efa8-64b7-4905-9d98-934816157131",
+      "monitor": true
+    },
+    {
+      "id": "8b5501a0-fb18-44dd-b76e-9aeff8f7a1db",
+      "enabled": true,
+      "name": "My atlassian-procurement-dev Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "e472763a-3f9e-419a-8e7f-fc71545a1a54",
+      "monitor": true
+    },
+    {
+      "id": "11274f50-dc81-44ce-b5ed-30689707f16f",
+      "enabled": true,
+      "name": "My a11y Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "ef0548d7-768a-4f24-a08d-90b7efbfdea1",
+      "monitor": true
+    },
+    {
+      "id": "d4370f87-6564-42cf-bfcc-c4245f7c04f3",
+      "enabled": true,
+      "name": "My ecosystem-platform Issues",
+      "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+      "siteId": "fe680554-2a7c-4805-b163-6d0f37214b94",
+      "monitor": true
     }
   ],
-  "atomKeymap.promptV3Features" : true,
-  "files.watcherExclude" : {
-    "**\/.ammonite" : true,
-    "**\/.bloop" : true,
-    "**\/.metals" : true
+  "atomKeymap.promptV3Features": true,
+  "files.watcherExclude": {
+    "**/.ammonite": true,
+    "**/.bloop": true,
+    "**/.metals": true
   },
-  "editor.insertSpaces" : true,
-  "[typescript]" : {
-    "editor.defaultFormatter" : "esbenp.prettier-vscode"
+  "editor.insertSpaces": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "files.exclude" : {
-    "**\/.project" : true,
-    "**\/.settings" : true,
-    "**\/.classpath" : true,
-    "**\/.factorypath" : true
+  "files.exclude": {
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.classpath": true,
+    "**/.factorypath": true
   },
-  "workbench.startupEditor" : "newUntitledFile",
-  "jest.autoEnable" : false,
-  "atlascode.bitbucket.pipelines.refreshInterval" : 0,
-  "workbench.iconTheme" : "vscode-icons",
-  "gitlens.advanced.fileHistoryFollowsRenames" : true,
-  "typescript.suggest.autoImports" : false,
-  "typescript.updateImportsOnFileMove.enabled" : "always",
-  "git.autofetch" : true,
-  "editor.suggestSelection" : "first",
-  "gitlens.views.search.location" : "gitlens",
-  "editor.cursorSmoothCaretAnimation" : "on",
-  "editor.tabSize" : 2,
-  "editor.accessibilitySupport" : "off",
+  "workbench.startupEditor": "newUntitledFile",
+  "jest.autoEnable": false,
+  "atlascode.bitbucket.pipelines.refreshInterval": 0,
+  "workbench.iconTheme": "vscode-icons",
+  "gitlens.advanced.fileHistoryFollowsRenames": true,
+  "typescript.suggest.autoImports": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "git.autofetch": true,
+  "editor.suggestSelection": "first",
+  "gitlens.views.search.location": "gitlens",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.tabSize": 2,
+  "editor.accessibilitySupport": "off",
   "telemetry.telemetryLevel": "off",
-  "[json]" : {
-    "editor.defaultFormatter" : "esbenp.prettier-vscode"
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "workbench.colorTheme" : "Winter is Coming (Dark Blue)",
-  "editor.minimap.enabled" : false,
-  "gitlens.views.fileHistory.location" : "explorer",
+  "workbench.colorTheme": "Dekirisu's Entropy",
+  "editor.minimap.enabled": false,
+  "gitlens.views.fileHistory.location": "explorer",
   "git.enableSmartCommit": true,
   "terminal.integrated.env.osx": {
     "FIG_NEW_SESSION": "1"
@@ -128,10 +324,39 @@
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "atlascode.jira.lastCreateSiteAndProject": {
-    "siteId": "fff89a1a-52c8-11e5-91b2-3c15c2bd8caa-ecosystem",
-    "projectKey": "MC"
-  },
   "terminal.external.osxExec": "Warp.app",
-  "window.zoomLevel": 1
+  "playwright.reuseBrowser": true,
+  "playwright.showTrace": false,
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "window.zoomLevel": 1,
+  "git.openRepositoryInParentFolders": "never",
+  "editor.stickyScroll.enabled": true,
+  "eslint.format.enable": true,
+  "eslint.ignoreUntitled": true,
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+    "vue",
+    "markdown",
+    "graphql"
+  ],
+  "[graphql]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "workbench.activityBar.location": "top",
+  "nxConsole.showNodeVersionOnStartup": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "gitlens.remotes": [
+    {
+      "type": "BitbucketServer",
+      "domain": "bitbucket-mirror-au.internal.atlassian.com",
+    },
+  ],
+  "atlascode.bitbucket.enabled": true,
+  "atlascode.jira.enabled": true
 }
