@@ -78,3 +78,10 @@
 # include work config
 [includeIf "gitdir:~/dev/atlassian/"]
   path = ~/dev/atlassian/.gitconfig
+
+[trace2]
+  eventTarget = af_unix:/Users/amohanty/.gittrace/trace.sock
+  configparams = custom.metacommands
+  eventBrief = true
+  maxFiles = 2000
+  eventNesting = 1
