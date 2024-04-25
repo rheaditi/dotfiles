@@ -21,7 +21,7 @@ DIR_DOTFILES_PRIVATE="$DIR_DEV/dotfiles-private"
 export LANG=en_US.UTF-8
 export SSH_KEY_PATH="~/.ssh/id_ed25519"
 
-plugins=(git zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting z)
 source $ZSH/oh-my-zsh.sh
 
 # source remaining files
@@ -50,7 +50,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # export PATH="$DENO_INSTALL/bin:$PATH"
 
 # jenv
-# export PATH="$HOME/.jenv/bin:$PATH"
-# eval "$(jenv init -)"
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
 
 unset DIR_DEV DIR_DOTFILES
