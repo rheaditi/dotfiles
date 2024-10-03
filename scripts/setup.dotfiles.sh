@@ -30,7 +30,10 @@ function symlinkDotFiles() {
     mkdir -p ~/dev/atlassian
   fi
 
-  removeAndSymlink ./git/atlassian.gitconfig ~/dev/atlassian/.gitconfig
+  if [ -d ~/dev/dotfiles-private ]; then
+    removeAndSymlink ~/dev/dotfiles-private/atlassian/git/gitconfig ~/dev/atlassian/.gitconfig
+  fi
+
 
   local TMUX_CONFIG_FILE="$HOME/dev/dotfiles-private/atlassian/tmuxinator/amkt-frontend.yml"
   if [ -f "$TMUX_CONFIG_FILE" ]; then

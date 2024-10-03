@@ -4,6 +4,8 @@
 # alias ohmyzsh="code ~/.oh-my-zsh"
 alias dotfiles="cd $DIR_DOTFILES"
 alias edit-dotfiles="code $DIR_DOTFILES"
+alias edit-dotpriv="code $DIR_DOTFILES_PRIVATE"
+
 # alias moo='fortune | cowsay | lolcat'
 alias filedate='date +%Y_%m_%d__%H_%M_%S'
 alias commitdate='date "+%A - %d %B %Y - %T"'

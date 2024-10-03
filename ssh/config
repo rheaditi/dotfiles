@@ -1,3 +1,5 @@
+Include dev_env_config
+
 Host *
   AddKeysToAgent yes
   UseKeychain yes
@@ -17,3 +19,7 @@ Host bitbucket-mirror-au.internal.atlassian.com
   AddKeysToAgent yes
   UseKeychain yes
   IdentityFile ~/.ssh/id_ed25519.atlassian
+
+Host devenv
+ RemoteForward 64431 localhost:64431
+ RemoteForward 16622 localhost:16622
