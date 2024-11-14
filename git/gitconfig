@@ -85,3 +85,5 @@
   eventBrief = true
   maxFiles = 2000
   eventNesting = 1
+[maintenance]
+  repo = /Users/amohanty/dev/atlassian/atlassian-frontend-monorepo

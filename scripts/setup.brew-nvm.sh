@@ -68,12 +68,11 @@ runIfYes \
 function installNodeGlobalUtils() {
   npm i -g npm-merge-driver
   npm i -g tldr
-  npm install --global pure-prompt
 }
 
 runIfYes \
   "node global utils" \
-  "Install npm-merge-driver, tldr & pure-prompt?" \
+  "Install npm-merge-driver, tldr?" \
   installNodeGlobalUtils;
 
 function installYarnBolt() {

@@ -37,8 +37,11 @@
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[shellscript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "yaml.schemas": {
-    "file:///Users/amohanty/.vscode/extensions/atlassian.atlascode-3.0.10/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/amohanty/.vscode/extensions/atlassian.atlascode-3.0.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   // editor stuff
   "editor.accessibilitySupport": "off",
@@ -56,10 +59,7 @@
   "editor.stickyScroll.scrollWithEditor": true,
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
-  "editor.rulers": [
-    100,
-    120
-  ],
+  "editor.rulers": [100, 120],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
@@ -311,13 +311,7 @@
   // eslint
   "eslint.format.enable": true,
   "eslint.ignoreUntitled": true,
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "graphql"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "graphql"],
   "eslint.probe": [
     "javascript",
     "javascriptreact",
@@ -331,6 +325,7 @@
   // files
   "files.defaultLanguage": "markdown",
   "files.associations": {
+    ".swcrc": "json",
     ".env.*": "properties",
     ".env": "properties",
     "*.flow": "javascript",
@@ -379,7 +374,7 @@
     {
       "type": "BitbucketServer",
       "domain": "bitbucket-mirror-au.internal.atlassian.com"
-    },
+    }
   ],
   "gitlens.advanced.fileHistoryFollowsRenames": true,
   "gitlens.statusBar.enabled": false,
@@ -399,4 +394,7 @@
     "coverage": true,
     "testFileOnly": true
   },
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "editor.largeFileOptimizations": false,
+  "editor.linkedEditing": true
 }

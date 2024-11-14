@@ -2,7 +2,7 @@
 
 if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
   # pure-prompt
-  fpath+=("$(brew --prefix)/share/zsh/site-functions")
+  fpath+=("$HOME/.zsh/pure")
   autoload -U promptinit; promptinit
   prompt pure
 fi
