@@ -57,6 +57,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   # jenv
   export PATH="$HOME/.jenv/bin:$PATH"
   eval "$(jenv init -)"
+
+  # rust
+  export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
 # deno

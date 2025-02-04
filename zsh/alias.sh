@@ -23,6 +23,7 @@ alias clean-remote-branches='git branch -a >/tmp/remote-branches && vi /tmp/merg
 alias reflog='gitk --all --date-order $(git log -g --pretty=%H)'
 alias gbdd='git branch -D'
 alias grbim='git rebase -i origin/$(git_main_branch)'
+alias gpom='git pull origin $(git_main_branch)'
 
 # alias: typos 👻
 alias got='git'
