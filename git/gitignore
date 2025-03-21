@@ -4,6 +4,11 @@
 # Folder view configuration files
 .DS_Store
 Desktop.ini
+.AppleDouble
+.LSOverride
+.DocumentRevisions-V100
+.fseventsd
+
 
 # Thumbnail cache files
 ._*
@@ -17,15 +22,26 @@ Thumbs.db
 # Compiled Python files
 *.pyc
 
-# npm & bower
+# Dependency manager directories
 bower_components
 node_modules
+.pnpm-store/
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 # IDEs stuff
 .idea
 .vscode
-
+*.sublime-project
+*.sublime-workspace
+.vim/
 *.swp
+*.swo
+*~
 
 # private files
 private
@@ -34,6 +50,9 @@ private
 *.log
 *.cache
 .eslintcache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # output
 dist
@@ -45,3 +64,14 @@ build
 
 # scala
 .metals
+
+# Environment files
+.env.local
+.env.*
+
+# Testing directories
+coverage/
+.nyc_output
+.coverage
+htmlcov/
+junit.xml
