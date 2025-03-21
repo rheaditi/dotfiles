@@ -52,5 +52,5 @@ alias zsource='source ~/.zshrc'
 alias personal='cd ~/dev/personal'
 alias tx=tmuxinator
 
-# alias: python 🐍
-alias venv-activate='source ./.venv/bin/activate'
+# Quick way to measure zsh startup time
+alias timezsh='time zsh -i -c exit' 

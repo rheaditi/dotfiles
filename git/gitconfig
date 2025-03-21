@@ -1,6 +1,7 @@
 [user]
   name = Aditi Mohanty
   email = rheaditi@users.noreply.github.com
+	signingkey = F922088081530062
 
 [github]
   user = rheaditi
@@ -65,6 +66,9 @@
 [push]
   default = current
 
+[checkout]
+	defaultRemote = origin
+
 [pager]
   branch = false
   stash = false
@@ -80,10 +84,11 @@
   path = ~/dev/atlassian/.gitconfig
 
 [trace2]
-  eventTarget = af_unix:/Users/amohanty/.gittrace/trace.sock
-  configparams = custom.metacommands
-  eventBrief = true
+	eventTarget = af_unix:/Users/amohanty/.gittrace/trace.sock
+	configparams = custom.metacommands
+	eventBrief = true
   maxFiles = 2000
-  eventNesting = 1
+	eventNesting = 1
+
 [maintenance]
   repo = /Users/amohanty/dev/atlassian/atlassian-frontend-monorepo
