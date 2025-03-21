@@ -19,6 +19,8 @@
   trustctime = false
   editor = vim
 
+  untrackedCache = true
+
 [alias]
   co = checkout
   cob = checkout -b
@@ -30,8 +32,7 @@
   grepl = grep --break --heading --line-number
   amend = commit --amend
   amendr = commit --amend --reuse-message=HEAD
-  unstage = reset HEAD --
-  uncommit = reset --soft HEAD^
+  
   last = log -1 HEAD
   visual = !gitk
   p = push
@@ -41,6 +42,20 @@
   ours = checkout --ours
   b = branch
   ba = branch -a
+
+  # undo
+  unstage = reset HEAD --
+  uncommit = reset --soft HEAD^
+  undo = reset HEAD~1 --mixed
+
+  # Show changes that will be pushed
+  outgoing = !git fetch && git log @{u}..
+    
+  # Show changes that will be pulled
+  incoming = !git fetch && git log ..@{u}
+
+  # List aliases
+  aliases = !git config --get-regexp '^alias\\.' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t => \\2/' | sort
 
 [color]
   # Use colors in Git commands that are capable of colored output when outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
@@ -92,3 +107,35 @@
 
 [maintenance]
   repo = /Users/amohanty/dev/atlassian/atlassian-frontend-monorepo
+
+[diff]
+  # Detect copies as well as renames
+  renames = copies
+  
+  # Use better, descriptive prefixes for diff output
+  mnemonicPrefix = true
+
+[merge]
+  # Include summaries of merged commits in newly created merge commit messages
+  log = true
+  
+  # Use better, descriptive prefix for merge conflict markers
+  conflictStyle = diff3
+
+[rebase]
+  # Auto-stash before rebasing
+  autoStash = true
+
+[gpg]
+  # Since you have a signing key configured, you might want to:
+  program = gpg
+
+[gc]
+  # More aggressive garbage collection
+  auto = 256
+  autoPackLimit = 64
+
+[pack]
+  # Better delta compression
+  windowMemory = 100m
+  packSizeLimit = 100m
