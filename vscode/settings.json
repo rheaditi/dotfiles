@@ -41,7 +41,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "yaml.schemas": {
-    "file:///Users/amohanty/.vscode/extensions/atlassian.atlascode-3.0.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    "file:///Users/amohanty/.vscode/extensions/atlassian.atlascode-3.8.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
   // editor stuff
   "editor.accessibilitySupport": "off",
@@ -61,8 +61,10 @@
   "editor.tabSize": 2,
   "editor.rulers": [100, 120],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll": "never",
+    "source.organizeImports": "never"
   },
+  "editor.formatOnSave": false,
   // atlassian extension
   "atlascode.bitbucket.explorer.defaultPullRequestFilter": "createdByMe",
   "atlascode.bitbucket.explorer.notifications.pullRequestCreated": false,
@@ -352,13 +354,13 @@
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.fontSize": 13,
   "workbench.activityBar.location": "top",
-  "workbench.colorTheme": "Cosmico",
   "workbench.iconTheme": "vscode-icons",
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "newUntitledFile",
   "terminal.integrated.env.osx": {
     "FIG_NEW_SESSION": "1"
   },
+  "terminal.integrated.scrollback": 9999,
   // git
   "git.autofetch": true,
   "git.openRepositoryInParentFolders": "never",
@@ -386,7 +388,7 @@
   "playwright.showTrace": false,
   "window.zoomLevel": 1,
   "nxConsole.showNodeVersionOnStartup": false,
-  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.ignoreTrimWhitespace": true,
   "github.copilot.editor.enableAutoCompletions": true,
   "jest.runMode": {
     "type": "on-save",
@@ -396,5 +398,32 @@
   },
   "diffEditor.hideUnchangedRegions.enabled": true,
   "editor.largeFileOptimizations": false,
-  "editor.linkedEditing": true
+  "editor.linkedEditing": true,
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "gitlens.modes": {
+    "zen": {
+      "name": "Zen",
+      "statusBarItemName": "Zen",
+      "description": "for a zen-like experience, disables many visual features",
+      "codeLens": false,
+      "currentLine": true,
+      "hovers": true,
+      "statusBar": false
+    },
+    "review": {
+      "name": "Review",
+      "statusBarItemName": "Reviewing",
+      "description": "for reviewing code, enables many visual features",
+      "codeLens": true,
+      "currentLine": true,
+      "hovers": true
+    }
+  },
+  "gitlens.mode.active": "review",
+  "prettier.enableDebugLogs": true,
+  "workbench.colorTheme": "Cosmico",
+  "atlascode.jira.lastCreateSiteAndProject": {
+    "siteId": "",
+    "projectKey": ""
+  }
 }
