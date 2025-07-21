@@ -32,3 +32,35 @@ ytw() {
 ytcov() {
   yarn test $1 --collectCoverage
 }
+
+# find all directories named "node_modules" and remove them
+rmr-node-modules() {
+  local max_depth=2
+
+  # Parse args
+  while [[ "$1" =~ ^- ]]; do
+    case "$1" in
+      -d|--depth)
+        shift
+        max_depth="$1"
+        ;;
+      *)
+        echo "Unknown option: $1"
+        return 1
+        ;;
+    esac
+    shift
+  done
+
+  echo "🔥 Removing node_modules directories up to depth $max_depth..."
+
+  for ((depth=1; depth<=max_depth; depth++)); do
+    echo "🔎 Checking depth $depth..."
+    find . -maxdepth "$depth" -type d -name "node_modules" -prune | while read -r dir; do
+      echo "🧹 Deleting $dir"
+      rm -rf "$dir"
+    done
+  done
+
+  echo "✅ All done. Breathe easy, the bloat is gone."
+}
