@@ -17,7 +17,6 @@ function symlinkDotFiles() {
   removeAndSymlink ./git/gitconfig ~/.gitconfig
   removeAndSymlink ./git/gitignore ~/.gitignore
 
-  removeAndSymlink ./ssh/config ~/.ssh/config
   removeAndSymlink ./zsh/zshrc ~/.zshrc
   removeAndSymlink ./.vimrc ~/.vimrc
 
@@ -25,27 +24,36 @@ function symlinkDotFiles() {
   removeAndSymlink ./.eslintignore ~/.eslintignore
   removeAndSymlink ./.prettierrc.js ~/.prettierrc.js
 
-  # Atlassian
-  if [ ! -d ~/dev/atlassian ]; then
+  if [[ -n "$REMOTE_DEV_ENV" ]]; then
+    removeAndSymlink ./ssh/config ~/.ssh/config
+  fi
+
+  # atlassian dir setup
+  if [[ -n "$REMOTE_DEV_ENV" ]] && [ ! -d ~/dev/atlassian ]; then
     mkdir -p ~/dev/atlassian
   fi
 
-  if [ -d ~/dev/dotfiles-private ]; then
-    removeAndSymlink ~/dev/dotfiles-private/atlassian/git/gitconfig ~/dev/atlassian/.gitconfig
-  fi
+  # TODO: fix this for private dotfiles
+  # if [ -d ~/dev/dotfiles-private ]; then
+  #   removeAndSymlink ~/dev/dotfiles-private/atlassian/git/gitconfig ~/dev/atlassian/.gitconfig
+  # fi
 
-
-  local TMUX_CONFIG_FILE="$HOME/dev/dotfiles-private/atlassian/tmuxinator/amkt-frontend.yml"
-  if [ -f "$TMUX_CONFIG_FILE" ]; then
-    mkdir -p ~/.config/tmuxinator
-    removeAndSymlink "$TMUX_CONFIG_FILE" ~/.config/tmuxinator/amkt-frontend.yml
-  fi
+  # TODO: fix this for private dotfiles
+  # local TMUX_CONFIG_FILE="$HOME/dev/dotfiles-private/atlassian/tmuxinator/amkt-frontend.yml"
+  # if [ -f "$TMUX_CONFIG_FILE" ]; then
+  #   mkdir -p ~/.config/tmuxinator
+  #   removeAndSymlink "$TMUX_CONFIG_FILE" ~/.config/tmuxinator/amkt-frontend.yml
+  # fi
 }
 
-runIfYes \
+if [[ "$REMOTE_DEV_ENV" == "true" ]]; then
+  symlinkDotFiles;
+else
+  runIfYes \
   "dotfiles setup" \
   "Copy over config files? This may overwrite existing files in your home directory." \
   symlinkDotFiles;
+fi
 
 unset getAbsolutePath;
 unset removeAndSymlink;
