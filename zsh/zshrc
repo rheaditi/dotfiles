@@ -29,9 +29,6 @@ else
   source "$DIR_DOTFILES/zsh/zshrc.linux.sh"
 fi
 
-# Load common configurations
-source "$DIR_DOTFILES/zsh/common.sh"
-
 # Load Oh My Zsh and plugins
 plugins=(git zsh-syntax-highlighting z)
 source $ZSH/oh-my-zsh.sh
