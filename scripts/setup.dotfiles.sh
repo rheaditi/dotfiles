@@ -48,6 +48,7 @@ function symlinkDotFiles() {
 
 if [[ "$REMOTE_DEV_ENV" == "true" ]]; then
   symlinkDotFiles;
+  echo "✅ dotfiles setup complete"
 else
   runIfYes \
   "dotfiles setup" \
