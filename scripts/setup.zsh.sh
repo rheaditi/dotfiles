@@ -6,6 +6,7 @@ function setupOhMyZshPlugins() {
   if [ ! -d "$plugin_dir" ]; then
     echo "zsh-syntax-highlighting plugin not found; installing..."
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$plugin_dir"
+    echo "✅ zsh-syntax-highlighting plugin installed"
   else
     echo "☑️ zsh-syntax-highlighting plugin already exists at \"$plugin_dir\""
   fi
@@ -19,6 +20,7 @@ function setupPurePrompt() {
     mkdir -p "$HOME/.zsh"
     rm -rf "$HOME/.zsh/pure"
     git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+    echo "✅ pure-prompt installed"
   else
     echo "☑️ pure-prompt already exists at \"$pure_dir\""
   fi
