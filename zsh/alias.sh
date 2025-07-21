@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
 # alias: generic
-# alias ohmyzsh="code ~/.oh-my-zsh"
 alias dotfiles="cd $DIR_DOTFILES"
 alias edit-dotfiles="code $DIR_DOTFILES"
 alias edit-dotpriv="code $DIR_DOTFILES_PRIVATE"
 
-# alias moo='fortune | cowsay | lolcat'
 alias filedate='date +%Y_%m_%d__%H_%M_%S'
 alias commitdate='date "+%A - %d %B %Y - %T"'
 alias uuid='uuidgen | tr "[:upper:]" "[:lower:]"'
@@ -53,4 +51,4 @@ alias personal='cd ~/dev/personal'
 alias tx=tmuxinator
 
 # Quick way to measure zsh startup time
-alias timezsh='time zsh -i -c exit' 
+alias timezsh='time zsh -i -c exit'

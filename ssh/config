@@ -1,25 +1,15 @@
-Include dev_env_config
-
 Host *
   AddKeysToAgent yes
   UseKeychain yes
-  IdentityFile ~/.ssh/id_ed25519
+  PKCS11Provider /usr/local/lib/libykcs11.dylib
+  # IdentityFile ~/.ssh/id_ed25519
 
-Host bitbucket.org
-  AddKeysToAgent yes
-  UseKeychain yes
-  IdentityFile ~/.ssh/id_ed25519.atlassian
+# Host bitbucket.org
+#   AddKeysToAgent yes
+#   UseKeychain yes
+#   IdentityFile ~/.ssh/id_ed25519.atlassian
 
-Host stash.atlassian.com
-  AddKeysToAgent yes
-  UseKeychain yes
-  IdentityFile ~/.ssh/id_ed25519.atlassian
-
-Host bitbucket-mirror-au.internal.atlassian.com
-  AddKeysToAgent yes
-  UseKeychain yes
-  IdentityFile ~/.ssh/id_ed25519.atlassian
-
-Host devenv
- RemoteForward 64431 localhost:64431
- RemoteForward 16622 localhost:16622
+# Host stash.atlassian.com
+#   AddKeysToAgent yes
+#   UseKeychain yes
+#   IdentityFile ~/.ssh/id_ed25519.atlassian

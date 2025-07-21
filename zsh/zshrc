@@ -5,14 +5,20 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 ZSH_THEME=""
 
-# Directory setup
-DIR_DEV="$HOME/dev"
-DIR_DOTFILES="$DIR_DEV/dotfiles"
-DIR_DOTFILES_PRIVATE="$DIR_DEV/dotfiles-private"
+# directory vars
+if [[ "$REMOTE_DEV_ENV" == "true" ]]; then
+  DIR_DEV="$HOME/dev"
+  DIR_DOTFILES="$DIR_DEV/dotfiles"
+  DIR_DOTFILES_PRIVATE="$HOME/dotfiles"
+else
+  DIR_DEV="$HOME/dev"
+  DIR_DOTFILES="$DIR_DEV/dotfiles"
+  DIR_DOTFILES_PRIVATE="$DIR_DEV/dotfiles-private"
+fi
 
 # User configuration
 export LANG=en_US.UTF-8
-export SSH_KEY_PATH="~/.ssh/id_ed25519"
+# export SSH_KEY_PATH="~/.ssh/id_ed25519" # TODO: check if this is needed
 export EDITOR=vim
 
 # Load OS-specific configurations
@@ -33,7 +39,6 @@ source $ZSH/oh-my-zsh.sh
 # Load additional configuration files
 source "$DIR_DOTFILES/zsh/alias.sh"
 source "$DIR_DOTFILES/zsh/prompt.sh"
-source "$DIR_DOTFILES/zsh/play.sh"
 source "$DIR_DOTFILES/zsh/shell-functions.sh"
 
 # Load private configurations if they exist
