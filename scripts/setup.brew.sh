@@ -8,6 +8,10 @@ function installBrewCoreUtils() {
   brew install coreutils tree gpg
 }
 
+function installBrewAdditionals() {
+  brew install --cask finicky
+}
+
 function installBrew() {
   if command -v brew 2>/dev/null; then
     echo "Homebrew already installed."
@@ -33,6 +37,11 @@ function installBrewIfYes() {
     "Homebrew" \
     "Install Homebrew?" \
     installBrew;
+
+    runIfYes \
+    "Additional Brew packages" \
+    "Install additional brew packages (finicky)?" \
+    installBrewAdditionals;
 
   # Remove outdated versions from the cellar
   brew cleanup

@@ -29,6 +29,11 @@ else
   source "$DIR_DOTFILES/zsh/zshrc.linux.sh"
 fi
 
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 # Load Oh My Zsh and plugins
 plugins=(git zsh-syntax-highlighting z)
 source $ZSH/oh-my-zsh.sh
