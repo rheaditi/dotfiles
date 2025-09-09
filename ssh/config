@@ -1,15 +1,13 @@
+
 Host *
   AddKeysToAgent yes
   UseKeychain yes
-  PKCS11Provider /usr/local/lib/libykcs11.dylib
-  # IdentityFile ~/.ssh/id_ed25519
+  IdentityFile ~/.ssh/id_ed25519
 
-# Host bitbucket.org
-#   AddKeysToAgent yes
-#   UseKeychain yes
-#   IdentityFile ~/.ssh/id_ed25519.atlassian
+Host bitbucket.org
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519.atlassian
 
-# Host stash.atlassian.com
-#   AddKeysToAgent yes
-#   UseKeychain yes
-#   IdentityFile ~/.ssh/id_ed25519.atlassian
+Include dns_host_config
+Include dev_env_config
