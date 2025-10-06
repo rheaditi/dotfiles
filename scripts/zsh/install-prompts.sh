@@ -35,6 +35,12 @@ install-pure-prompt() {
 install-starship-prompt() {
   log-step "Setting up Starship prompt..."
 
+  # Ensure ~/local/bin is in PATH for current session
+  if [[ ":$PATH:" != *":$HOME/local/bin:"* ]]; then
+    log-info "Adding $HOME/local/bin to PATH for current session"
+    export PATH="$HOME/local/bin:$PATH"
+  fi
+
   # Check if starship is already installed
   if command -v starship &> /dev/null; then
     log-info "Starship already installed, attempting update..."
@@ -69,13 +75,6 @@ install-starship-prompt() {
            log-error "Failed to install Starship via official installer"
            return 1
          }
-
-          # Ensure ~/local/bin is in PATH for current session
-          # TODO: Add $HOME/local/bin to PATH permanently in zshrc when creating symlinks
-          if [[ ":$PATH:" != *":$HOME/local/bin:"* ]]; then
-            log-info "Adding $HOME/local/bin to PATH for current session"
-            export PATH="$HOME/local/bin:$PATH"
-          fi
          ;;
       *)
         log-error "Unsupported package manager for Starship: $package_manager"
