@@ -33,3 +33,6 @@ fi
 # Step 5: Source other configurations
 source "$DOTFILES_CONFIG_DIR/zshrc.alias.sh"
 source "$DOTFILES_CONFIG_DIR/zshrc.functions.sh"
+
+# Step 6: Source private configurations (if they exist)
+source "$DOTFILES_CONFIG_DIR/zshrc.private.sh"

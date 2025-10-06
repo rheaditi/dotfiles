@@ -54,6 +54,7 @@ alias ya='yarn add'
 alias yr='yarn run'
 alias ye='yarn exec'
 alias yarn-please='rm -rf node_modules && rm yarn.lock && yarn install'
+alias yw='yarn workspace'
 
 # alias: other 🤗
 alias zsource='source ~/.zshrc'
