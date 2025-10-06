@@ -10,6 +10,7 @@ DOTFILES_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 # Source utility functions
 source "$SCRIPT_DIR/../utils/logging.sh"
 source "$SCRIPT_DIR/../utils/file-operations.sh"
+source "$DOTFILES_ROOT/common/utils/platform-detection.sh"
 
 # Execute zshrc setup
 log-step "Setting up zsh configuration..."
@@ -24,12 +25,11 @@ if [[ ! -f "$CONFIG_FILE" ]]; then
   exit 1
 fi
 
-# Handle devbox vs local environment
-if [[ "$REMOTE_DEV_ENV" == "true" ]]; then
+if is-devbox; then
   # Devbox environment - symlink to ~/.zshrc-rheaditi and source from ~/.zshrc
   log-info "Devbox environment detected"
 
-  local dotfiles_zshrc="$HOME/.zshrc-rheaditi"
+  dotfiles_zshrc="$HOME/.zshrc-rheaditi"
 
   # Create symlink to our config
   ln -sf "$CONFIG_FILE" "$dotfiles_zshrc"

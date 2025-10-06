@@ -1,7 +1,12 @@
 export ZSH=$HOME/.oh-my-zsh
 
-# Get the directory where this config file is located
-DOTFILES_CONFIG_DIR="$(cd "$(dirname "${(%):-%x}")" && pwd)"
+# Get the directory where this config file is actually located (resolve symlinks)
+DOTFILES_CONFIG_FILE="${(%):-%x}"
+# Resolve symlink to get the real path
+if [[ -L "$DOTFILES_CONFIG_FILE" ]]; then
+  DOTFILES_CONFIG_FILE="$(readlink "$DOTFILES_CONFIG_FILE")"
+fi
+DOTFILES_CONFIG_DIR="$(cd "$(dirname "$DOTFILES_CONFIG_FILE")" && pwd)"
 DOTFILES_ROOT="$(cd "$DOTFILES_CONFIG_DIR/../.." && pwd)"
 
 # Source platform detection utilities
