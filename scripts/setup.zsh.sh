@@ -86,6 +86,47 @@ install-zsh() {
   fi
 }
 
+# Install or update Oh My Zsh framework
+install-oh-my-zsh() {
+  log-step "Setting up Oh My Zsh framework..."
+
+  if [ -d "$HOME/.oh-my-zsh" ]; then
+    log-info "Oh My Zsh already installed, attempting update..."
+    if command -v omz &> /dev/null && omz update; then
+      log-success "Oh My Zsh updated successfully"
+    else
+      log-warning "Could not update Oh My Zsh automatically. Run 'omz update' manually."
+    fi
+  else
+    log-info "Installing Oh My Zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || {
+      log-error "Failed to install Oh My Zsh"
+      return 1
+    }
+    log-success "Oh My Zsh installed successfully"
+  fi
+}
+
+# Install or update zsh plugins
+install-zsh-plugins() {
+  log-step "Setting up zsh plugins..."
+
+  local plugin_dir="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+
+  if [ -d "$plugin_dir" ]; then
+    log-info "Updating zsh-syntax-highlighting plugin..."
+    (cd "$plugin_dir" && git pull) || log-warning "Could not update zsh-syntax-highlighting plugin"
+  else
+    log-info "Installing zsh-syntax-highlighting plugin..."
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$plugin_dir" || {
+      log-error "Failed to install zsh-syntax-highlighting plugin"
+      return 1
+    }
+  fi
+
+  log-success "oh-my-zsh plugins setup completed"
+}
+
 # Main function to set up zsh shell
 setup-zsh-shell() {
   log-step "Starting zsh shell setup..."
@@ -98,10 +139,24 @@ setup-zsh-shell() {
     fi
   fi
 
-  log-success "Zsh shell setup (detection/installation) completed successfully!"
+  # Step 2: Install Oh My Zsh framework
+  if ! install-oh-my-zsh; then
+    log-error "Failed to install Oh My Zsh. Aborting setup."
+    return 1
+  fi
+
+  # Step 3: Install zsh plugins
+  if ! install-zsh-plugins; then
+    log-error "Failed to install zsh plugins. Aborting setup."
+    return 1
+  fi
+
+  log-success "Zsh shell setup completed successfully!"
+  log-info "Installed components:"
+  log-info "  ✅ zsh shell"
+  log-info "  ✅ Oh My Zsh framework"
+  log-info "  ✅ zsh-syntax-highlighting plugin"
   log-info "Next steps will include:"
-  log-info "  - Installing Oh My Zsh framework"
-  log-info "  - Installing zsh plugins"
   log-info "  - Installing Pure prompt theme"
   log-info "  - Setting zsh as default shell"
   log-info "  - Creating configuration symlinks"
