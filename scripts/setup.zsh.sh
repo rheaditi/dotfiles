@@ -41,6 +41,13 @@ log-info "Running default shell setup..."
   exit 1
 }
 
+# Step 5: Setup zsh configuration
+log-info "Running zshrc configuration setup..."
+"$SCRIPT_DIR/zsh/setup-zshrc.sh" || {
+  log-error "Failed to set up zsh configuration. Aborting setup."
+  exit 1
+}
+
 log-success "Zsh shell setup completed successfully!"
 log-info "Installed components:"
 log-info "  ✅ zsh shell"
@@ -48,5 +55,4 @@ log-info "  ✅ Oh My Zsh framework"
 log-info "  ✅ zsh-syntax-highlighting plugin"
 log-info "  ✅ Pure prompt and Starship prompt"
 log-info "  ✅ Default shell configuration"
-log-info "Next steps will include:"
-log-info "  - Creating configuration symlinks"
+log-info "  ✅ Zsh configuration files"
