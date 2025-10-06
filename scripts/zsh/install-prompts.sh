@@ -9,19 +9,93 @@ DOTFILES_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 # Source utility functions
 source "$SCRIPT_DIR/../utils/logging.sh"
+source "$SCRIPT_DIR/../utils/package-manager.sh"
 
-# Install prompt themes (placeholder for future implementation)
-install-prompts() {
-  log-step "Setting up zsh prompts..."
+# Install or update Pure prompt
+install-pure-prompt() {
+  log-step "Setting up Pure prompt..."
 
-  # TODO: Implement prompt installation
-  # - Pure prompt
-  # - Starship
-  # - Custom prompts
+  local pure_dir="$HOME/.zsh/pure"
 
-  log-info "Prompt installation not yet implemented"
-  log-success "Prompts setup completed (placeholder)"
+  if [ -d "$pure_dir" ]; then
+    log-info "Pure prompt already installed, updating..."
+    (cd "$pure_dir" && git pull) || log-warning "Could not update Pure prompt"
+  else
+    log-info "Installing Pure prompt..."
+    mkdir -p "$HOME/.zsh"
+    git clone https://github.com/sindresorhus/pure.git "$pure_dir" || {
+      log-error "Failed to install Pure prompt"
+      return 1
+    }
+    log-success "Pure prompt installed successfully"
+  fi
+}
+
+# Install or update Starship prompt
+install-starship-prompt() {
+  log-step "Setting up Starship prompt..."
+
+  # Check if starship is already installed
+  if command -v starship &> /dev/null; then
+    log-info "Starship already installed, attempting update..."
+    local package_manager
+    package_manager=$(detect-package-manager)
+
+    case "$package_manager" in
+      "brew")
+        brew upgrade starship || log-warning "Could not update Starship via Homebrew"
+        ;;
+      *)
+        log-warning "Starship update not supported for $package_manager. Install manually if needed."
+        ;;
+    esac
+  else
+    log-info "Installing Starship prompt..."
+    local package_manager
+    package_manager=$(detect-package-manager)
+
+    case "$package_manager" in
+      "brew")
+        brew install starship || {
+          log-error "Failed to install Starship via Homebrew"
+          return 1
+        }
+        ;;
+      "apt"|"yum")
+        # Use official installer for Linux
+        log-info "Using official Starship installer for Linux..."
+        curl -sS https://starship.rs/install.sh | sh -s -- --yes || {
+          log-error "Failed to install Starship via official installer"
+          return 1
+        }
+        ;;
+      *)
+        log-error "Unsupported package manager for Starship: $package_manager"
+        log-info "Please install Starship manually: https://starship.rs/guide/#step-1-install-starship"
+        return 1
+        ;;
+    esac
+    log-success "Starship prompt installed successfully"
+  fi
 }
 
 # Execute prompts setup
-install-prompts
+log-step "Installing zsh prompts..."
+
+# Install Pure prompt
+if ! install-pure-prompt; then
+  log-error "Failed to install Pure prompt"
+  exit 1
+fi
+
+# Install Starship prompt
+if ! install-starship-prompt; then
+  log-error "Failed to install Starship prompt"
+  exit 1
+fi
+
+log-success "Zsh prompts installation completed!"
+log-info "Installed prompts:"
+log-info "  ✅ Pure prompt (available at ~/.zsh/pure)"
+log-info "  ✅ Starship prompt (available via 'starship' command)"
+log-info "Note: Prompts are installed but not activated yet"
