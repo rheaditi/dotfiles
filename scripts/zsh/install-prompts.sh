@@ -61,14 +61,22 @@ install-starship-prompt() {
           return 1
         }
         ;;
-      "apt"|"yum")
-        # Use official installer for Linux
-        log-info "Using official Starship installer for Linux..."
-        curl -sS https://starship.rs/install.sh | sh -s -- --yes || {
-          log-error "Failed to install Starship via official installer"
-          return 1
-        }
-        ;;
+       "apt"|"yum")
+         # Use official installer for Linux with user directory
+         log-info "Installing Starship to user directory..."
+         mkdir -p "$HOME/local/bin"
+         curl -sS https://starship.rs/install.sh | sh -s -- --bin-dir "$HOME/local/bin" --yes || {
+           log-error "Failed to install Starship via official installer"
+           return 1
+         }
+
+          # Ensure ~/local/bin is in PATH for current session
+          # TODO: Add $HOME/local/bin to PATH permanently in zshrc when creating symlinks
+          if [[ ":$PATH:" != *":$HOME/local/bin:"* ]]; then
+            log-info "Adding $HOME/local/bin to PATH for current session"
+            export PATH="$HOME/local/bin:$PATH"
+          fi
+         ;;
       *)
         log-error "Unsupported package manager for Starship: $package_manager"
         log-info "Please install Starship manually: https://starship.rs/guide/#step-1-install-starship"
