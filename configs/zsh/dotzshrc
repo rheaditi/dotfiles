@@ -21,3 +21,11 @@ source "$DOTFILES_CONFIG_DIR/zshrc.prompt.sh"
 # Step 3: User configurations
 export LANG=en_US.UTF-8
 export EDITOR=vim
+
+# Step 4: Source platform-specific configuration
+source "$DOTFILES_CONFIG_DIR/zshrc.platform.sh"
+if is-macos; then
+  source "$DOTFILES_CONFIG_DIR/zshrc.macos.sh"
+elif is-linux; then
+  source "$DOTFILES_CONFIG_DIR/zshrc.linux.sh"
+fi
