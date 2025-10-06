@@ -11,6 +11,8 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 if is-devbox; then
   COMPLETION_WAITING_DOTS="false"
+  # the default prompt is set via the devbox platform image which we want to disable (search on slack)
+  DISABLE_ZSH_DEFAULT_PROMPT="true"
   zstyle ':omz:update' mode disabled  # disable automatic updates
 else
   zstyle ':omz:update' mode auto      # update automatically without asking
