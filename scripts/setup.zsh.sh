@@ -34,11 +34,19 @@ log-info "Running prompts setup..."
   exit 1
 }
 
+# Step 4: Set zsh as default shell
+log-info "Running default shell setup..."
+"$SCRIPT_DIR/zsh/set-default-shell.sh" || {
+  log-error "Failed to set up default shell. Aborting setup."
+  exit 1
+}
+
 log-success "Zsh shell setup completed successfully!"
 log-info "Installed components:"
 log-info "  ✅ zsh shell"
 log-info "  ✅ Oh My Zsh framework"
 log-info "  ✅ zsh-syntax-highlighting plugin"
+log-info "  ✅ Pure prompt and Starship prompt"
+log-info "  ✅ Default shell configuration"
 log-info "Next steps will include:"
-log-info "  - Setting zsh as default shell"
 log-info "  - Creating configuration symlinks"
