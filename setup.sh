@@ -1,18 +1,34 @@
 #!/usr/bin/env bash
 
-echo ""
+# Main Dotfiles Setup Script
+# Entry point for setting up the development environment
 
-./scripts/setup.macos.sh
-./scripts/setup.dotfiles.sh
-./scripts/setup.brew.sh
-./scripts/setup.nodejs.sh
-./scripts/setup.zsh.sh
+# Get the directory of this script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-cat << EOF
-Other things to manually setup:
-  → Font: Fira Code (https://github.com/tonsky/FiraCode/releases)
+# Source logging utilities
+source "$SCRIPT_DIR/scripts/utils/logging.sh"
 
-Reload the .zshrc:-
-  $ source ~/.zshrc
-EOF
+log-step "Starting dotfiles setup..."
+log-info "Environment: ${REMOTE_DEV_ENV:-local}"
 
+# Set up shell environment (zsh, oh-my-zsh, plugins, etc.)
+log-step "Setting up shell environment..."
+if "$SCRIPT_DIR/scripts/setup.zsh.sh"; then
+  log-success "Shell setup completed successfully"
+else
+  log-error "Shell setup failed"
+  exit 1
+fi
+
+log-success "Dotfiles setup completed!"
+log-info "Next steps:"
+log-info "  - Reload your shell configuration: source ~/.zshrc"
+log-info "  - Verify zsh is working: zsh --version"
+
+# TODO: Future setup components will be added here:
+# - Git configuration setup
+# - VS Code settings symlinks
+# - SSH configuration
+# - macOS-specific settings (when not in devbox)
+# - Node.js/npm setup

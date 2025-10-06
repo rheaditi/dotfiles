@@ -47,5 +47,12 @@ source "$DIR_DOTFILES/zsh/shell-functions.sh"
 [ -f "$HOME/.iterm2_shell_integration.zsh" ] && source ~/.iterm2_shell_integration.zsh
 [ -f "$DIR_DOTFILES_PRIVATE/entry.sh" ] && source "$DIR_DOTFILES_PRIVATE/entry.sh" || false
 
+# bun completions
+[ -s "/Users/amohanty/.bun/_bun" ] && source "/Users/amohanty/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
 # Cleanup
 unset DIR_DEV DIR_DOTFILES DIR_DOTFILES_PRIVATE
