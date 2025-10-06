@@ -29,3 +29,7 @@ if is-macos; then
 elif is-linux; then
   source "$DOTFILES_CONFIG_DIR/zshrc.linux.sh"
 fi
+
+# Step 5: Source other configurations
+source "$DOTFILES_CONFIG_DIR/zshrc.alias.sh"
+source "$DOTFILES_CONFIG_DIR/zshrc.functions.sh"
