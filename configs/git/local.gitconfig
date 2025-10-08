@@ -1,0 +1,19 @@
+# Git Configuration for Local Environment
+
+# Base configuration (always included)
+[include]
+  path = ~/dev/dotfiles/configs/git/base.gitconfig
+
+# Private user configuration (always included)
+[include]
+  path = ~/dev/dotfiles-private/atlassian/git/amohanty.local.gitconfig
+
+# Personal configuration (conditional include based on gitdir)
+[includeIf "gitdir:~/dev/personal/"]
+  path = ~/dev/dotfiles/configs/git/rheaditi.gitconfig
+
+[includeIf "gitdir:~/dev/dotfiles/"]
+  path = ~/dev/dotfiles/configs/git/rheaditi.gitconfig
+
+[includeIf "gitdir:~/dev/dotfiles-private/"]
+  path = ~/dev/dotfiles/configs/git/rheaditi.gitconfig
