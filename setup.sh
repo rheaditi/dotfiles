@@ -21,13 +21,22 @@ else
   exit 1
 fi
 
+# Set up git configuration
+log-step "Setting up git configuration..."
+if "$SCRIPT_DIR/scripts/setup.git.sh"; then
+  log-success "Git setup completed successfully"
+else
+  log-error "Git setup failed"
+  exit 1
+fi
+
 log-success "Dotfiles setup completed!"
 log-info "Next steps:"
 log-info "  - Reload your shell configuration: source ~/.zshrc"
 log-info "  - Verify zsh is working: zsh --version"
+log-info "  - Verify git configuration: git --no-pager config --list --show-origin"
 
 # TODO: Future setup components will be added here:
-# - Git configuration setup
 # - VS Code settings symlinks
 # - SSH configuration
 # - macOS-specific settings (when not in devbox)
