@@ -336,7 +336,8 @@
     "*.tsx": "typescriptreact",
     "*rc": "shellscript",
     "zshrc_default": "shellscript",
-    "*.nadel": "graphql"
+    "*.nadel": "graphql",
+    "*.gitignore": "ignore"
   },
   "files.watcherExclude": {
     "**/.ammonite": true,

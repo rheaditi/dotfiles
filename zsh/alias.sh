@@ -22,6 +22,7 @@ alias reflog='gitk --all --date-order $(git log -g --pretty=%H)'
 alias gbdd='git branch -D'
 alias grbim='git rebase -i origin/$(git_main_branch)'
 alias gpom='git pull origin $(git_main_branch)'
+alias gfom='git fetch origin $(git_main_branch) --prune --prune-tags'
 
 # alias: typos 👻
 alias got='git'
