@@ -18,15 +18,24 @@ TARGET_FILE="$HOME/.zshrc"
 
 # Backup existing .zshrc if it exists
 if [[ -f "$TARGET_FILE" || -L "$TARGET_FILE" ]]; then
+  # Unset immutable flag in case a previous setup run locked it
+  chflags nouchg "$TARGET_FILE" 2>/dev/null || true
   backup-file "$TARGET_FILE" || {
     log-error "Failed to backup existing .zshrc"
     exit 1
   }
 fi
 
-# Create direct symlink to our config
-ln -sf "$CONFIG_FILE" "$TARGET_FILE"
-log-success "Created direct symlink: $TARGET_FILE -> $CONFIG_FILE"
+# Write a stub that sources the real config by absolute path.
+# Using a plain file (not a symlink) so tools that append to ~/.zshrc
+# (e.g. nvm, conda) don't break our config — the source line runs first
+# regardless of what gets appended below it.
+cat > "$TARGET_FILE" <<EOF
+# Managed by dotfiles — do not edit this line.
+# Additional tool-appended config below this line is fine.
+source "$CONFIG_FILE"
+EOF
+log-success "Created stub: $TARGET_FILE -> source $CONFIG_FILE"
 
 log-success "Zsh configuration setup completed!"
 

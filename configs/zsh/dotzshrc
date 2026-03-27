@@ -36,3 +36,4 @@ source "$DOTFILES_CONFIG_DIR/zshrc.functions.sh"
 
 # Step 6: Source private configurations (if they exist)
 source "$DOTFILES_CONFIG_DIR/zshrc.private.sh"
+if [ -f "$HOME/.afm-bin-path-manager.zsh" ]; then source "$HOME/.afm-bin-path-manager.zsh"; fi
