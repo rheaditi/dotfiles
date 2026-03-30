@@ -25,5 +25,6 @@ log_info "  DIR_DOTFILES         = $DIR_DOTFILES"
 log_info "  DIR_DOTFILES_PRIVATE = $DIR_DOTFILES_PRIVATE"
 
 source "$DIR_SELF/setup/setup.git.sh"
+source "$DIR_SELF/setup/zsh/setup.zsh.sh"
 
 log_success "Done."

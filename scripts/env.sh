@@ -17,7 +17,22 @@ is_windows() {
 }
 
 # A devbox is a remote machine that is not a personal workstation.
-# Update this detection as you see fit.
+# Signal this by setting REMOTE_DEV_ENV=true in the machine's environment.
 is_devbox() {
   [ "${REMOTE_DEV_ENV:-}" = "true" ]
+}
+
+# Sets PACKAGE_MANAGER to the first available package manager.
+# Returns 1 if none is found.
+detect_package_manager() {
+  if command -v brew &>/dev/null; then
+    PACKAGE_MANAGER="brew"
+  elif command -v apt-get &>/dev/null; then
+    PACKAGE_MANAGER="apt"
+  elif command -v yum &>/dev/null; then
+    PACKAGE_MANAGER="yum"
+  else
+    PACKAGE_MANAGER=""
+    return 1
+  fi
 }
