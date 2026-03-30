@@ -1,0 +1,169 @@
+# Base Git Configuration
+# All non-identity settings shared across all environments 
+
+[core]
+  autocrlf = false
+  editor = vim
+  excludesfile = ~/.gitignore
+  hideDotFiles = false
+  pager = less -FRX
+  whitespace = space-before-tab,trailing-space
+
+  # Make `git status` faster by caching untracked files
+  untrackedCache = true
+
+  # Make `git rebase` safer on macOS, more info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+  trustctime = false
+
+[push]
+  default = simple
+  autoSetupRemote = true
+
+[pull]
+  rebase = true
+
+[rebase]
+  # Auto-stash before rebasing
+  autoStash = true
+
+[fetch]
+  prune = true
+
+[init]
+  defaultBranch = main
+
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  pager = true
+  status = auto
+  ui = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[alias]
+  # Status and info
+  st = status
+  s = status --short
+
+  # Branch operations
+  b = branch
+  co = checkout
+  cob = checkout -b
+
+  # Commit operations
+  ci = commit
+  cm = commit -m
+  ca = commit -a
+  cam = commit -am
+  amend = commit --amend
+
+  # Remote operations
+  pl = pull --ff-only
+  p = push
+  f = fetch
+  fa = fetch --all
+
+  # Log operations
+  lg = log --oneline --graph --decorate
+  lga = log --oneline --graph --decorate --all
+  ll = log --pretty=format:'%C(yellow)%h%Creset -%C(red)%d%Creset %s %C(green)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+  # Diff operations
+  d = diff
+  dc = diff --cached
+
+  # Stash operations
+  sl = stash list
+  sa = stash apply
+  ss = stash save
+
+  # undo
+  unstage = reset HEAD --
+  uncommit = reset --soft HEAD^
+  undo = reset HEAD~1 --mixed
+
+  # Show changes that will be pushed
+  outgoing = !git fetch && git log @{u}..
+
+  # Show changes that will be pulled
+  incoming = !git fetch && git log ..@{u}
+
+  # List aliases
+  aliases = !git config --get-regexp '^alias\\.' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t => \\2/' | sort
+
+[diff]
+  tool = vimdiff
+
+  # Detect copies as well as renames
+  renames = copies
+
+  # Use better, descriptive prefixes for diff output
+  mnemonicPrefix = true
+
+[merge]
+  tool = vimdiff
+
+  # Include summaries of merged commits in newly created merge commit messages
+  log = true
+
+  # Use better, descriptive prefix for merge conflict markers
+  conflictStyle = diff3
+
+[rerere]
+  enabled = true
+
+[grep]
+  lineNumber = true
+
+[help]
+  autocorrect = 5
+
+[checkout]
+  defaultRemote = origin
+
+[pager]
+  # disable pager for few commands
+  branch = false
+  stash = false
+
+[commit]
+  gpgsign = false
+
+[gpg]
+  # Since you have a signing key configured, you might want to:
+  program = gpg
+
+[gc]
+  # More aggressive garbage collection
+  auto = 256
+  autoPackLimit = 64
+
+[pack]
+  # Better delta compression
+  windowMemory = 100m
+  packSizeLimit = 100m
+
+[credential]
+  helper = store
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
