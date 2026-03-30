@@ -56,4 +56,8 @@ EOF
   log_success "Appended include to $GITCONFIG"
 fi
 
+# ── Step 4: symlink global gitignore ─────────────────────────────────────────
+
+symlink_file "$DIR_DOTFILES/configs/git/global.gitignore" "$DIR_HOME/.gitignore"
+
 log_success "Git setup complete."

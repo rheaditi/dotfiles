@@ -7,6 +7,7 @@ DIR_SELF="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$DIR_SELF/scripts/logging.sh"
 source "$DIR_SELF/scripts/env.sh"
 source "$DIR_SELF/scripts/vars.sh"
+source "$DIR_SELF/scripts/symlink.sh"
 
 log_info "Starting dotfiles setup..."
 
