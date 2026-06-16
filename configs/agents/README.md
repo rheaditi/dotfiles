@@ -28,7 +28,7 @@ overlay) into one file per tool, then symlinks it into place:
 Generic content (how I communicate, git/PR preferences) lives here in the
 public repo. Work-specific content (internal hosts, APIs, table names) lives
 in the **private** dotfiles repo at `$DIR_DOTFILES_PRIVATE/agents/sources/`
-(see `common/utils/paths.sh`). The build merges both when the private repo is
+(see `scripts/utils/paths.sh`). The build merges both when the private repo is
 present and falls back gracefully when it isn't.
 
 ## Fragment ordering

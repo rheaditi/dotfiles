@@ -21,7 +21,7 @@ DOTFILES_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 source "$DOTFILES_ROOT/scripts/utils/logging.sh"
 # Single source of truth for DIR_DOTFILES_PRIVATE (and friends).
-source "$DOTFILES_ROOT/common/utils/paths.sh"
+source "$DOTFILES_ROOT/scripts/utils/paths.sh"
 
 PUBLIC_SOURCES="$DOTFILES_ROOT/configs/agents/sources"
 PRIVATE_SOURCES="${DIR_DOTFILES_PRIVATE:-}/agents/sources"

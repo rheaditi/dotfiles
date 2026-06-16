@@ -9,7 +9,7 @@ source "$SCRIPT_DIR/../utils/logging.sh"
 source "$SCRIPT_DIR/../utils/file-operations.sh"
 
 # Source platform detection
-source "$SCRIPT_DIR/../../common/utils/platform-detection.sh"
+source "$SCRIPT_DIR/../utils/environment.sh"
 
 # Configuration directory
 DOTFILES_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"

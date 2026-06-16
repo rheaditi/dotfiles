@@ -60,11 +60,15 @@
   # Status and info
   st = status
   s = status --short
+  sts = status -sb
 
   # Branch operations
   b = branch
+  ba = branch -a
   co = checkout
   cob = checkout -b
+  deletebf = branch -D
+  ours = checkout --ours
 
   # Commit operations
   ci = commit
@@ -72,6 +76,7 @@
   ca = commit -a
   cam = commit -am
   amend = commit --amend
+  amendr = commit --amend --reuse-message=HEAD
 
   # Remote operations
   pl = pull --ff-only
@@ -83,6 +88,13 @@
   lg = log --oneline --graph --decorate
   lga = log --oneline --graph --decorate --all
   ll = log --pretty=format:'%C(yellow)%h%Creset -%C(red)%d%Creset %s %C(green)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lm = log --pretty=format:'* %s (%h)'
+  last = log -1 HEAD
+
+  # Search / misc
+  grepl = grep --break --heading --line-number
+  visual = !gitk
 
   # Diff operations
   d = diff

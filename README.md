@@ -17,7 +17,7 @@ This setup includes configurations for:
 | Component      | Description |
 |----------------|-------------|
 | **Zsh**        | oh-my-zsh, custom aliases, functions, and prompt |
-| **Terminal**   | **cmux** + Ghostty. Theme/font/colors in [`configs/ghostty/config`](configs/ghostty/config) (read by cmux via libghostty); cmux app settings in [`configs/cmux/cmux.json`](configs/cmux/). Symlinked by `setup.sh`. The old iTerm2 config is retained under [`legacy/iterm/`](legacy/). |
+| **Terminal**   | **cmux** + Ghostty. Theme/font/colors in [`configs/ghostty/config`](configs/ghostty/config) (read by cmux via libghostty); cmux app settings in [`configs/cmux/cmux.json`](configs/cmux/). Symlinked by `setup.sh`. (The old iTerm2 config was removed — see git history if needed.) |
 | **VS Code**    | Settings and keybindings, et al. |
 | **Git**        | Configuration, global gitignore |
 | **SSH**        | Config template |

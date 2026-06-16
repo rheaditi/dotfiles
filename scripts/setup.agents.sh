@@ -13,7 +13,7 @@ source "$SCRIPT_DIR/utils/logging.sh"
 source "$SCRIPT_DIR/utils/file-operations.sh"
 source "$SCRIPT_DIR/utils/environment.sh"
 # Single source of truth for DIR_DOTFILES_PRIVATE.
-source "$DOTFILES_ROOT/common/utils/paths.sh"
+source "$SCRIPT_DIR/utils/paths.sh"
 
 BUILD_DIR="$DOTFILES_ROOT/configs/agents/build"
 

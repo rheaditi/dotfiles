@@ -19,6 +19,43 @@ is-remote-dev-env() {
   [[ "${REMOTE_DEV_ENV:-}" == "true" ]]
 }
 
+# Alias kept for callers that use the older name.
+is-devbox() {
+  is-remote-dev-env
+}
+
+# Is this a plain local machine (not a devbox/RDE)?
+is-local() {
+  ! is-remote-dev-env
+}
+
+# Are we running under WSL?
+is-wsl() {
+  grep -qi microsoft /proc/version 2>/dev/null
+}
+
+# Echo a short platform identifier: macos | linux | unknown
+detect-platform() {
+  if is-macos; then
+    echo "macos"
+  elif is-linux; then
+    echo "linux"
+  else
+    echo "unknown"
+  fi
+}
+
+# Echo a short environment identifier: devbox | wsl | local
+detect-environment() {
+  if is-remote-dev-env; then
+    echo "devbox"
+  elif is-wsl; then
+    echo "wsl"
+  else
+    echo "local"
+  fi
+}
+
 # Is this an interactive session where we can prompt the user?
 #
 # Returns non-zero (non-interactive) when:

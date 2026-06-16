@@ -187,8 +187,8 @@ items that will mislead future-me (or anyone else following the README).
 | # | Item | Action |
 |---|------|--------|
 | 4.1 | ✅ **Done.** `README.md` rewritten to describe the **two-tier** model (§3): `setup.sh` (config) vs `bootstrap.sh` (install + config). | — |
-| 4.2 | `scripts/setup.editor.sh` references `scripts/editor/vscode/setup-vscode.sh` and `scripts/editor/cursor/setup-cursor.sh` — neither exists. Half-finished refactor. | Either delete `setup.editor.sh` (cleanest), or finish the move (Phase 5.2). Pick one in the relevant phase, don't leave dangling. |
-| 4.3 | `old/scripts/` and `old/configs/` still ship in the repo. Hard to tell what's "live" vs. "retired". | Either delete (we have git history) or rename to `archive/` with a one-line `README.md` at the top of the dir explaining the status. |
+| 4.2 | ✅ **Done.** `scripts/setup.editor.sh` was rebuilt as a real symlink-installer (`scripts/editor/setup-vscode.sh`); no dangling references remain. | — |
+| 4.3 | ✅ **Done.** `old/` deleted (git history preserves the original "v1" scripts/configs). | — |
 | 4.4 | Top-level `.eslintignore`, `.prettierrc.js`, `.editorconfig`, `.vimrc` (10 bytes), `.gitignore` (14 bytes) — these are repo-meta, not env config. They're fine to keep but unrelated to the dotfiles role of the repo. | No action; just note for context. |
 
 ---
@@ -309,42 +309,11 @@ something feels off; not on a hook (per Q4 answer: explicit > implicit).
 > `scripts/setup.terminal.sh` → `scripts/terminal/setup-terminal-config.sh`
 > (wired into `setup.sh`). Theme is set via the `theme =` line (this repo uses
 > adaptive `dark:Ayu Mirage,light:Ayu Light`). See `configs/cmux/README.md`.
-> The iTerm-specific notes below remain **legacy** for reference only.
 
-> **Legacy (iTerm2).** ⚠️ We moved to **cmux** as the
-> terminal/multiplexer, so the iTerm-specific work below is
-> **not** being implemented. The iTerm files have been moved to
-> `legacy/iterm/` (see `legacy/README.md`). They're retained so the
-> preference choices (color schemes, font, key behaviors in the plist) can
-> be evaluated for a cmux equivalent when cmux config lands.
-
-**cmux migration note (future work):**
-
-- Audit `legacy/iterm/com.googlecode.iterm2.plist` and
-  `legacy/iterm/colorSchemes/*.itermcolors` for settings worth porting
-  (color theme, font = Fira Code, scrollback, key mappings).
-- Decide cmux's "extend, not replace" hook — i.e. whatever config file/dir
-  cmux reads — and wire it into `setup.sh` following the same pattern used
-  for the editor leaf-files (§5.2.1). Add a `configs/cmux/` source dir.
-- Until cmux config is defined, this sub-phase stays parked.
-
-<details>
-<summary>Original iTerm approach (kept for reference only)</summary>
-
-iTerm provided a native "extend, not replace" hook:
-`PreferencesCustomFolder` — point iTerm at a folder it owns and it would
-read/write its `com.googlecode.iterm2.plist` there.
-
-1. Keep the plist in repo (now under `legacy/iterm/`).
-2. In `setup.sh`, set the two `defaults write` keys:
-   ```bash
-   defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$DOTFILES_ROOT/legacy/iterm"
-   defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
-   ```
-3. iTerm then reads from and writes back to the repo directly. No symlink
-   needed, no drift.
-
-</details>
+> **iTerm2 (retired).** We moved to **cmux**, so the old iTerm2 config
+> (`com.googlecode.iterm2.plist`, color schemes) was **removed** from the repo.
+> It's preserved in git history if any preference (color theme, font, key
+> behaviors) is ever worth porting to a cmux/Ghostty equivalent.
 
 #### 5.2.3 — Resync script (the "pesky tool" safety net)
 
@@ -793,8 +762,8 @@ alongside.
    - Each sub-commit is safely revertible; tools fall back to
      defaults if anything breaks.
 4. **Phase 5.2.2 + 5.2.3** (terminal config + the `sync-prefs` script) —
-   deferred. 5.2.2 is now blocked on defining cmux config (iTerm retired to
-   `legacy/`); 5.2.3 can land independently when GUI-drift becomes a pain.
+   5.2.2 shipped (cmux + Ghostty); 5.2.3 (the `sync-prefs` script) can land
+   independently when GUI-drift becomes a pain.
 5. **Phase 5.4** (`bootstrap.sh`) — core shipped (brew/node/ssh);
    defer remaining items (Xcode CLT, macOS defaults, fonts) until next clean-OS
    install is actually planned, then build incrementally.

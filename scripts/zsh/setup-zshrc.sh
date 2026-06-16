@@ -7,7 +7,7 @@ DOTFILES_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 source "$SCRIPT_DIR/../utils/logging.sh"
 source "$SCRIPT_DIR/../utils/file-operations.sh"
-source "$DOTFILES_ROOT/common/utils/platform-detection.sh"
+source "$SCRIPT_DIR/../utils/environment.sh"
 
 log-step "Setting up zsh configuration..."
 

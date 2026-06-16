@@ -10,7 +10,6 @@ back into this repo — no drift, no manual copying.
 | `settings.json` | `~/Library/Application Support/Code/User/settings.json` |
 | `keybindings.json` | `~/Library/Application Support/Code/User/keybindings.json` |
 | `extensions.txt` | _(not symlinked — list of extensions to auto-install)_ |
-| `settings.cursor.json` | _(reserved for a future Cursor setup; not yet wired)_ |
 
 ## Setup
 
