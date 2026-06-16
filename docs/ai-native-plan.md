@@ -228,8 +228,9 @@ Goal: every GUI-driven config change lands in the repo automatically.
 Zero manual copy-paste. Survives app updates.
 
 > Terminal note: the original plan targeted iTerm here. We're moving to
-> **cmux**, so the terminal sub-phase (§5.2.2) is now legacy/deferred until
-> cmux config is defined. The editor work (§5.2.1) is unaffected.
+> **cmux**. The terminal sub-phase (§5.2.2) is now **shipped** — Ghostty +
+> cmux configs are symlinked via `scripts/setup.terminal.sh`. The editor work
+> (§5.2.1) is unaffected.
 
 #### 5.2.1 — Editor and agent-tool leaf-file config
 
@@ -294,10 +295,19 @@ through the symlink (turning the link into a regular file), the resync
 script `scripts/sync-prefs.sh` re-establishes it. Run manually when
 something feels off; not on a hook (per Q4 answer: explicit > implicit).
 
-#### 5.2.2 — iTerm2 preferences (legacy — superseded by cmux)
+#### 5.2.2 — Terminal config: cmux + Ghostty (shipped ✅)
 
-> **Status: legacy / deferred.** ⚠️ We're moving to **cmux** as the
-> terminal/multiplexer going forward, so the iTerm-specific work below is
+> **Status: cmux/Ghostty shipped.** ✅ cmux is built on libghostty and reads
+> `~/.config/ghostty/config` for theme/font/colors; cmux's own app settings
+> live in `~/.config/cmux/cmux.json`. Both are now symlinked from
+> `configs/ghostty/config` and `configs/cmux/cmux.json` by
+> `scripts/setup.terminal.sh` → `scripts/terminal/setup-terminal-config.sh`
+> (wired into `setup.sh`). Theme is set via the `theme =` line (this repo uses
+> adaptive `dark:Ayu Mirage,light:Ayu Light`). See `configs/cmux/README.md`.
+> The iTerm-specific notes below remain **legacy** for reference only.
+
+> **Legacy (iTerm2).** ⚠️ We moved to **cmux** as the
+> terminal/multiplexer, so the iTerm-specific work below is
 > **not** being implemented. The iTerm files have been moved to
 > `legacy/iterm/` (see `legacy/README.md`). They're retained so the
 > preference choices (color schemes, font, key behaviors in the plist) can

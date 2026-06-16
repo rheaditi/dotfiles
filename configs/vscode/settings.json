@@ -114,7 +114,8 @@
     "*rc": "shellscript",
     "zshrc_default": "shellscript",
     "*.nadel": "graphql",
-    "*.gitignore": "ignore"
+    "*.gitignore": "ignore",
+    "cmux.json": "jsonc"
   },
   // Hide only OS cruft / caches from the Explorer. Heavy build dirs
   // (node_modules, target, etc.) are intentionally NOT hidden so they stay

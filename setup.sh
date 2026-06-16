@@ -48,6 +48,15 @@ else
   exit 1
 fi
 
+# Set up terminal configuration (Ghostty + cmux)
+log-step "Setting up terminal configuration..."
+if "$SCRIPT_DIR/scripts/setup.terminal.sh"; then
+  log-success "Terminal setup completed successfully"
+else
+  log-error "Terminal setup failed"
+  exit 1
+fi
+
 log-success "Dotfiles setup completed!"
 log-info "Next steps:"
 log-info "  - Reload your shell configuration: source ~/.zshrc"
@@ -55,6 +64,8 @@ log-info "  - Verify zsh is working: zsh --version"
 log-info "  - Verify git configuration: git --no-pager config --list --show-origin"
 log-info "  - Verify SSH config: cat ~/.ssh/config"
 log-info "  - Verify VS Code settings: ls -la \"\$HOME/Library/Application Support/Code/User/settings.json\""
+log-info "  - Verify terminal config: ls -la ~/.config/ghostty/config ~/.config/cmux/cmux.json"
+log-info "  - Reload cmux config: Cmd+Shift+,"
 
 # TODO: Future setup components will be added here:
 # - macOS-specific settings (when not in devbox)

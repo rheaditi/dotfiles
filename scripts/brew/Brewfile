@@ -12,5 +12,9 @@ brew "gnupg"       # GPG for signing commits / encryption
 # --- Shell & prompt -----------------------------------------------------------
 # (oh-my-zsh and prompts are handled by scripts/setup.zsh.sh)
 
+# --- Fonts --------------------------------------------------------------------
+# Fira Code: programming font with ligatures (used by VS Code + cmux/Ghostty).
+cask "font-fira-code"
+
 # --- Apps (casks) -------------------------------------------------------------
 # (none yet — add cask "<app>" entries here)
