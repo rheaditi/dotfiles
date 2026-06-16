@@ -43,9 +43,12 @@
   // editor stuff
   "editor.accessibilitySupport": "off",
   "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorStyle": "line-thin",
+  "editor.detectIndentation": true,
   "editor.fontFamily": "'Fira Code', 'Hasklig', Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.fontSize": 14,
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
   "editor.gotoLocation.multipleDefinitions": "goto",
   "editor.insertSpaces": true,
   "editor.minimap.enabled": false,
@@ -435,4 +438,7 @@
   "git.blame.editorDecoration.enabled": true,
   "chat.disableAIFeatures": true,
   "diffEditor.hideUnchangedRegions.enabled": true,
+  // workbench / security (merged from base)
+  "workbench.settings.applyToAllProfiles": ["editor.fontSize"],
+  "security.workspace.trust.enabled": true,
 }

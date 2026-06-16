@@ -209,7 +209,7 @@ Goal: zero stale claims in the repo. No new features.
   rebuild cleanly in Phase 5.2 with the symlink + sync approach.
 - Commit the existing uncommitted drift (`configs/zsh/dotzshrc`,
   `configs/zsh/zshrc.alias.sh`, `legacy/iterm/com.googlecode.iterm2.plist`,
-  `vscode/settings.json`) so the repo starts from a clean baseline.
+  `configs/vscode/settings.json`) so the repo starts from a clean baseline.
   Note: the `signalfx_auth_token` keychain export currently in
   `dotzshrc` is work-specific — that line should move to the private
   repo's `entry.sh` before commit.
@@ -232,6 +232,12 @@ Zero manual copy-paste. Survives app updates.
 > cmux config is defined. The editor work (§5.2.1) is unaffected.
 
 #### 5.2.1 — Editor and agent-tool leaf-file config
+
+> **Status: VS Code shipped.** ✅ `configs/vscode/{settings.json,keybindings.json}`
+> are symlinked into the VS Code User dir by `scripts/setup.editor.sh` →
+> `scripts/editor/setup-vscode.sh` (wired into `setup.sh`). The full live
+> settings were merged into `configs/vscode/settings.json` (live values win;
+> base-only keys added). Cursor and Rovo Dev CLI below remain **pending**.
 
 Same approach across three apps, because they all store a single
 top-level config file alongside a directory of runtime state:
@@ -267,13 +273,12 @@ configs/
     config.yml
 ```
 
-(Existing `vscode/settings.json` and `vscode/keybindings.json` move
-under `configs/vscode/` to match the rest of the repo's convention.
-That's a `git mv` — no content change.)
+(✅ Done for VS Code: `vscode/settings.json` + `vscode/keybindings.json`
+moved under `configs/vscode/`. Cursor/Rovo still to move.)
 
-Setup script: `scripts/setup.editor.sh` becomes a real symlink-installer
-(despite the name — it now handles Rovo too; consider renaming to
-`setup.tools.sh` or `setup.app-configs.sh` at lift time).
+Setup script: ✅ `scripts/setup.editor.sh` is now a real symlink-installer
+(VS Code only today). It may grow to handle Cursor/Rovo too — consider
+renaming to `setup.tools.sh` or `setup.app-configs.sh` if/when it does.
 
 **Secrets check before committing `rovo/config.yml`:** Rovo's
 `config.yml` may carry tokens, API keys, or workspace identifiers.
