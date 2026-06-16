@@ -77,6 +77,11 @@ NONINTERACTIVE=1 ./bootstrap.sh   # install everything, no prompts
    - **Zsh** - oh-my-zsh, plugins, prompt
    - **Git** - config + global gitignore
    - **SSH** - symlinks `configs/ssh/config` → `~/.ssh/config`
+   - **Editor** - symlinks VS Code settings + keybindings
+   - **Terminal** - symlinks Ghostty config + cmux settings
+4. **VS Code extensions** - installs from `configs/vscode/extensions.txt`, but
+   only if the `code` CLI is on `PATH` (otherwise it's skipped with a reminder
+   to run `./scripts/setup.vscode-extensions.sh` later)
 
 For the full design rationale, architecture, and evolution plan, see
 [docs/ai-native-plan.md](docs/ai-native-plan.md).
@@ -86,7 +91,8 @@ For the full design rationale, architecture, and evolution plan, see
 After the automated setup, I also do the following:
 - **Install Fira Code font** ([download here](https://github.com/tonsky/FiraCode/releases))
 - **Reload the shell**: `source ~/.zshrc`
-- **Set up VS Code** (if needed): `./scripts/setup.vscode.sh`
+- **Install VS Code extensions** (once the `code` command is on `PATH`):
+  `./scripts/setup.vscode-extensions.sh`
 
 ## Customization 🎨
 

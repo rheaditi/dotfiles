@@ -238,7 +238,12 @@ Zero manual copy-paste. Survives app updates.
 > are symlinked into the VS Code User dir by `scripts/setup.editor.sh` →
 > `scripts/editor/setup-vscode.sh` (wired into `setup.sh`). The full live
 > settings were merged into `configs/vscode/settings.json` (live values win;
-> base-only keys added). Cursor and Rovo Dev CLI below remain **pending**.
+> base-only keys added). **Extensions** are managed declaratively in
+> `configs/vscode/extensions.txt` and installed by a separate stage,
+> `scripts/setup.vscode-extensions.sh` → `scripts/editor/install-vscode-extensions.sh`
+> (kept out of the config tier because the `code` CLI isn't present on a fresh
+> machine; `bootstrap.sh` runs it only if `code` is on `PATH`, else suggests it).
+> Cursor and Rovo Dev CLI below remain **pending**.
 
 Same approach across three apps, because they all store a single
 top-level config file alongside a directory of runtime state:

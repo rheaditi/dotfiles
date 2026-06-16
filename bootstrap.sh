@@ -74,7 +74,25 @@ if ! "$SCRIPT_DIR/setup.sh"; then
   exit 1
 fi
 
+# VS Code extensions - only if the `code` CLI is already on PATH. On a fresh
+# machine the CLI is installed by the VS Code GUI app, so it often won't exist
+# yet; in that case we skip here and suggest running the stage later.
+VSCODE_EXT_PENDING=0
+if command -v code >/dev/null 2>&1 || command -v code-server >/dev/null 2>&1; then
+  log-step "VS Code extensions..."
+  if ! "$SCRIPT_DIR/scripts/setup.vscode-extensions.sh"; then
+    log-warning "VS Code extensions setup failed (continuing)"
+  fi
+else
+  VSCODE_EXT_PENDING=1
+  log-info "Skipping VS Code extensions (the 'code' CLI isn't on PATH yet)"
+fi
+
 log-success "Bootstrap completed! 🎉"
 log-info "Next steps:"
 log-info "  - Reload your shell: source ~/.zshrc"
 log-info "  - Install the Fira Code font: https://github.com/tonsky/FiraCode/releases"
+if [[ "$VSCODE_EXT_PENDING" -eq 1 ]]; then
+  log-info "  - Install the VS Code 'code' command (Cmd+Shift+P > 'Shell Command: Install code command in PATH'),"
+  log-info "    then run: ./scripts/setup.vscode-extensions.sh"
+fi
