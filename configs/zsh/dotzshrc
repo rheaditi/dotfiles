@@ -37,3 +37,12 @@ source "$DOTFILES_CONFIG_DIR/zshrc.functions.sh"
 # Step 6: Source private configurations (if they exist)
 source "$DOTFILES_CONFIG_DIR/zshrc.private.sh"
 if [ -f "$HOME/.afm-bin-path-manager.zsh" ]; then source "$HOME/.afm-bin-path-manager.zsh"; fi
+
+# terraform
+export TF_VAR_signalfx_auth_token=$(security find-generic-password -a "$USER" -s "signalfx_auth_token" -w)
+
+# ops-sherpa
+export SIGNALFX_API_TOKEN=$(security find-generic-password -a "$USER" -s "signalfx_auth_token" -w)
+export ATLASSIAN_API_TOKEN=$(security find-generic-password -a "$USER" -s "ops_sherpa_atlassian_token" -w)
+export BITBUCKET_TOKEN=$(security find-generic-password -a "$USER" -s "bitbucket_token" -w)
+export OPS_JIRA_TOKEN=$(security find-generic-password -a "$USER" -s "opsj_token" -w)

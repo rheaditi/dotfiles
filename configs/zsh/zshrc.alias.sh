@@ -24,6 +24,7 @@ alias dev="cd $DIR_DEV"
 alias play="cd $DIR_DEV/play || echo 'No play directory found'"
 alias personal="cd $DIR_DEV/personal || echo 'No personal directory found'"
 
+
 # aliases for git
 alias delete-branches='git branch >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -D </tmp/merged-branches'
 alias clean-merged-branches='git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches'

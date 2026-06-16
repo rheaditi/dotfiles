@@ -4,7 +4,7 @@
 - Profile: `DEFAULT`
 - Warehouse ID: `af2491cd959ef264`
 - Default timeout: `30s` (max `50s`)
-- Auth setup: `databricks auth login https://socrates-workbench-01.cloud.databricks.com -p DEFAULT`
+- Auth setup: `databricks auth login --host https://socrates-workbench-01.cloud.databricks.com -p DEFAULT`
 - Auth check: `databricks auth describe -p DEFAULT`
 
 ### Key tables
