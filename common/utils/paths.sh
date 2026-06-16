@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ -n "$REMOTE_DEV_ENV" ]]; then
+if [[ -n "${REMOTE_DEV_ENV:-}" ]]; then
   # this is the RDE environment
   DIR_DEV="$HOME/dev"
   DIR_DOTFILES="$DIR_DEV/dotfiles"

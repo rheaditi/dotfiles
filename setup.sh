@@ -57,6 +57,15 @@ else
   exit 1
 fi
 
+# Set up AGENTS.md context (build + symlink into agent tools)
+log-step "Setting up AGENTS.md context..."
+if "$SCRIPT_DIR/scripts/setup.agents.sh"; then
+  log-success "AGENTS.md setup completed successfully"
+else
+  log-error "AGENTS.md setup failed"
+  exit 1
+fi
+
 log-success "Dotfiles setup completed!"
 log-info "Next steps:"
 log-info "  - Reload your shell configuration: source ~/.zshrc"
@@ -66,6 +75,7 @@ log-info "  - Verify SSH config: cat ~/.ssh/config"
 log-info "  - Verify VS Code settings: ls -la \"\$HOME/Library/Application Support/Code/User/settings.json\""
 log-info "  - Verify terminal config: ls -la ~/.config/ghostty/config ~/.config/cmux/cmux.json"
 log-info "  - Reload cmux config: Cmd+Shift+,"
+log-info "  - Verify Rovo AGENTS.md: ls -la ~/.rovodev/AGENTS.md"
 
 # TODO: Future setup components will be added here:
 # - macOS-specific settings (when not in devbox)

@@ -362,6 +362,17 @@ confirm the link is restored.
 
 ### Phase 5.3 — Shared AGENTS.md system (the AI-native core)
 
+> **Status: shipped (Rovo).** ✅ Modular `.md` fragments under
+> `configs/agents/sources/` (+ a private overlay at
+> `$DIR_DOTFILES_PRIVATE/agents/sources/`) are composed by
+> `scripts/agents/build-agents.sh` into `configs/agents/build/rovo.md`
+> (gitignored) and symlinked to `~/.rovodev/AGENTS.md` by
+> `scripts/setup.agents.sh` (wired into `setup.sh`). The old hand-maintained
+> `rovodev/AGENTS.md` was split: "Communication Style" → public
+> `sources/30-communication.md`; Socrates + Pollinator → private sources.
+> `--diff` previews source edits; build is idempotent/byte-stable. **Cursor**
+> and **cmux** remain future targets (add a `TARGETS` entry + one symlink line).
+
 The **highest-priority** AI-native deliverable. A single source of
 truth for agent context — "how I work, what I expect, what I prefer" —
 composed from modular fragments at setup time and installed into the

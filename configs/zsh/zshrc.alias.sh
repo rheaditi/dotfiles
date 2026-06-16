@@ -13,6 +13,8 @@ fi
 # dotfiles related aliases
 alias edit-dotfiles="$LOCAL_EDITOR $DIR_DOTFILES"
 alias edit-dotfiles-private="$LOCAL_EDITOR $DIR_DOTFILES_PRIVATE"
+# Rebuild the composed AGENTS.md files from sources (after editing fragments)
+alias rebuild-agents="$DIR_DOTFILES/scripts/agents/build-agents.sh"
 
 # generic stuff
 alias get-date-filename='date +%Y_%m_%d__%H_%M_%S'
