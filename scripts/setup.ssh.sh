@@ -4,6 +4,13 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/utils/logging.sh"
+source "$SCRIPT_DIR/utils/environment.sh"
+
+# Devboxes/RDE configure SSH manually — skip entirely.
+if is-remote-dev-env; then
+  log-info "Devbox detected, skipping SSH setup (configured automatically there)"
+  return 0 2>/dev/null || exit 0
+fi
 
 log-info "Starting SSH setup..."
 

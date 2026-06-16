@@ -1,1 +1,6 @@
 iterm/schemes
+
+# The global ~/.gitignore ignores .vscode everywhere; keep this repo's shared
+# workspace settings under version control.
+!.vscode/
+!.vscode/settings.json
