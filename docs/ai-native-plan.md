@@ -21,8 +21,9 @@ devbox). What it does **not** yet do:
 - Treat the editor (Cursor) as a first-class config target. Cursor settings,
   rules, skills, hooks, and MCP config live entirely on the machine today
   and are lost on a wipe.
-- Capture GUI-app preference drift automatically (iTerm plist, VS Code
-  `settings.json`, Cursor `settings.json` all drift without symlinks).
+- Capture GUI-app preference drift automatically (VS Code `settings.json`,
+  Cursor `settings.json` drift without symlinks; terminal config too once
+  cmux lands — iTerm is now legacy, see §5.2.2).
 - Match the README. `README.md` claims `setup.sh` installs Homebrew,
   Node.js, macOS prefs, and VS Code — none of that is true today; those
   scripts live in `old/` and are not wired in.
@@ -73,26 +74,108 @@ split it.
 
 ## 3. Two-tier setup model
 
-A single `./setup.sh` today tries to be everything and is therefore stale.
-We split it cleanly:
+> **Status: shipped.** ✅ The two-tier split below is implemented. This
+> section is now the as-built reference for it. (The original draft named
+> the slow path `bootstrap-macos.sh`; it shipped as `bootstrap.sh`.)
+
+A single `./setup.sh` used to try to be everything and was therefore stale.
+It's split cleanly into two entrypoints with a deliberate separation of
+concerns:
+
+| Tier | Entrypoint     | Purpose                              | Installs tools? | Prompts? |
+|------|----------------|--------------------------------------|-----------------|----------|
+| 1    | `setup.sh`     | Apply configuration (symlinks)       | No              | No       |
+| 2    | `bootstrap.sh` | Full provisioning of a fresh machine | Yes             | Yes\*    |
+
+\* `bootstrap.sh` confirms each install step in an interactive session, and
+auto-proceeds when run unattended (`NONINTERACTIVE=1` or no TTY).
+
+**`bootstrap.sh` is a strict superset of `setup.sh`** — it runs the
+installers, then calls `setup.sh` for the symlink/config work. This keeps the
+config logic in exactly one place (DRY).
+
+**Cross-platform.** `bootstrap.sh` detects the OS up front (via `$OSTYPE`,
+see `is-macos`/`is-linux` in `scripts/utils/environment.sh`). macOS-only steps
+(Homebrew) are skipped on other systems with a clear log; cross-platform steps
+(Node.js, all config) still run everywhere — so the same command works on a
+macOS laptop and a Linux remote-dev box.
 
 ```
-./setup.sh              # Fast path. Config symlinks + shell + git only.
-                        # Run on EVERY machine, EVERY time you re-clone.
-                        # Idempotent. Target runtime: < 30 seconds.
-
-./bootstrap-macos.sh    # Slow path. Run ONCE on a brand-new macOS box.
-                        # Installs Homebrew, Brewfile, macOS defaults, node,
-                        # fonts, ssh keys, etc. Calls into ./setup.sh
-                        # at the end.
+bootstrap.sh ──► setup.brew.sh ──► brew/Brewfile
+            ├──► setup.node.sh ──► node/install-node.sh (nvm, node LTS, yarn)
+            └──► setup.sh ───────► setup.zsh.sh
+                                   setup.git.sh
+                                   setup.ssh.sh
 ```
 
-Naming chosen so the dangerous, machine-touching script is named
-unambiguously and unlikely to be invoked by accident.
+### When to use which
 
-The current `old/scripts/setup.brew.sh`, `setup.macos.sh`,
-`setup.nodejs.sh` etc. can be the starting body for `bootstrap-macos.sh`
-once cleaned up — we don't write them from scratch.
+- **Daily / after `git pull`:** `./setup.sh` — fast, no installs, idempotent.
+  Target runtime: < 30 seconds.
+- **New machine / full reinstall:** `./bootstrap.sh` — installs everything,
+  then applies config. Run ONCE on a brand-new box.
+- **Unattended:** `NONINTERACTIVE=1 ./bootstrap.sh` — installs all, no
+  prompts.
+
+### Directory layout (as built)
+
+```
+.
+├── setup.sh                  # Tier 1: config-only entrypoint
+├── bootstrap.sh              # Tier 2: full provisioning entrypoint
+├── configs/                  # Source-of-truth config files (symlink targets)
+│   ├── git/
+│   ├── ssh/                  # ssh/config -> ~/.ssh/config
+│   └── zsh/
+├── scripts/
+│   ├── setup.zsh.sh          # Tier 1 orchestrators (config)
+│   ├── setup.git.sh
+│   ├── setup.ssh.sh
+│   ├── setup.brew.sh         # Tier 2 orchestrators (install)
+│   ├── setup.node.sh
+│   ├── brew/Brewfile         # Declarative Homebrew package list
+│   ├── node/install-node.sh  # Node.js install logic
+│   ├── git/ ssh/ zsh/        # Per-domain sub-scripts
+│   └── utils/                # Shared helpers (sourced, not executed)
+│       ├── logging.sh        # log-info / log-success / log-step / ...
+│       ├── environment.sh    # is-macos / is-linux / is-interactive / ...
+│       ├── interactive.sh    # confirm-step / run-if-confirmed
+│       ├── file-operations.sh# backup-file / symlink helpers
+│       └── package-manager.sh# cross-platform install-package
+└── docs/ai-native-plan.md    # this file
+```
+
+### Conventions for adding a new component
+
+To add a new tool (e.g. `foo`):
+
+1. Put its config under `configs/foo/`.
+2. **Config (Tier 1):** add `scripts/foo/setup-foo-config.sh` (does the work)
+   and `scripts/setup.foo.sh` (orchestrator), then wire the orchestrator into
+   `setup.sh`.
+3. **Install (Tier 2):** if it needs installing, add `scripts/setup.foo.sh`
+   guarded by `confirm-step`/`run-if-confirmed`, then wire it into
+   `bootstrap.sh`.
+4. Make scripts executable (`chmod +x`).
+5. Always source helpers from `scripts/utils/` rather than duplicating logic.
+6. Update the README table and this document.
+
+### Shared utilities reference
+
+- **`logging.sh`** — consistent, colorized output: `log-info`, `log-success`,
+  `log-warning`, `log-error`, `log-step`, `log-already-exists`.
+- **`environment.sh`** — `is-macos`, `is-linux`, `is-remote-dev-env`,
+  `is-interactive` (false when `NONINTERACTIVE=1` or there's no TTY).
+- **`interactive.sh`** — `confirm-step "<task>" "<prompt>"` (auto-proceeds when
+  non-interactive) and `run-if-confirmed "<task>" "<prompt>" <cmd...>`.
+- **`file-operations.sh`** — `backup-file` (timestamped backups before
+  overwriting).
+- **`package-manager.sh`** — `detect-package-manager`, `install-package`,
+  `is-package-installed`, `update-package-manager` (brew/apt/yum/pacman).
+
+The `old/scripts/setup.brew.sh`, `setup.macos.sh`, `setup.nodejs.sh` were the
+starting bodies for the Tier-2 installers (brew + node shipped; macOS defaults
+still pending — see Phase 5.4).
 
 ---
 
@@ -103,7 +186,7 @@ items that will mislead future-me (or anyone else following the README).
 
 | # | Item | Action |
 |---|------|--------|
-| 4.1 | `README.md` describes `setup.sh` doing macOS/brew/node/VS Code — it doesn't. | Rewrite README to describe the **two-tier** model (§3). Be honest about what works today vs. what's planned. |
+| 4.1 | ✅ **Done.** `README.md` rewritten to describe the **two-tier** model (§3): `setup.sh` (config) vs `bootstrap.sh` (install + config). | — |
 | 4.2 | `scripts/setup.editor.sh` references `scripts/editor/vscode/setup-vscode.sh` and `scripts/editor/cursor/setup-cursor.sh` — neither exists. Half-finished refactor. | Either delete `setup.editor.sh` (cleanest), or finish the move (Phase 5.2). Pick one in the relevant phase, don't leave dangling. |
 | 4.3 | `old/scripts/` and `old/configs/` still ship in the repo. Hard to tell what's "live" vs. "retired". | Either delete (we have git history) or rename to `archive/` with a one-line `README.md` at the top of the dir explaining the status. |
 | 4.4 | Top-level `.eslintignore`, `.prettierrc.js`, `.editorconfig`, `.vimrc` (10 bytes), `.gitignore` (14 bytes) — these are repo-meta, not env config. They're fine to keep but unrelated to the dotfiles role of the repo. | No action; just note for context. |
@@ -125,7 +208,7 @@ Goal: zero stale claims in the repo. No new features.
 - Delete or finish `scripts/setup.editor.sh`. Suggest delete now,
   rebuild cleanly in Phase 5.2 with the symlink + sync approach.
 - Commit the existing uncommitted drift (`configs/zsh/dotzshrc`,
-  `configs/zsh/zshrc.alias.sh`, `iterm/com.googlecode.iterm2.plist`,
+  `configs/zsh/zshrc.alias.sh`, `legacy/iterm/com.googlecode.iterm2.plist`,
   `vscode/settings.json`) so the repo starts from a clean baseline.
   Note: the `signalfx_auth_token` keychain export currently in
   `dotzshrc` is work-specific — that line should move to the private
@@ -139,10 +222,14 @@ on this machine still no-ops (idempotency check).
 
 ---
 
-### Phase 5.2 — Editor + iTerm symlink layer ("extend, not replace")
+### Phase 5.2 — Editor + terminal symlink layer ("extend, not replace")
 
 Goal: every GUI-driven config change lands in the repo automatically.
 Zero manual copy-paste. Survives app updates.
+
+> Terminal note: the original plan targeted iTerm here. We're moving to
+> **cmux**, so the terminal sub-phase (§5.2.2) is now legacy/deferred until
+> cmux config is defined. The editor work (§5.2.1) is unaffected.
 
 #### 5.2.1 — Editor and agent-tool leaf-file config
 
@@ -202,26 +289,42 @@ through the symlink (turning the link into a regular file), the resync
 script `scripts/sync-prefs.sh` re-establishes it. Run manually when
 something feels off; not on a hook (per Q4 answer: explicit > implicit).
 
-#### 5.2.2 — iTerm2 preferences
+#### 5.2.2 — iTerm2 preferences (legacy — superseded by cmux)
 
-iTerm provides a native "extend, not replace" hook:
-`PreferencesCustomFolder` — point iTerm at a folder it owns and it will
+> **Status: legacy / deferred.** ⚠️ We're moving to **cmux** as the
+> terminal/multiplexer going forward, so the iTerm-specific work below is
+> **not** being implemented. The iTerm files have been moved to
+> `legacy/iterm/` (see `legacy/README.md`). They're retained so the
+> preference choices (color schemes, font, key behaviors in the plist) can
+> be evaluated for a cmux equivalent when cmux config lands.
+
+**cmux migration note (future work):**
+
+- Audit `legacy/iterm/com.googlecode.iterm2.plist` and
+  `legacy/iterm/colorSchemes/*.itermcolors` for settings worth porting
+  (color theme, font = Fira Code, scrollback, key mappings).
+- Decide cmux's "extend, not replace" hook — i.e. whatever config file/dir
+  cmux reads — and wire it into `setup.sh` following the same pattern used
+  for the editor leaf-files (§5.2.1). Add a `configs/cmux/` source dir.
+- Until cmux config is defined, this sub-phase stays parked.
+
+<details>
+<summary>Original iTerm approach (kept for reference only)</summary>
+
+iTerm provided a native "extend, not replace" hook:
+`PreferencesCustomFolder` — point iTerm at a folder it owns and it would
 read/write its `com.googlecode.iterm2.plist` there.
 
-Approach:
-
-1. Keep `iterm/com.googlecode.iterm2.plist` in repo (already there).
+1. Keep the plist in repo (now under `legacy/iterm/`).
 2. In `setup.sh`, set the two `defaults write` keys:
    ```bash
-   defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$DOTFILES_ROOT/iterm"
+   defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$DOTFILES_ROOT/legacy/iterm"
    defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
    ```
-3. iTerm now reads from and writes back to the repo directly. No
-   symlink needed, no drift.
+3. iTerm then reads from and writes back to the repo directly. No symlink
+   needed, no drift.
 
-**Verification:** open iTerm, change the font size in Preferences, quit
-iTerm, run `git status` — the plist shows modified. (This is also a
-nice test of "did I remember to commit my GUI changes?")
+</details>
 
 #### 5.2.3 — Resync script (the "pesky tool" safety net)
 
@@ -410,29 +513,44 @@ All source content remains in the repo, undamaged. Re-run
 
 ---
 
-### Phase 5.4 — `bootstrap-macos.sh`
+### Phase 5.4 — `bootstrap.sh` (partially shipped)
 
-Goal: a brand-new MacBook reaches the state where `./setup.sh` can run.
+Goal: a brand-new MacBook reaches "fully productive" in one command.
+Shipped as `bootstrap.sh` (not `bootstrap-macos.sh` — see §3).
 
-Scope (each item is independent; pick which ones survive triage):
+Scope, with current status:
 
-- Xcode Command Line Tools (`xcode-select --install`).
-- Homebrew bootstrap.
-- `Brewfile` at repo root — single source of truth for installed
-  packages and casks. `brew bundle` makes this trivial. This replaces
-  the ad-hoc lists in `old/scripts/setup.brew.sh`.
-- macOS defaults (the `defaults write ...` block from
+- ✅ Homebrew bootstrap (`scripts/setup.brew.sh`).
+- ✅ `scripts/brew/Brewfile` — single source of truth for installed
+  packages/casks via `brew bundle`. Replaces the ad-hoc lists in
+  `old/scripts/setup.brew.sh`.
+- ✅ Node.js via `nvm` + LTS + yarn (`scripts/node/install-node.sh`).
+- ✅ SSH config: symlink `configs/ssh/config` → `~/.ssh/config`
+  (via `setup.sh` → `setup.ssh.sh`).
+- ✅ Calls `./setup.sh` at the end for the fast-path config layer.
+- ⬜ Xcode Command Line Tools (`xcode-select --install`) — **pending**;
+  should become the first bootstrap step (macOS prerequisite).
+- ⬜ macOS defaults (the `defaults write ...` block from
   `old/scripts/setup.macos.sh`). Audit for what's still relevant on
-  current macOS.
-- Fonts (Fira Code, etc.) via brew cask — already partly in scope of
-  Brewfile.
-- Node.js via `nvm` (from `old/scripts/setup.nodejs.sh`).
-- SSH config: symlink `ssh/config` into `~/.ssh/config`.
-- Call `./setup.sh` at the end to do the fast-path config layer.
+  current macOS. **Pending.**
+- ⬜ Fonts (Fira Code, etc.) via brew cask — **pending**; fold into the
+  Brewfile casks section.
 
-**Idempotency requirement:** running `bootstrap-macos.sh` twice in a row
-on a healthy machine must be a no-op. The `old/` scripts mostly already
-do this; verify per-step on lift.
+**Idempotency requirement:** running `bootstrap.sh` twice in a row on a
+healthy machine is a no-op. How each step achieves this:
+
+- **Homebrew:** install is guarded by `command -v brew`; `brew update` runs
+  *only* on a fresh install, so re-runs make no network calls for brew itself.
+- **Brew packages:** `brew bundle` natively skips already-installed
+  formulae/casks.
+- **nvm:** guarded by the presence of `$NVM_DIR/nvm.sh`.
+- **Node.js:** compares latest remote LTS against the installed LTS and skips
+  if they match (re-running *after* a new LTS ships will upgrade, by design).
+- **yarn:** guarded by `command -v yarn`.
+- **Config:** delegated to `setup.sh`, which is already idempotent (symlink
+  checks).
+
+Verify per-step as the remaining items (Xcode CLT, macOS defaults, fonts) land.
 
 **Out of scope (deliberately):** anything Atlassian-specific. Bootstrap
 stays in the public repo and assumes no work-context.
@@ -451,7 +569,7 @@ in:
 - `configs/zsh/zshrc.alias.sh` (the `DIR_DOTFILES` variable)
 - `configs/git/local.gitconfig` (`includeIf "gitdir:~/dev/dotfiles/"`)
 - `scripts/git/setup-git-config.sh` (`PRIVATE_GITCONFIG` path)
-- `setup.sh` / `bootstrap-macos.sh`
+- `setup.sh` / `bootstrap.sh`
 
 Decision trigger: first time we want to clone this somewhere other
 than `~/dev/dotfiles`. Until then, the simplicity is worth more than
@@ -624,7 +742,7 @@ alongside.
    committing current drift and getting the README honest.
 2. **Phase 5.2.1** (editor `settings.json` + `keybindings.json`
    symlinks for VS Code and Cursor only) — the minimal slice. Skip
-   5.2.2 (iTerm) and 5.2.3 (sync-prefs) for now; they're useful
+   5.2.2 (terminal) and 5.2.3 (sync-prefs) for now; they're useful
    polish but not on the AI-native critical path.
 3. **Phase 5.3** (AGENTS.md system) — the headline. Split into
    testable sub-commits:
@@ -643,10 +761,11 @@ alongside.
      correctly merges.
    - Each sub-commit is safely revertible; tools fall back to
      defaults if anything breaks.
-4. **Phase 5.2.2 + 5.2.3** (iTerm `PreferencesCustomFolder` + the
-   `sync-prefs` script) — pick up after 5.3 lands. Closes the
-   remaining GUI-drift gap.
-5. **Phase 5.4** (`bootstrap-macos.sh`) — defer until next clean-OS
+4. **Phase 5.2.2 + 5.2.3** (terminal config + the `sync-prefs` script) —
+   deferred. 5.2.2 is now blocked on defining cmux config (iTerm retired to
+   `legacy/`); 5.2.3 can land independently when GUI-drift becomes a pain.
+5. **Phase 5.4** (`bootstrap.sh`) — core shipped (brew/node/ssh);
+   defer remaining items (Xcode CLT, macOS defaults, fonts) until next clean-OS
    install is actually planned, then build incrementally.
 6. **Phase 5.5** (`$DOT_DEN`) — only when triggered.
 7. **Phase 5.6** (deep AI-tool config sync — MCP, hooks, skills,

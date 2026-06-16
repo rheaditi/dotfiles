@@ -17,7 +17,7 @@ This setup includes configurations for:
 | Component      | Description |
 |----------------|-------------|
 | **Zsh**        | oh-my-zsh, custom aliases, functions, and prompt |
-| **iTerm2**     | Color schemes downloaded/converted from Visual Studio Code themes via [ditto-cli](https://www.npmjs.com/package/@campvanilla/ditto-cli) 🎨<br>_You can also preview these themes without applying them ([steps here](https://stackoverflow.com/questions/22943676/how-to-export-iterm2-profiles/23356086#23356086))_. |
+| **Terminal**   | Moving to **cmux** going forward. The old iTerm2 config (color schemes + plist) is retained under [`legacy/iterm/`](legacy/) for reference / future migration. |
 | **VS Code**    | Settings and keybindings, et al. |
 | **Git**        | Configuration, global gitignore |
 | **SSH**        | Config template |
@@ -29,11 +29,12 @@ This setup includes configurations for:
 
 Before diving into _editing_ these files though, make sure you have:
 - **Zsh** & [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh#getting-started) installed
-- **iTerm2** ([download here](https://www.iterm2.com/downloads.html)) - optional but recommended
+- A terminal of your choice (**cmux** going forward; iTerm2 is now legacy)
 - **Xcode Command Line Tools** (will be installed automatically if missing)
 
 ## Installation 🎯
 
+There are **two entrypoints**, depending on what you need:
 
 ```sh
 # Create a cozy dev directory
@@ -41,19 +42,44 @@ mkdir -p ~/dev && cd ~/dev
 
 # Clone the magic
 git clone https://github.com/rheaditi/dotfiles.git
+cd dotfiles
+```
 
-# Let the scripts do their thing
-cd dotfiles && ./setup.sh
+### Quick: apply configuration only
+
+`setup.sh` only symlinks/applies config (zsh, git, ssh). It installs nothing,
+never prompts, and is safe to re-run anytime (e.g. after `git pull`):
+
+```sh
+./setup.sh
+```
+
+### Full: provision a fresh machine 🪄
+
+`bootstrap.sh` is the "spilled coffee" path — run it once on a new machine to
+**install tooling** (Homebrew, Node.js, packages) _and then_ apply all config.
+In an interactive terminal it asks you to confirm each install step; when run
+unattended (`NONINTERACTIVE=1`) it installs everything automatically. It also
+works cross-platform — macOS-only steps (Homebrew) are skipped on Linux:
+
+```sh
+./bootstrap.sh                    # confirm each install step
+NONINTERACTIVE=1 ./bootstrap.sh   # install everything, no prompts
 ```
 
 ### What Actually Happens
 
-The setup script runs through some additional steps based on the OS / some arguments:
-1. **macOS Setup** - Configures system preferences
-2. **Dotfiles Setup** - Symlinks config files to your home directory
-3. **Homebrew Setup** - Installs essential packages and apps
-4. **Node.js Setup** - Installs Node.js and global packages
-5. **Zsh Setup** - Configures shell environment
+`bootstrap.sh` is a strict superset of `setup.sh`:
+
+1. **Homebrew Setup** *(macOS)* - Installs Homebrew + packages from `scripts/brew/Brewfile`
+2. **Node.js Setup** - Installs nvm, Node.js (LTS), and yarn
+3. **Configuration** *(delegates to `setup.sh`)*:
+   - **Zsh** - oh-my-zsh, plugins, prompt
+   - **Git** - config + global gitignore
+   - **SSH** - symlinks `configs/ssh/config` → `~/.ssh/config`
+
+For the full design rationale, architecture, and evolution plan, see
+[docs/ai-native-plan.md](docs/ai-native-plan.md).
 
 ## Manual Steps 📝
 

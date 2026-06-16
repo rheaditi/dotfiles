@@ -3,9 +3,10 @@
 # File Operations Utility Functions
 # Handles common file operations like backup, symlinks, etc.
 
-# Source logging functions
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/logging.sh"
+# Source logging functions.
+# Use a util-local var name so we never clobber a caller's $SCRIPT_DIR.
+UTILS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$UTILS_DIR/logging.sh"
 
 # Create a backup of a file with timestamp
 backup-file() {

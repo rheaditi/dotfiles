@@ -1,0 +1,16 @@
+# Brewfile - declarative Homebrew package list
+# Install everything with: brew bundle --file scripts/brew/Brewfile
+#
+# Keep this list curated. Group by purpose and add a short comment for anything
+# non-obvious. Casks are GUI apps; formulae are CLI tools/libraries.
+
+# --- Core CLI utilities -------------------------------------------------------
+brew "coreutils"   # GNU core utilities (macOS ships outdated BSD versions)
+brew "tree"        # Directory tree visualization
+brew "gnupg"       # GPG for signing commits / encryption
+
+# --- Shell & prompt -----------------------------------------------------------
+# (oh-my-zsh and prompts are handled by scripts/setup.zsh.sh)
+
+# --- Apps (casks) -------------------------------------------------------------
+# (none yet — add cask "<app>" entries here)
