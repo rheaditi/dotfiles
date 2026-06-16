@@ -9,6 +9,9 @@ brew "coreutils"   # GNU core utilities (macOS ships outdated BSD versions)
 brew "tree"        # Directory tree visualization
 brew "gnupg"       # GPG for signing commits / encryption
 
+# --- Languages / toolchains ---------------------------------------------------
+brew "go"          # Go toolchain (compiler, go tool, gofmt)
+
 # --- Shell & prompt -----------------------------------------------------------
 # (oh-my-zsh and prompts are handled by scripts/setup.zsh.sh)
 
