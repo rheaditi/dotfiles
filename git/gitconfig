@@ -139,3 +139,9 @@
   # Better delta compression
   windowMemory = 100m
   packSizeLimit = 100m
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

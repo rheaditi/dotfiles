@@ -30,14 +30,23 @@ else
   exit 1
 fi
 
+# Set up SSH configuration
+log-step "Setting up SSH configuration..."
+if "$SCRIPT_DIR/scripts/setup.ssh.sh"; then
+  log-success "SSH setup completed successfully"
+else
+  log-error "SSH setup failed"
+  exit 1
+fi
+
 log-success "Dotfiles setup completed!"
 log-info "Next steps:"
 log-info "  - Reload your shell configuration: source ~/.zshrc"
 log-info "  - Verify zsh is working: zsh --version"
 log-info "  - Verify git configuration: git --no-pager config --list --show-origin"
+log-info "  - Verify SSH config: cat ~/.ssh/config"
 
 # TODO: Future setup components will be added here:
 # - VS Code settings symlinks
-# - SSH configuration
 # - macOS-specific settings (when not in devbox)
 # - Node.js/npm setup
