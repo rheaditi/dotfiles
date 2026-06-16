@@ -1,18 +1,18 @@
+# Single source of truth for dotfiles path vars (DIR_DEV, DIR_DOTFILES,
+# DIR_DOTFILES_PRIVATE, DIR_DOTFILES_PRIVATE_ROOT). Resolved relative to this
+# file so it works regardless of where the shell was started.
+source "${0:A:h}/../../scripts/utils/paths.sh"
+
 if is-devbox; then
-  DIR_DEV="$HOME/dev"
-  DIR_DOTFILES="$DIR_DEV/dotfiles"
-  DIR_DOTFILES_PRIVATE="$HOME/dotfiles"
   LOCAL_EDITOR="code-server"
 else
-  DIR_DEV="$HOME/dev"
-  DIR_DOTFILES="$DIR_DEV/dotfiles"
-  DIR_DOTFILES_PRIVATE="$DIR_DEV/dotfiles-private"
   LOCAL_EDITOR="cursor"
 fi
 
 # dotfiles related aliases
 alias edit-dotfiles="$LOCAL_EDITOR $DIR_DOTFILES"
-alias edit-dotfiles-private="$LOCAL_EDITOR $DIR_DOTFILES_PRIVATE"
+# Open the private repo root (not the nested content dir) in the editor.
+alias edit-dotfiles-private="$LOCAL_EDITOR $DIR_DOTFILES_PRIVATE_ROOT"
 # Rebuild the composed AGENTS.md files from sources (after editing fragments)
 alias rebuild-agents="$DIR_DOTFILES/scripts/agents/build-agents.sh"
 

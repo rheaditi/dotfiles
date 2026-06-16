@@ -1,9 +1,8 @@
-if is-devbox; then
-  if [[ -f "$HOME/dotfiles/zsh/entry.sh" ]]; then
-    source "$HOME/dotfiles/zsh/entry.sh"
-  fi
-else
-  if [[ -f "$HOME/dev/dotfiles-private/atlassian/zsh/entry.sh" ]]; then
-    source "$HOME/dev/dotfiles-private/atlassian/zsh/entry.sh"
-  fi
+# DIR_DOTFILES_PRIVATE resolves to the private repo's content dir for both
+# local (~/dev/dotfiles-private/atlassian) and devbox (~/dotfiles) subtree
+# clones. Source paths.sh so this works regardless of load order.
+source "${0:A:h}/../../scripts/utils/paths.sh"
+
+if [[ -f "$DIR_DOTFILES_PRIVATE/zsh/entry.sh" ]]; then
+  source "$DIR_DOTFILES_PRIVATE/zsh/entry.sh"
 fi

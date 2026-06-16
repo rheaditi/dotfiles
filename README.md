@@ -86,8 +86,14 @@ NONINTERACTIVE=1 ./bootstrap.sh   # install everything, no prompts
    only if the `code` CLI is on `PATH` (otherwise it's skipped with a reminder
    to run `./scripts/setup.vscode-extensions.sh` later)
 
-For the full design rationale, architecture, and evolution plan, see
-[docs/ai-native-plan.md](docs/ai-native-plan.md).
+Documentation lives in [`docs/`](docs/):
+
+- [**ARCHITECTURE.md**](docs/ARCHITECTURE.md) — how the repo is wired (two-tier
+  setup, public/private subtree model, path & env contracts, secrets).
+- [**SETUP.md**](docs/SETUP.md) — fresh-machine runbook (clone → bootstrap →
+  secrets → verify).
+- [**ai-native-plan.md**](docs/ai-native-plan.md) — the evolving roadmap and
+  design rationale.
 
 ## Manual Steps 📝
 

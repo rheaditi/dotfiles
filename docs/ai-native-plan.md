@@ -5,6 +5,10 @@ setup dead simple and fast. Heavily inspired by
 [atxtechbro/dotfiles](https://github.com/atxtechbro/dotfiles) but deliberately
 pared down — borrowing philosophies, not infrastructure.
 
+> 📖 This is the evolving **roadmap**. For as-built reference (how the repo is
+> wired today) see [`ARCHITECTURE.md`](./ARCHITECTURE.md); for fresh-machine
+> setup see [`SETUP.md`](./SETUP.md).
+
 > Status: **draft**. Each phase below is independently shippable and
 > independently revertible. Nothing here is "all-or-nothing". When in doubt,
 > ship the smaller version.

@@ -11,12 +11,16 @@ source "$SCRIPT_DIR/../utils/file-operations.sh"
 # Source platform detection
 source "$SCRIPT_DIR/../utils/environment.sh"
 
+# Source canonical dotfiles paths (DIR_DOTFILES_PRIVATE resolves to the private
+# repo's content dir, which differs between local and devbox/RDE subtree clones).
+source "$SCRIPT_DIR/../utils/paths.sh"
+
 # Configuration directory
 DOTFILES_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 CONFIG_DIR="$DOTFILES_ROOT/configs/git"
 
 # Configuration paths
-PRIVATE_GITCONFIG="$HOME/dev/dotfiles-private/atlassian/git/amohanty.local.gitconfig"
+PRIVATE_GITCONFIG="$DIR_DOTFILES_PRIVATE/git/amohanty.local.gitconfig"
 BASE_GITCONFIG="$CONFIG_DIR/base.gitconfig"
 RHEADITI_GITCONFIG="$CONFIG_DIR/rheaditi.gitconfig"
 GLOBAL_GITIGNORE="$CONFIG_DIR/global.gitignore"
