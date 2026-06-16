@@ -1,16 +1,15 @@
 Include devbox.conf/*.conf
 Include service_port_forward_config
 
-
 Host *
   AddKeysToAgent yes
   UseKeychain yes
-  IdentityFile ~/.ssh/id_ed25519
+  IdentityFile ~/.ssh/id_ed25519_personal
 
 Host bitbucket.org
   AddKeysToAgent yes
   UseKeychain yes
-  IdentityFile ~/.ssh/id_ed25519.atlassian
+  IdentityFile ~/.ssh/id_ed25519_atlassian
 
 Include dns_host_config
 Include dev_env_config
