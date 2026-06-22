@@ -96,3 +96,17 @@ if [[ "$VSCODE_EXT_PENDING" -eq 1 ]]; then
   log-info "  - Install the VS Code 'code' command (Cmd+Shift+P > 'Shell Command: Install code command in PATH'),"
   log-info "    then run: ./scripts/setup.vscode-extensions.sh"
 fi
+
+# --- Manual steps -----------------------------------------------------------
+# These can't be fully automated because they require elevated privileges
+# (an interactive sudo / privileged-helper prompt) and would hang a
+# non-interactive run. Do them by hand in your own terminal.
+if is-macos; then
+  log-info "Manual steps (require elevated permissions, can't be automated):"
+  if ! command -v docker >/dev/null 2>&1 && [[ ! -d "/Applications/Docker.app" ]]; then
+    log-info "  - Install Docker Desktop (needs an interactive sudo prompt for its"
+    log-info "    privileged helper, so it's kept out of the Brewfile):"
+    log-info "      brew install --cask docker-desktop"
+    log-info "    Then launch it once to finish setup: open -a Docker"
+  fi
+fi

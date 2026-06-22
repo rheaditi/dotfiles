@@ -20,4 +20,7 @@ brew "go"          # Go toolchain (compiler, go tool, gofmt)
 cask "font-fira-code"
 
 # --- Apps (casks) -------------------------------------------------------------
+# Docker Desktop is intentionally NOT installed here: its cask requires an
+# interactive sudo prompt (privileged helper) that hangs non-interactive runs.
+# See the "manual steps" section at the end of bootstrap.sh.
 # (none yet — add cask "<app>" entries here)
