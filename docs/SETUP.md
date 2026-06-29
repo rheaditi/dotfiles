@@ -67,20 +67,14 @@ Extensions are listed in `configs/vscode/extensions.txt`.
 
 ## 4. Populate Keychain secrets (macOS, optional)
 
-Shell startup pulls a few tokens from the macOS Keychain. Until they exist
-you'll see a once-a-day warning (the shell still works fine). Add them with:
+Keychain-backed secrets are managed by the **private** repo (they're
+Atlassian-specific). Shell startup reads them via the private repo's
+`zsh/secrets.sh`; until each item exists you'll see a once-a-day warning (the
+shell still works fine, and there's no warning at all without the private repo).
 
-```sh
-security add-generic-password -a "$USER" -s "signalfx_auth_token"        -w
-security add-generic-password -a "$USER" -s "ops_sherpa_atlassian_token" -w
-security add-generic-password -a "$USER" -s "bitbucket_token"            -w
-security add-generic-password -a "$USER" -s "opsj_token"                 -w
-```
-
-Each command prompts for the secret value (so it never lands in shell history).
-Re-add with `-U` to update an existing item. See
-[ARCHITECTURE.md → Secrets](./ARCHITECTURE.md#secrets--macos-keychain) for which
-env vars each item populates.
+The warning lists each missing item and the exact `security add-generic-password`
+command to add it. See the private repo for the full list of items and the env
+vars they populate.
 
 ## 5. Verify
 

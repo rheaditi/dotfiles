@@ -180,17 +180,16 @@ Shared, sourced by both setup scripts and the zsh runtime (so it must be
 
 ## Secrets — macOS Keychain
 
-Some env vars are populated at shell startup from the macOS Keychain via a
-`keychain_export` helper in `configs/zsh/dotzshrc`. If an item is missing, the
-helper prints a single throttled warning (about once a day) listing what to add,
-rather than failing the shell. The items and the vars they populate:
+Keychain-backed secrets are **Atlassian-specific**, so they live entirely in the
+**private** repo (`zsh/secrets.sh`), sourced via `zshrc.private.sh` → the private
+`entry.sh`. The public repo defines no keychain logic, so a public-only checkout
+has no secrets wiring and prints no warnings.
 
-| Keychain item (`-s`) | Env var(s) populated |
-|---|---|
-| `signalfx_auth_token` | `TF_VAR_signalfx_auth_token`, `SIGNALFX_API_TOKEN` |
-| `ops_sherpa_atlassian_token` | `ATLASSIAN_API_TOKEN` |
-| `bitbucket_token` | `BITBUCKET_TOKEN` |
-| `opsj_token` | `OPS_JIRA_TOKEN` |
+The private `secrets.sh` is self-contained (it detects macOS inline rather than
+depending on `environment.sh`, since it also runs on Linux devboxes where it's a
+no-op). It reads each item via a `keychain_export` helper and, if any are
+missing, prints a single throttled warning (about once a day) listing what to
+add rather than failing the shell.
 
-See [`SETUP.md`](./SETUP.md) for the commands to populate these.
+See the private repo for the list of items and the env vars they populate.
 
