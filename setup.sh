@@ -75,7 +75,7 @@ log-info "  - Verify SSH config: cat ~/.ssh/config"
 log-info "  - Verify VS Code settings: ls -la \"\$HOME/Library/Application Support/Code/User/settings.json\""
 log-info "  - Verify terminal config: ls -la ~/.config/ghostty/config ~/.config/cmux/cmux.json"
 log-info "  - Reload cmux config: Cmd+Shift+,"
-log-info "  - Verify Rovo AGENTS.md: ls -la ~/.rovodev/AGENTS.md"
+log-info "  - Verify Rovo AGENTS.md: ls -la ~/.rovo/AGENTS.md"
 
 # TODO: Future setup components will be added here:
 # - macOS-specific settings (when not in devbox)

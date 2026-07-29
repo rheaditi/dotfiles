@@ -21,7 +21,7 @@ overlay) into one file per tool, then symlinks it into place:
 
 | Tool | Built file | Symlinked to |
 |------|-----------|--------------|
-| Rovo Dev CLI | `build/rovo.md` | `~/.rovodev/AGENTS.md` |
+| Rovo CLI | `build/rovo.md` | `~/.rovo/AGENTS.md` |
 
 ## Public + private overlay
 
@@ -43,26 +43,29 @@ Files are concatenated in sorted order, in this sequence:
 Use numeric prefixes for explicit ordering: `00-09` foundational,
 `10-29` workflow/conventions, `30+` stylistic.
 
-## Rovo Dev `config.yml`
+## Rovo `config.yml` + `mcp.json`
 
-Beyond `AGENTS.md`, `scripts/setup.agents.sh` also symlinks Rovo Dev's
-`config.yml` (model, UI, tool-permission, and hook settings) from the **private**
-dotfiles repo:
+Beyond `AGENTS.md`, `scripts/setup.agents.sh` also symlinks Rovo's `config.yml`
+(model, UI, tool-permission, and hook settings) and `mcp.json` (MCP server
+config) from the **private** dotfiles repo:
 
 ```
-$DIR_DOTFILES_PRIVATE/rovodev/config.yml  →  ~/.rovodev/config.yml
+$DIR_DOTFILES_PRIVATE/rovodev/config.yml  →  ~/.rovo/config.yml
+$DIR_DOTFILES_PRIVATE/rovodev/mcp.json    →  ~/.rovo/mcp.json
 ```
 
-It lives in the private repo because it references Atlassian-internal hooks and
-the billing site (no secrets, but internal-ish). Notes:
+The source folder is still named `rovodev/` (historical); only the destination
+moved to `~/.rovo/`. They live in the private repo because they reference
+Atlassian-internal hooks, the billing site, and internal MCP servers (no
+secrets, but internal-ish). Notes:
 
 - **Symlinked**, so Rovo's runtime rewrites flow back into the private repo
   (expect occasional churn in app-managed fields like `announcementTracking`).
-- **Skipped on devbox/RDE** (`REMOTE_DEV_ENV=true`): the committed file has
+- **Skipped on devbox/RDE** (`REMOTE_DEV_ENV=true`): the committed files have
   machine-specific absolute paths (`/Users/...`) that would be wrong there, so
   the devbox keeps Rovo's own native config.
 - **Skipped if the private repo isn't present** — public-only setups just won't
-  get it.
+  get them.
 
 ## Usage
 

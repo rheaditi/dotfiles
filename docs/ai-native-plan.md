@@ -256,7 +256,7 @@ top-level config file alongside a directory of runtime state:
 |---|---|---|
 | VS Code | `settings.json`, `keybindings.json` | `~/Library/Application Support/Code/User/` |
 | Cursor | `settings.json`, `keybindings.json` | `~/Library/Application Support/Cursor/User/` |
-| Rovo Dev CLI | `config.yml` | `~/.rovodev/config.yml` |
+| Rovo CLI | `config.yml`, `mcp.json` | `~/.rovo/` |
 
 The Cursor and VS Code directories also contain `globalStorage/`,
 `workspaceStorage/`, `History/`, `snippets/` — runtime state we never
@@ -339,7 +339,7 @@ confirm the link is restored.
 > `configs/agents/sources/` (+ a private overlay at
 > `$DIR_DOTFILES_PRIVATE/agents/sources/`) are composed by
 > `scripts/agents/build-agents.sh` into `configs/agents/build/rovo.md`
-> (gitignored) and symlinked to `~/.rovodev/AGENTS.md` by
+> (gitignored) and symlinked to `~/.rovo/AGENTS.md` by
 > `scripts/setup.agents.sh` (wired into `setup.sh`). The old hand-maintained
 > `rovodev/AGENTS.md` was split: "Communication Style" → public
 > `sources/30-communication.md`; Socrates + Pollinator → private sources.
@@ -351,8 +351,8 @@ truth for agent context — "how I work, what I expect, what I prefer" —
 composed from modular fragments at setup time and installed into the
 global location each tool reads.
 
-Primary target: **Atlassian Rovo Dev CLI** (daily driver, reads
-`~/.rovodev/AGENTS.md`).
+Primary target: **Atlassian Rovo CLI** (daily driver, reads
+`~/.rovo/AGENTS.md`).
 Secondary target: **Cursor** (used alongside, must see the same
 context).
 Future target: **cmux** (agent multiplexer) — flagged so the design
@@ -458,8 +458,8 @@ lands.
 
 1. Run `build-agents.sh` (always — fast).
 2. Symlink each `build/<tool>.md` into its tool's global location:
-   - **Rovo**: `~/.rovodev/AGENTS.md` → `configs/agents/build/rovo.md`.
-     Confirmed path. If `~/.rovodev/` doesn't exist yet (e.g. fresh
+   - **Rovo**: `~/.rovo/AGENTS.md` → `configs/agents/build/rovo.md`.
+     Confirmed path. If `~/.rovo/` doesn't exist yet (e.g. fresh
      machine before Rovo is installed), create it.
    - **Cursor**: per the Cursor user-rules convention, symlink to
      `~/.cursor/rules/00-shared-agents.mdc`. If MDC frontmatter is
@@ -615,26 +615,26 @@ Cursor splits its config across two roots:
   keybindings.json                                    ✅ covered by Phase 5.2.1
 ```
 
-#### Rovo Dev CLI leftovers
+#### Rovo CLI leftovers
 
 ```
-~/.rovodev/
+~/.rovo/
   AGENTS.md                                           ✅ covered by Phase 5.3
   config.yml                                          ✅ covered by Phase 5.2.1
+  mcp.json                                            ✅ covered by Phase 5.2.1
   backup.config.yml                                   never track (Rovo-managed backup)
   config.yml.lock                                     never track (runtime lock)
   event_hooks.log                                     never track (runtime log)
   hooks/                                              track later (dir)
-  mcp.json                                            track later
   logs/, sessions/, prompt_history                    never track (runtime)
 ```
 
 #### What's left to track after 5.2 + 5.3
 
-- `~/.cursor/mcp.json` and `~/.rovodev/mcp.json` (MCP server configs —
-  potentially symmetric content, candidate for a shared source like
-  Phase 5.3's pattern)
-- `~/.cursor/hooks.json`, `~/.cursor/hooks/`, `~/.rovodev/hooks/`
+- `~/.cursor/mcp.json` (MCP server config — Rovo's `~/.rovo/mcp.json` is
+  already tracked via Phase 5.2.1; the two are potentially symmetric content,
+  a candidate for a shared source like Phase 5.3's pattern)
+- `~/.cursor/hooks.json`, `~/.cursor/hooks/`, `~/.rovo/hooks/`
   (per-tool hook scripts — likely tool-specific, less reusable)
 - `~/.cursor/skills-cursor/` (the skills library — portable IP, worth
   preserving across machines)

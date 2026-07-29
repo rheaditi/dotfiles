@@ -24,7 +24,7 @@ This setup includes configurations for:
 | **macOS**      | System preferences via scripts |
 | **Homebrew**   | Package management for most tooling |
 | **Node.js**    | Development environment with nvm |
-| **AI agents**  | Shared `AGENTS.md` context composed from modular fragments ([`configs/agents/`](configs/agents/)) and symlinked to `~/.rovodev/AGENTS.md` |
+| **AI agents**  | Shared `AGENTS.md` context composed from modular fragments ([`configs/agents/`](configs/agents/)) and symlinked to `~/.rovo/AGENTS.md` |
 
 ## Prerequisites 🛠️
 
@@ -81,7 +81,7 @@ NONINTERACTIVE=1 ./bootstrap.sh   # install everything, no prompts
    - **Editor** - symlinks VS Code settings + keybindings
    - **Terminal** - symlinks Ghostty config + cmux settings
    - **AGENTS.md** - builds shared AI-agent context and symlinks it to
-     `~/.rovodev/AGENTS.md`
+     `~/.rovo/AGENTS.md`
 4. **VS Code extensions** - installs from `configs/vscode/extensions.txt`, but
    only if the `code` CLI is on `PATH` (otherwise it's skipped with a reminder
    to run `./scripts/setup.vscode-extensions.sh` later)

@@ -144,7 +144,7 @@ don't redefine these anywhere.
 | `DIR_DOTFILES_PRIVATE` | private **content** dir (use this for tooling) | `~/dev/dotfiles-private/atlassian` | `~/dotfiles` |
 
 - Use **`DIR_DOTFILES_PRIVATE`** when reading content (agents sources, the
-  private gitconfig, the private zsh `entry.sh`, rovodev `config.yml`).
+  private gitconfig, the private zsh `entry.sh`, Rovo `config.yml`/`mcp.json`).
 - Use **`DIR_DOTFILES_PRIVATE_ROOT`** only when you mean the repo root (e.g. the
   `edit-dotfiles-private` editor alias).
 

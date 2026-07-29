@@ -23,5 +23,5 @@
 	eventNesting = 1
 	configparams = custom.metacommands
 [afm]
-	binPathManagerScriptHash = 2064e7dbecb4f6f491309b244c13954c265d56ff
-	binPathManagerScriptTimestamp = 1781000071
+	binPathManagerScriptHash = 898c3e20ce199c40a5fb7bfda71e3a42d0ba4c00
+	binPathManagerScriptTimestamp = 1785294858
