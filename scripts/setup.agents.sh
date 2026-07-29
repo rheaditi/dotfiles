@@ -19,10 +19,15 @@ BUILD_DIR="$DOTFILES_ROOT/configs/agents/build"
 
 # Rovo config.yml and mcp.json live in the private dotfiles repo (no secrets,
 # but have Atlassian-internal hooks/billing site + MCP servers). The source
-# folder is still named rovodev/; only the destination moved to ~/.rovo/.
-# Symlinked in if present.
+# folder is still named rovodev/. Symlinked in if present.
 ROVO_PRIVATE_CONFIG="${DIR_DOTFILES_PRIVATE:-}/rovodev/config.yml"
 ROVO_PRIVATE_MCP="${DIR_DOTFILES_PRIVATE:-}/rovodev/mcp.json"
+
+# Rovo state dirs to link into. We're mid-migration from the old "rovodev" CLI
+# to the new "rovo" CLI, and running both in parallel while rovo stabilizes, so
+# the same source files are linked into both. Drop "$HOME/.rovodev" from this
+# list once rovo is the sole daily driver.
+ROVO_HOMES=("$HOME/.rovo" "$HOME/.rovodev")
 
 # Link a built target file into its tool's global location.
 # Usage: link-agent-file <built-file> <destination>
@@ -61,30 +66,38 @@ setup-agents() {
     return 1
   fi
 
-  # Rovo CLI.
-  link-agent-file "$BUILD_DIR/rovo.md" "$HOME/.rovo/AGENTS.md"
-
-  # Future targets follow the same pattern, e.g.:
-  #   link-agent-file "$BUILD_DIR/cursor.md" "$HOME/.cursor/rules/00-shared-agents.mdc"
-
-  # Rovo config.yml + mcp.json from the private repo (skipped if not present).
-  # Skipped on devbox/RDE: the committed files have machine-specific absolute
-  # paths (/Users/...) that would be wrong there.
+  # Rovo CLI (linked into every dir in ROVO_HOMES — see note above).
+  #
+  # config.yml + mcp.json come from the private repo and are skipped on
+  # devbox/RDE: the committed files have machine-specific absolute paths
+  # (/Users/...) that would be wrong there.
+  local skip_private=false
   if is-remote-dev-env; then
     log-info "Devbox detected, skipping Rovo config.yml/mcp.json symlinks (machine-specific paths)"
-  else
+    skip_private=true
+  fi
+
+  local rovo_home
+  for rovo_home in "${ROVO_HOMES[@]}"; do
+    link-agent-file "$BUILD_DIR/rovo.md" "$rovo_home/AGENTS.md"
+
+    [[ "$skip_private" == true ]] && continue
+
     if [[ -f "$ROVO_PRIVATE_CONFIG" ]]; then
-      link-agent-file "$ROVO_PRIVATE_CONFIG" "$HOME/.rovo/config.yml"
+      link-agent-file "$ROVO_PRIVATE_CONFIG" "$rovo_home/config.yml"
     else
       log-info "Private Rovo config not found, skipping: $ROVO_PRIVATE_CONFIG"
     fi
 
     if [[ -f "$ROVO_PRIVATE_MCP" ]]; then
-      link-agent-file "$ROVO_PRIVATE_MCP" "$HOME/.rovo/mcp.json"
+      link-agent-file "$ROVO_PRIVATE_MCP" "$rovo_home/mcp.json"
     else
       log-info "Private Rovo mcp.json not found, skipping: $ROVO_PRIVATE_MCP"
     fi
-  fi
+  done
+
+  # Future targets follow the same pattern, e.g.:
+  #   link-agent-file "$BUILD_DIR/cursor.md" "$HOME/.cursor/rules/00-shared-agents.mdc"
 
   log-success "AGENTS.md setup complete"
 }
