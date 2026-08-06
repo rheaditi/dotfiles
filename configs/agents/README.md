@@ -50,14 +50,14 @@ Beyond `AGENTS.md`, `scripts/setup.agents.sh` also symlinks Rovo's `config.yml`
 config) from the **private** dotfiles repo:
 
 ```
-$DIR_DOTFILES_PRIVATE/rovodev/config.yml  →  ~/.rovo/config.yml
-$DIR_DOTFILES_PRIVATE/rovodev/mcp.json    →  ~/.rovo/mcp.json
+$DIR_DOTFILES_PRIVATE/rovo/config.yml  →  ~/.rovo/config.yml
+$DIR_DOTFILES_PRIVATE/rovo/mcp.json    →  ~/.rovo/mcp.json
 ```
 
-The source folder is still named `rovodev/` (historical); only the destination
-moved to `~/.rovo/`. They live in the private repo because they reference
-Atlassian-internal hooks, the billing site, and internal MCP servers (no
-secrets, but internal-ish). Notes:
+Setup links these private source files only into Rovo's `~/.rovo/` runtime
+home. They live in the private repo because they reference Atlassian-internal
+hooks, the billing site, and internal MCP servers (no secrets, but internal-ish).
+Notes:
 
 - **Symlinked**, so Rovo's runtime rewrites flow back into the private repo
   (expect occasional churn in app-managed fields like `announcementTracking`).
@@ -78,6 +78,14 @@ secrets, but internal-ish). Notes:
 `setup.sh` runs `setup.agents.sh` automatically, so the symlinks are
 re-established on every setup. After editing a source, re-run the build (or
 just `./setup.sh`).
+
+## Legacy Rovo Dev archive
+
+`~/.rovodev` is no longer managed or referenced by Rovo's active configuration.
+It is retained as an archive until the week of **August 10, 2026**. Before
+archiving it, run a normal Rovo session; its remaining `skills/`, `hooks/`,
+`logs/`, and `prompt_history/` do not need migration unless Rovo develops a
+specific dependency on them.
 
 ## Add a fragment
 

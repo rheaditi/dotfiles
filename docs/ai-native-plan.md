@@ -340,8 +340,8 @@ confirm the link is restored.
 > `$DIR_DOTFILES_PRIVATE/agents/sources/`) are composed by
 > `scripts/agents/build-agents.sh` into `configs/agents/build/rovo.md`
 > (gitignored) and symlinked to `~/.rovo/AGENTS.md` by
-> `scripts/setup.agents.sh` (wired into `setup.sh`). The old hand-maintained
-> `rovodev/AGENTS.md` was split: "Communication Style" → public
+> `scripts/setup.agents.sh` (wired into `setup.sh`). The former hand-maintained
+> agent memory was split: "Communication Style" → public
 > `sources/30-communication.md`; Socrates + Pollinator → private sources.
 > `--diff` previews source edits; build is idempotent/byte-stable. **Cursor**
 > and **cmux** remain future targets (add a `TARGETS` entry + one symlink line).
