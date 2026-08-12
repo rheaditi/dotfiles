@@ -213,5 +213,8 @@
   // Security & profiles
   // ===========================================================================
   "security.workspace.trust.enabled": true,
-  "workbench.settings.applyToAllProfiles": ["editor.fontSize"]
+  "workbench.settings.applyToAllProfiles": [
+    "editor.fontSize"
+  ],
+  "go.toolsManagement.autoUpdate": true
 }
