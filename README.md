@@ -1,6 +1,7 @@
 # rheaditi's dotfiles ✨
 
-A painstakingly curated collection of configs, scripts, and digital comfort blankets for macOS development on my personal and work machines (with some Ubuntu compatibility thrown in). Proceed with caution and a sense of adventure! 🚀
+A painstakingly curated collection of configs, scripts, and digital comfort blankets for macOS development on my personal and work machines (with some Ubuntu compatibility thrown in).
+Proceed with caution and a sense of adventure! 🚀
 
 <img width="419" alt="image" src="https://user-images.githubusercontent.com/6426069/159650696-f50e5175-0c2b-472e-a99d-01a3a0ee149c.png">
 
@@ -45,6 +46,42 @@ mkdir -p ~/dev && cd ~/dev
 git clone https://github.com/rheaditi/dotfiles.git
 cd dotfiles
 ```
+
+These are my personal defaults. Before running `./bootstrap.sh` or
+`./setup.sh`, update the files below so you do not accidentally use my Git
+identity or local paths.
+
+<details>
+<summary><strong>Files to update before bootstrap</strong></summary>
+
+Create and commit your own profile and Git identity configuration before setup:
+
+```sh
+# Replace my profile with yours.
+cp configs/rheaditi.env configs/<username>.env
+rm configs/rheaditi.env
+
+# Replace my Git identity configuration with yours.
+cp configs/git/rheaditi.gitconfig configs/git/<username>.gitconfig
+rm configs/git/rheaditi.gitconfig
+```
+
+Update `configs/<username>.env` so `DOTFILES_USER_GITCONFIG` points to your new
+`configs/git/<username>.gitconfig`, then update that Git config with your name,
+email, signing key, and GitHub username. Commit both replacement files before
+running setup.
+
+You can also create an ignored `configs/local.env` for machine-specific
+overrides, such as a private work Git config:
+
+```sh
+DOTFILES_PRIVATE_GITCONFIG="$HOME/path/to/work.gitconfig"
+```
+
+See [`configs/git/README.md`](configs/git/README.md) for Git configuration
+precedence and devbox behavior.
+
+</details>
 
 ### Quick: apply configuration only
 

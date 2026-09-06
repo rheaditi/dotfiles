@@ -1,72 +1,82 @@
 #!/usr/bin/env bash
 
-# Git Configuration Setup Script
-# Creates main gitconfig file with base configuration and environment-specific includes
+# Git configuration setup.
+# Keeps mutable global Git state in a tracked file in the dotfiles repository
+# so automated changes remain visible for review.
 
-# Source utility functions
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+
 source "$SCRIPT_DIR/../utils/logging.sh"
 source "$SCRIPT_DIR/../utils/file-operations.sh"
-
-# Source platform detection
 source "$SCRIPT_DIR/../utils/environment.sh"
+source "$SCRIPT_DIR/../utils/user-config.sh"
 
-# Source canonical dotfiles paths (DIR_DOTFILES_PRIVATE resolves to the private
-# repo's content dir, which differs between local and devbox/RDE subtree clones).
-source "$SCRIPT_DIR/../utils/paths.sh"
-
-# Configuration directory
-DOTFILES_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 CONFIG_DIR="$DOTFILES_ROOT/configs/git"
-
-# Configuration paths
-PRIVATE_GITCONFIG="$DIR_DOTFILES_PRIVATE/git/amohanty.local.gitconfig"
 BASE_GITCONFIG="$CONFIG_DIR/base.gitconfig"
-RHEADITI_GITCONFIG="$CONFIG_DIR/rheaditi.gitconfig"
 GLOBAL_GITIGNORE="$CONFIG_DIR/global.gitignore"
 LOCAL_GITCONFIG="$CONFIG_DIR/local.gitconfig"
+LOCAL_USER_GITCONFIG="$CONFIG_DIR/user.gitconfig"
+LOCAL_PRIVATE_GITCONFIG="$CONFIG_DIR/private.gitconfig"
 
-# Set up git configuration
+# Explicit environment values take precedence over committed profile and local
+# overrides, including explicit empty values that disable an optional include.
+USER_GITCONFIG_FROM_ENV="${DOTFILES_USER_GITCONFIG-}"
+USER_GITCONFIG_FROM_ENV_SET="${DOTFILES_USER_GITCONFIG+x}"
+PRIVATE_GITCONFIG_FROM_ENV="${DOTFILES_PRIVATE_GITCONFIG-}"
+PRIVATE_GITCONFIG_FROM_ENV_SET="${DOTFILES_PRIVATE_GITCONFIG+x}"
+if ! load-user-config; then
+  log-error "Unable to load a committed user profile"
+  exit 1
+fi
+if [[ "$USER_GITCONFIG_FROM_ENV_SET" == "x" ]]; then
+  DOTFILES_USER_GITCONFIG="$USER_GITCONFIG_FROM_ENV"
+fi
+if [[ "$PRIVATE_GITCONFIG_FROM_ENV_SET" == "x" ]]; then
+  DOTFILES_PRIVATE_GITCONFIG="$PRIVATE_GITCONFIG_FROM_ENV"
+fi
+
 setup-git-config() {
   log-info "Setting up git configuration..."
 
-  setup-global-gitignore
+  setup-global-gitignore || return 1
 
   if is-devbox; then
-    create-devbox-gitconfig
+    create-devbox-gitconfig || return 1
   else
-    create-local-gitconfig
+    create-local-gitconfig || return 1
   fi
 
   warn-about-backup-files
   log-success "Git configuration setup complete"
 }
 
-# Set up global gitignore
 setup-global-gitignore() {
   log-info "Setting up global gitignore..."
 
-  # Backup existing global gitignore if it exists
-  if [[ -f ~/.gitignore ]]; then
-    backup-file ~/.gitignore
+  if [[ -e ~/.gitignore || -L ~/.gitignore ]]; then
+    if [[ ~/.gitignore -ef "$GLOBAL_GITIGNORE" ]]; then
+      log-info "Global gitignore already uses the tracked configuration"
+      return 0
+    fi
+    backup-file ~/.gitignore || return 1
   fi
 
-  # Create symlink to global gitignore
-  ln -sf "$GLOBAL_GITIGNORE" ~/.gitignore
+  ln -sf "$GLOBAL_GITIGNORE" ~/.gitignore || {
+    log-error "Failed to create global gitignore symlink"
+    return 1
+  }
   log-info "Created symlink: ~/.gitignore -> $GLOBAL_GITIGNORE"
 }
 
-# Create gitconfig for devbox environment
 create-devbox-gitconfig() {
   log-info "Setting up devbox gitconfig..."
 
-  # Check if base.gitconfig include already exists
   if [[ -f ~/.gitconfig ]] && grep -q "path = $BASE_GITCONFIG" ~/.gitconfig; then
     log-info "Base gitconfig include already exists, skipping"
     return 0
   fi
 
-  # Add include to existing file or create new one
   {
     if [[ -f ~/.gitconfig ]]; then
       echo ""
@@ -82,37 +92,94 @@ create-devbox-gitconfig() {
   log-info "Added base gitconfig include to ~/.gitconfig"
 }
 
-# Create gitconfig for local environment
 create-local-gitconfig() {
   log-info "Setting up local gitconfig..."
 
-  # Check if private gitconfig exists
-  if [[ ! -f "$PRIVATE_GITCONFIG" ]]; then
-    log-error "Required private gitconfig not found: $PRIVATE_GITCONFIG"
-    log-error "Please ensure dotfiles-private repository is available"
-    return 1
-  fi
+  configure-optional-gitconfig "$DOTFILES_USER_GITCONFIG" "$LOCAL_USER_GITCONFIG" "user" || return 1
+  configure-optional-gitconfig "$DOTFILES_PRIVATE_GITCONFIG" "$LOCAL_PRIVATE_GITCONFIG" "private" || return 1
 
-  # Check if local.gitconfig file exists
   if [[ ! -f "$LOCAL_GITCONFIG" ]]; then
-    log-error "Required local gitconfig not found: $LOCAL_GITCONFIG"
-    log-error "Please ensure the local.gitconfig file exists in the git directory"
+    write-local-gitconfig
+    log-info "Created mutable gitconfig: $LOCAL_GITCONFIG"
+  else
+    update-local-gitconfig-includes
+  fi
+
+  if [[ -e ~/.gitconfig || -L ~/.gitconfig ]]; then
+    if [[ ~/.gitconfig -ef "$LOCAL_GITCONFIG" ]]; then
+      log-info "Global gitconfig already uses the mutable repository config"
+    else
+      backup-file ~/.gitconfig || return 1
+    fi
+  fi
+
+  ln -sfn "$LOCAL_GITCONFIG" ~/.gitconfig || {
+    log-error "Failed to create global gitconfig symlink"
     return 1
-  fi
-
-  # Backup existing gitconfig if it exists
-  if [[ -f ~/.gitconfig ]]; then
-    backup-file ~/.gitconfig
-  fi
-
-  # Create symlink to local gitconfig
-  ln -sf "$LOCAL_GITCONFIG" ~/.gitconfig
+  }
   log-success "Created symlink: ~/.gitconfig -> $LOCAL_GITCONFIG"
-  log-info "Includes: base.gitconfig, private config"
-  log-info "Conditional includes: rheaditi.gitconfig for ~/dev/personal/ and ~/dev/dotfiles/"
+  log-info "Tracked include: base.gitconfig"
 }
 
-# Warn about leftover backup files
+write-local-gitconfig() {
+  cat > "$LOCAL_GITCONFIG" <<EOF
+# Mutable Git configuration managed by dotfiles setup.
+# Tool-managed global state belongs in this tracked repository file.
+[include]
+    path = $BASE_GITCONFIG
+
+[include]
+    path = $LOCAL_PRIVATE_GITCONFIG
+
+[includeIf "gitdir:~/dev/personal/"]
+    path = $LOCAL_USER_GITCONFIG
+
+[includeIf "gitdir:~/dev/dotfiles/"]
+    path = $LOCAL_USER_GITCONFIG
+
+[includeIf "gitdir:~/dev/dotfiles-private/"]
+    path = $LOCAL_USER_GITCONFIG
+EOF
+}
+
+update-local-gitconfig-includes() {
+  # Replace only setup-managed include entries. This preserves tool-managed
+  # settings such as [afm] and [trace2] in the tracked local wrapper.
+  git config --file "$LOCAL_GITCONFIG" --unset-all include.path || true
+  git config --file "$LOCAL_GITCONFIG" --add include.path "$BASE_GITCONFIG"
+  git config --file "$LOCAL_GITCONFIG" --add include.path "$LOCAL_PRIVATE_GITCONFIG"
+  git config --file "$LOCAL_GITCONFIG" --replace-all 'includeIf.gitdir:~/dev/personal/.path' "$LOCAL_USER_GITCONFIG"
+  git config --file "$LOCAL_GITCONFIG" --replace-all 'includeIf.gitdir:~/dev/dotfiles/.path' "$LOCAL_USER_GITCONFIG"
+  git config --file "$LOCAL_GITCONFIG" --replace-all 'includeIf.gitdir:~/dev/dotfiles-private/.path' "$LOCAL_USER_GITCONFIG"
+}
+
+configure-optional-gitconfig() {
+  local configured_path="$1"
+  local local_path="$2"
+  local config_type="$3"
+
+  rm -f "$local_path"
+
+  if [[ -z "$configured_path" ]]; then
+    : > "$local_path"
+    log-info "No $config_type gitconfig configured"
+    return 0
+  fi
+
+  if [[ ! -f "$configured_path" ]]; then
+    : > "$local_path"
+    log-warning "Optional $config_type gitconfig is unavailable: $configured_path"
+    log-warning "Continuing without a $config_type gitconfig include"
+    return 0
+  fi
+
+  ln -s "$configured_path" "$local_path" || {
+    log-error "Failed to configure $config_type gitconfig include"
+    return 1
+  }
+  log-info "Configured $config_type gitconfig include"
+}
+
 warn-about-backup-files() {
   local backup_files
   backup_files=$(find "$HOME" -maxdepth 1 -name "*.gitconfig.*" -type f 2>/dev/null)
@@ -126,5 +193,4 @@ warn-about-backup-files() {
   fi
 }
 
-# Main execution
 setup-git-config

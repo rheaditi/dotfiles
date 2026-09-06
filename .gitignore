@@ -2,3 +2,9 @@
 # workspace settings under version control.
 !.vscode/
 !.vscode/settings.json
+
+# Machine-specific dotfiles overrides and generated Git config links.
+/configs/local.env
+/configs/git/local.gitconfig.*
+/configs/git/user.gitconfig
+/configs/git/private.gitconfig
