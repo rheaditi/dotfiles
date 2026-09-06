@@ -1,0 +1,42 @@
+# Step 0: Pre-requisite Variables
+
+DOTFILES_CONFIG_FILE="${(%):-%x}" # Get the directory where this config file is actually located (resolve symlinks)
+if [[ -L "$DOTFILES_CONFIG_FILE" ]]; then
+  DOTFILES_CONFIG_FILE="$(readlink "$DOTFILES_CONFIG_FILE")"
+fi
+DOTFILES_CONFIG_DIR="$(cd "$(dirname "$DOTFILES_CONFIG_FILE")" && pwd)"
+DOTFILES_ROOT="$(cd "$DOTFILES_CONFIG_DIR/../.." && pwd)"
+
+# Source platform detection utilities
+source "$DOTFILES_ROOT/scripts/utils/environment.sh"
+
+# Step 1: Setup paths
+export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH"
+
+# Step 2: Source oh-my-zsh options & prompt options
+# oh-my-zsh overrides the prompt so Pure must be activated after source $ZSH/oh-my-zsh.sh.
+source "$DOTFILES_CONFIG_DIR/zshrc.ohmyzsh.sh"
+source "$DOTFILES_CONFIG_DIR/zshrc.prompt.sh"
+
+# Step 3: User configurations
+export LANG=en_US.UTF-8
+export EDITOR=vim
+
+# Step 4: Source platform-specific configuration
+source "$DOTFILES_CONFIG_DIR/zshrc.platform.sh"
+if is-macos; then
+  source "$DOTFILES_CONFIG_DIR/zshrc.macos.sh"
+elif is-linux; then
+  source "$DOTFILES_CONFIG_DIR/zshrc.linux.sh"
+fi
+
+# Step 5: Source other configurations
+source "$DOTFILES_CONFIG_DIR/zshrc.alias.sh"
+source "$DOTFILES_CONFIG_DIR/zshrc.functions.sh"
+
+# Step 6: Source private configurations (if they exist)
+# Keychain-backed secrets live in the private repo's zsh/secrets.sh, sourced via
+# zshrc.private.sh → entry.sh. They're optional and degrade gracefully when the
+# private repo is absent. See the private repo for details.
+source "$DOTFILES_CONFIG_DIR/zshrc.private.sh"
+if [ -f "$HOME/.afm-bin-path-manager.zsh" ]; then source "$HOME/.afm-bin-path-manager.zsh"; fi

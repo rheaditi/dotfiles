@@ -1,0 +1,41 @@
+# Ghostty configuration
+# ----------------------------------------------------------------------------
+# This file is read by both Ghostty and cmux (cmux is built on libghostty and
+# reads ~/.config/ghostty/config for themes, fonts, and colors).
+#
+# Reload after editing:  Cmd+Shift+,   (cmux)  /  Cmd+,  (Ghostty)
+# Theme reference:        https://cmux.com/docs/configuration
+# ----------------------------------------------------------------------------
+
+# --- Theme & colors ---------------------------------------------------------
+# Adaptive: cmux/Ghostty switch automatically with macOS light/dark appearance.
+# "Ayu Mirage" is the muted dark variant; "Ayu Light" for light mode.
+# To force a single theme instead, use:  theme = Ayu
+theme = dark:Ayu Mirage,light:Ayu Light
+
+# --- Font -------------------------------------------------------------------
+font-family = "Fira Code"
+font-size = 14
+# Ligatures (matches VS Code's editor.fontLigatures = true). Ghostty enables
+# ligatures by default; these make calt/liga explicit. To DISABLE, use:
+#   font-feature = -calt, -liga, -dlig
+font-feature = calt
+font-feature = liga
+font-feature = dlig
+
+# --- Window & padding -------------------------------------------------------
+window-padding-x = 12
+window-padding-y = 10
+window-padding-balance = true
+# cmux provides its own vertical tab sidebar — hide Ghostty's tab bar.
+window-show-tab-bar = never
+
+# --- Cursor -----------------------------------------------------------------
+cursor-style = bar
+cursor-style-blink = false
+
+# --- Scrollback -------------------------------------------------------------
+scrollback-limit = 10000000
+
+# --- macOS ------------------------------------------------------------------
+macos-option-as-alt = true

@@ -1,0 +1,6 @@
+{
+  // Workspace-scoped settings for the dotfiles repo only.
+  "files.associations": {
+    "configs/ssh/config": "ssh_config"
+  }
+}

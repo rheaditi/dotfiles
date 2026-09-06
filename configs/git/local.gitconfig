@@ -1,0 +1,27 @@
+# Git Configuration for Local Environment
+
+# Base configuration (always included)
+[include]
+  path = ~/dev/dotfiles/configs/git/base.gitconfig
+
+# Private user configuration (always included)
+[include]
+  path = ~/dev/dotfiles-private/atlassian/git/amohanty.local.gitconfig
+
+# Personal configuration (conditional include based on gitdir)
+[includeIf "gitdir:~/dev/personal/"]
+  path = ~/dev/dotfiles/configs/git/rheaditi.gitconfig
+
+[includeIf "gitdir:~/dev/dotfiles/"]
+  path = ~/dev/dotfiles/configs/git/rheaditi.gitconfig
+
+[includeIf "gitdir:~/dev/dotfiles-private/"]
+  path = ~/dev/dotfiles/configs/git/rheaditi.gitconfig
+[trace2]
+	eventTarget = af_unix:/Users/amohanty/.gittrace/trace.sock
+	eventBrief = true
+	eventNesting = 1
+	configparams = custom.metacommands
+[afm]
+	binPathManagerScriptHash = 898c3e20ce199c40a5fb7bfda71e3a42d0ba4c00
+	binPathManagerScriptTimestamp = 1785294858
