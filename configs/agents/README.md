@@ -23,6 +23,11 @@ overlay) into one file per tool, then symlinks it into place:
 |------|-----------|--------------|
 | Rovo CLI | `build/rovo.md` | `~/.rovo/AGENTS.md` |
 
+The private overlay is also the source of truth for Rovo's global `/prompts`
+library. `scripts/setup.agents.sh` symlinks its registry and Markdown prompt
+bodies into `~/.rovo`. In a local checkout, see
+`$DIR_DOTFILES_PRIVATE/rovo/README.md` for authoring details.
+
 ## Public + private overlay
 
 Generic content (how I communicate, git/PR preferences) lives here in the
@@ -43,15 +48,17 @@ Files are concatenated in sorted order, in this sequence:
 Use numeric prefixes for explicit ordering: `00-09` foundational,
 `10-29` workflow/conventions, `30+` stylistic.
 
-## Rovo `config.yml` + `mcp.json`
+## Rovo runtime configuration and prompts
 
 Beyond `AGENTS.md`, `scripts/setup.agents.sh` also symlinks Rovo's `config.yml`
-(model, UI, tool-permission, and hook settings) and `mcp.json` (MCP server
-config) from the **private** dotfiles repo:
+(model, UI, tool-permission, and hook settings), `mcp.json` (MCP server config),
+and global `/prompts` library from the **private** dotfiles repo:
 
 ```
-$DIR_DOTFILES_PRIVATE/rovo/config.yml  →  ~/.rovo/config.yml
-$DIR_DOTFILES_PRIVATE/rovo/mcp.json    →  ~/.rovo/mcp.json
+$DIR_DOTFILES_PRIVATE/rovo/config.yml   →  ~/.rovo/config.yml
+$DIR_DOTFILES_PRIVATE/rovo/mcp.json     →  ~/.rovo/mcp.json
+$DIR_DOTFILES_PRIVATE/rovo/prompts.yml  →  ~/.rovo/prompts.yml
+$DIR_DOTFILES_PRIVATE/rovo/prompts/     →  ~/.rovo/prompts/
 ```
 
 Setup links these private source files only into Rovo's `~/.rovo/` runtime

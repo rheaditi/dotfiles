@@ -17,23 +17,25 @@ source "$SCRIPT_DIR/utils/paths.sh"
 
 BUILD_DIR="$DOTFILES_ROOT/configs/agents/build"
 
-# Rovo config.yml and mcp.json live in the private dotfiles repo (no secrets,
-# but have Atlassian-internal hooks/billing site + MCP servers). Symlinked in
-# if present.
+# Rovo runtime configuration lives in the private dotfiles repo. config.yml and
+# mcp.json can contain local absolute paths, while the prompt registry and its
+# content directory are portable and can also be linked on devbox.
 ROVO_PRIVATE_CONFIG="${DIR_DOTFILES_PRIVATE:-}/rovo/config.yml"
 ROVO_PRIVATE_MCP="${DIR_DOTFILES_PRIVATE:-}/rovo/mcp.json"
+ROVO_PRIVATE_PROMPTS="${DIR_DOTFILES_PRIVATE:-}/rovo/prompts.yml"
+ROVO_PRIVATE_PROMPT_DIR="${DIR_DOTFILES_PRIVATE:-}/rovo/prompts"
 
 # Rovo CLI runtime home.
 ROVO_HOME="$HOME/.rovo"
 
-# Link a built target file into its tool's global location.
-# Usage: link-agent-file <built-file> <destination>
-link-agent-file() {
+# Link a file or directory into a tool's global location.
+# Usage: link-agent-path <source> <destination>
+link-agent-path() {
   local src="$1" dest="$2" dest_dir
   dest_dir="$(dirname "$dest")"
 
-  if [[ ! -f "$src" ]]; then
-    log-warning "Built agent file missing, skipping: $src"
+  if [[ ! -e "$src" ]]; then
+    log-warning "Agent source missing, skipping: $src"
     return 0
   fi
 
@@ -64,7 +66,21 @@ setup-agents() {
   fi
 
   # Rovo CLI runtime home.
-  link-agent-file "$BUILD_DIR/rovo.md" "$ROVO_HOME/AGENTS.md"
+  link-agent-path "$BUILD_DIR/rovo.md" "$ROVO_HOME/AGENTS.md"
+
+  # Saved prompts are portable: the registry uses paths relative to ~/.rovo and
+  # its Markdown bodies are linked as a directory beside it.
+  if [[ -f "$ROVO_PRIVATE_PROMPTS" ]]; then
+    link-agent-path "$ROVO_PRIVATE_PROMPTS" "$ROVO_HOME/prompts.yml"
+  else
+    log-info "Private Rovo prompts registry not found, skipping: $ROVO_PRIVATE_PROMPTS"
+  fi
+
+  if [[ -d "$ROVO_PRIVATE_PROMPT_DIR" ]]; then
+    link-agent-path "$ROVO_PRIVATE_PROMPT_DIR" "$ROVO_HOME/prompts"
+  else
+    log-info "Private Rovo prompts directory not found, skipping: $ROVO_PRIVATE_PROMPT_DIR"
+  fi
 
   # config.yml + mcp.json come from the private repo and are skipped on
   # devbox/RDE: the committed files have machine-specific absolute paths
@@ -75,13 +91,13 @@ setup-agents() {
   fi
 
   if [[ -f "$ROVO_PRIVATE_CONFIG" ]]; then
-    link-agent-file "$ROVO_PRIVATE_CONFIG" "$ROVO_HOME/config.yml"
+    link-agent-path "$ROVO_PRIVATE_CONFIG" "$ROVO_HOME/config.yml"
   else
     log-info "Private Rovo config not found, skipping: $ROVO_PRIVATE_CONFIG"
   fi
 
   if [[ -f "$ROVO_PRIVATE_MCP" ]]; then
-    link-agent-file "$ROVO_PRIVATE_MCP" "$ROVO_HOME/mcp.json"
+    link-agent-path "$ROVO_PRIVATE_MCP" "$ROVO_HOME/mcp.json"
   else
     log-info "Private Rovo mcp.json not found, skipping: $ROVO_PRIVATE_MCP"
   fi

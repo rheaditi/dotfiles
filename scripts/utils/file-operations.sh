@@ -17,8 +17,8 @@ backup-file() {
     return 1
   fi
 
-  if [[ ! -f "$file_path" && ! -L "$file_path" ]]; then
-    log-info "backup-file: File does not exist, no backup needed: $file_path"
+  if [[ ! -e "$file_path" && ! -L "$file_path" ]]; then
+    log-info "backup-file: Path does not exist, no backup needed: $file_path"
     return 0
   fi
 
