@@ -1,0 +1,156 @@
+# Global Git Ignore File
+# OS-specific and common development files to ignore across all repositories
+
+# Git credential file
+.gitconfig.local
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.AppleDouble
+.LSOverride
+.DocumentRevisions-V100
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# IDE and Editor files
+.classpath
+.idea
+.metadata
+.project
+.settings/
+.vscode
+*.sublime-project
+*.sublime-workspace
+*~
+
+# Vim
+.vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Emacs
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Common build artifacts and dependencies
+.npm
+.pnpm-store/
+.yarn-integrity
+.yarn/*
+bower_components
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+dist
+build
+target
+
+# Test Outputs
+.coverage
+.nyc_output
+coverage
+htmlcov
+junit.xml
+test-results
+test-reports
+
+# Logs & Caches
+.eslintcache
+.npm
+*.cache
+*.log
+*.log.*
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+.nyc_output
+
+# Dependency directories
+jspm_packages/
+
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.local
+.env.*
+.env.*.local
+
+# Temporary folders
+tmp/
+temp/
+
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Database
+*.sqlite
+*.db
+
+# Python
+*.pyc
+.venv
+
+# Private Files
+private

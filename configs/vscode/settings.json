@@ -1,0 +1,220 @@
+{
+  // ===========================================================================
+  // Editor — core behavior
+  // ===========================================================================
+  "editor.accessibilitySupport": "off",
+  "editor.detectIndentation": true,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.linkedEditing": true,
+  "editor.suggestSelection": "first",
+  "editor.gotoLocation.multipleDefinitions": "goto",
+
+  // Editor — appearance
+  "editor.fontFamily": "'Fira Code', 'Hasklig', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.cursorStyle": "line-thin",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.smoothScrolling": true,
+  "editor.minimap.enabled": false,
+  "editor.renderControlCharacters": true,
+  "editor.renderWhitespace": "all",
+  "editor.stickyScroll.enabled": true,
+  "editor.stickyScroll.scrollWithEditor": true,
+  "editor.rulers": [100, 120],
+
+  // Editor — formatting
+  "editor.formatOnSave": false,
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "never",
+    "source.organizeImports": "never"
+  },
+
+  // ===========================================================================
+  // Languages — JS / TS preferences
+  // ===========================================================================
+  "javascript.validate.enable": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.suggest.autoImports": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  // Languages — per-language default formatters
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[graphql]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+
+  // ===========================================================================
+  // ESLint
+  // ===========================================================================
+  "eslint.format.enable": true,
+  "eslint.ignoreUntitled": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "graphql"
+  ],
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+    "vue",
+    "markdown",
+    "graphql"
+  ],
+
+  // ===========================================================================
+  // Files
+  // ===========================================================================
+  "files.defaultLanguage": "markdown",
+  "files.associations": {
+    ".swcrc": "json",
+    ".env": "properties",
+    ".env.*": "properties",
+    "*.flow": "javascript",
+    "*.jsx": "javascriptreact",
+    "*.tsx": "typescriptreact",
+    "*rc": "shellscript",
+    "zshrc_default": "shellscript",
+    "*.nadel": "graphql",
+    "*.gitignore": "ignore",
+    "cmux.json": "jsonc"
+  },
+  // Hide only OS cruft / caches from the Explorer. Heavy build dirs
+  // (node_modules, target, etc.) are intentionally NOT hidden so they stay
+  // browsable — the perf win comes from files.watcherExclude below.
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true,
+    "**/.ruff_cache": true
+  },
+  // Don't file-watch large generated/build dirs — big perf win across
+  // JS/TS, Rust, Go, and Python projects.
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    "**/.turbo/**": true,
+    "**/.parcel-cache/**": true,
+    "**/dist/**": true,
+    "**/target/**": true,
+    "**/vendor/**": true,
+    "**/.git/**": true
+  },
+
+  // ===========================================================================
+  // Workbench & appearance
+  // ===========================================================================
+  "workbench.colorTheme": "Aura Dark (Soft Text)",
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.activityBar.location": "top",
+  "workbench.sideBar.location": "right",
+  "workbench.startupEditor": "newUntitledFile",
+  "window.zoomLevel": 1,
+
+  // Diff editor
+  "diffEditor.ignoreTrimWhitespace": true,
+  "diffEditor.hideUnchangedRegions.enabled": true,
+
+  // ===========================================================================
+  // Terminal
+  // ===========================================================================
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.scrollback": 9999,
+  "terminal.integrated.defaultProfile.linux": "zsh",
+
+  // ===========================================================================
+  // Git
+  // ===========================================================================
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.openRepositoryInParentFolders": "never",
+  "git.blame.editorDecoration.enabled": true,
+
+  // GitLens
+  "gitlens.gitCommands.closeOnFocusOut": true,
+  "gitlens.advanced.fileHistoryFollowsRenames": true,
+  "gitlens.statusBar.enabled": false,
+  "gitlens.mode.active": "review",
+  "gitlens.modes": {
+    "zen": {
+      "name": "Zen",
+      "statusBarItemName": "Zen",
+      "description": "for a zen-like experience, disables many visual features",
+      "codeLens": false,
+      "currentLine": true,
+      "hovers": true,
+      "statusBar": false
+    },
+    "review": {
+      "name": "Review",
+      "statusBarItemName": "Reviewing",
+      "description": "for reviewing code, enables many visual features",
+      "codeLens": true,
+      "currentLine": true,
+      "hovers": true
+    }
+  },
+
+  // ===========================================================================
+  // Other extensions
+  // ===========================================================================
+  "github.copilot.editor.enableAutoCompletions": true,
+  "vsicons.dontShowNewVersionMessage": true,
+
+  // ===========================================================================
+  // Telemetry & privacy
+  // ===========================================================================
+  "telemetry.telemetryLevel": "off",
+  "redhat.telemetry.enabled": false,
+  "chat.disableAIFeatures": true,
+
+  // ===========================================================================
+  // Security & profiles
+  // ===========================================================================
+  "security.workspace.trust.enabled": true,
+  "workbench.settings.applyToAllProfiles": [
+    "editor.fontSize"
+  ],
+  "go.toolsManagement.autoUpdate": true
+}

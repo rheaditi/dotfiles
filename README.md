@@ -1,6 +1,7 @@
 # rheaditi's dotfiles ✨
 
-A painstakingly curated collection of configs, scripts, and digital comfort blankets for macOS development on my personal and work machines (with some Ubuntu compatibility thrown in). Proceed with caution and a sense of adventure! 🚀
+A painstakingly curated collection of configs, scripts, and digital comfort blankets for macOS development on my personal and work machines (with some Ubuntu compatibility thrown in).
+Proceed with caution and a sense of adventure! 🚀
 
 <img width="419" alt="image" src="https://user-images.githubusercontent.com/6426069/159650696-f50e5175-0c2b-472e-a99d-01a3a0ee149c.png">
 
@@ -17,23 +18,25 @@ This setup includes configurations for:
 | Component      | Description |
 |----------------|-------------|
 | **Zsh**        | oh-my-zsh, custom aliases, functions, and prompt |
-| **iTerm2**     | Color schemes downloaded/converted from Visual Studio Code themes via [ditto-cli](https://www.npmjs.com/package/@campvanilla/ditto-cli) 🎨<br>_You can also preview these themes without applying them ([steps here](https://stackoverflow.com/questions/22943676/how-to-export-iterm2-profiles/23356086#23356086))_. |
+| **Terminal**   | **cmux** + Ghostty. Theme/font/colors in [`configs/ghostty/config`](configs/ghostty/config) (read by cmux via libghostty); cmux app settings in [`configs/cmux/cmux.json`](configs/cmux/). Symlinked by `setup.sh`. (The old iTerm2 config was removed — see git history if needed.) |
 | **VS Code**    | Settings and keybindings, et al. |
 | **Git**        | Configuration, global gitignore |
 | **SSH**        | Config template |
 | **macOS**      | System preferences via scripts |
 | **Homebrew**   | Package management for most tooling |
 | **Node.js**    | Development environment with nvm |
+| **AI agents**  | Shared `AGENTS.md` context composed from modular fragments ([`configs/agents/`](configs/agents/)) and symlinked to `~/.rovo/AGENTS.md` |
 
 ## Prerequisites 🛠️
 
 Before diving into _editing_ these files though, make sure you have:
 - **Zsh** & [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh#getting-started) installed
-- **iTerm2** ([download here](https://www.iterm2.com/downloads.html)) - optional but recommended
+- A terminal of your choice (**cmux** going forward; iTerm2 is now legacy)
 - **Xcode Command Line Tools** (will be installed automatically if missing)
 
 ## Installation 🎯
 
+There are **two entrypoints**, depending on what you need:
 
 ```sh
 # Create a cozy dev directory
@@ -41,26 +44,101 @@ mkdir -p ~/dev && cd ~/dev
 
 # Clone the magic
 git clone https://github.com/rheaditi/dotfiles.git
+cd dotfiles
+```
 
-# Let the scripts do their thing
-cd dotfiles && ./setup.sh
+These are my personal defaults. Before running `./bootstrap.sh` or
+`./setup.sh`, update the files below so you do not accidentally use my Git
+identity or local paths.
+
+<details>
+<summary><strong>Files to update before bootstrap</strong></summary>
+
+Create and commit your own profile and Git identity configuration before setup:
+
+```sh
+# Replace my profile with yours.
+cp configs/rheaditi.env configs/<username>.env
+rm configs/rheaditi.env
+
+# Replace my Git identity configuration with yours.
+cp configs/git/rheaditi.gitconfig configs/git/<username>.gitconfig
+rm configs/git/rheaditi.gitconfig
+```
+
+Update `configs/<username>.env` so `DOTFILES_USER_GITCONFIG` points to your new
+`configs/git/<username>.gitconfig`, then update that Git config with your name,
+email, signing key, and GitHub username. Commit both replacement files before
+running setup.
+
+You can also create an ignored `configs/local.env` for machine-specific
+overrides, such as a private work Git config:
+
+```sh
+DOTFILES_PRIVATE_GITCONFIG="$HOME/path/to/work.gitconfig"
+```
+
+See [`configs/git/README.md`](configs/git/README.md) for Git configuration
+precedence and devbox behavior.
+
+</details>
+
+### Quick: apply configuration only
+
+`setup.sh` only symlinks/applies config (zsh, git, ssh). It installs nothing,
+never prompts, and is safe to re-run anytime (e.g. after `git pull`):
+
+```sh
+./setup.sh
+```
+
+### Full: provision a fresh machine 🪄
+
+`bootstrap.sh` is the "spilled coffee" path — run it once on a new machine to
+**install tooling** (Homebrew, Node.js, packages) _and then_ apply all config.
+In an interactive terminal it asks you to confirm each install step; when run
+unattended (`NONINTERACTIVE=1`) it installs everything automatically. It also
+works cross-platform — macOS-only steps (Homebrew) are skipped on Linux:
+
+```sh
+./bootstrap.sh                    # confirm each install step
+NONINTERACTIVE=1 ./bootstrap.sh   # install everything, no prompts
 ```
 
 ### What Actually Happens
 
-The setup script runs through some additional steps based on the OS / some arguments:
-1. **macOS Setup** - Configures system preferences
-2. **Dotfiles Setup** - Symlinks config files to your home directory
-3. **Homebrew Setup** - Installs essential packages and apps
-4. **Node.js Setup** - Installs Node.js and global packages
-5. **Zsh Setup** - Configures shell environment
+`bootstrap.sh` is a strict superset of `setup.sh`:
+
+1. **Homebrew Setup** *(macOS)* - Installs Homebrew + packages from `scripts/brew/Brewfile`
+2. **Node.js Setup** - Installs nvm, Node.js (LTS), and yarn
+3. **Configuration** *(delegates to `setup.sh`)*:
+   - **Zsh** - oh-my-zsh, plugins, prompt
+   - **Git** - config + global gitignore
+   - **SSH** - symlinks `configs/ssh/config` → `~/.ssh/config`
+   - **Editor** - symlinks VS Code settings + keybindings
+   - **Terminal** - symlinks Ghostty config + cmux settings
+   - **AGENTS.md** - builds shared AI-agent context and symlinks it to
+     `~/.rovo/AGENTS.md`
+4. **VS Code extensions** - installs from `configs/vscode/extensions.txt`, but
+   only if the `code` CLI is on `PATH` (otherwise it's skipped with a reminder
+   to run `./scripts/setup.vscode-extensions.sh` later)
+
+Documentation lives in [`docs/`](docs/):
+
+- [**ARCHITECTURE.md**](docs/ARCHITECTURE.md) — how the repo is wired (two-tier
+  setup, public/private subtree model, path & env contracts, secrets).
+- [**SETUP.md**](docs/SETUP.md) — fresh-machine runbook (clone → bootstrap →
+  secrets → verify).
+- [**ai-native-plan.md**](docs/ai-native-plan.md) — the evolving roadmap and
+  design rationale.
 
 ## Manual Steps 📝
 
 After the automated setup, I also do the following:
 - **Install Fira Code font** ([download here](https://github.com/tonsky/FiraCode/releases))
 - **Reload the shell**: `source ~/.zshrc`
-- **Set up VS Code** (if needed): `./scripts/setup.vscode.sh`
+- **Install VS Code extensions** (once the `code` command is on `PATH`):
+  `./scripts/setup.vscode-extensions.sh`
 
 ## Customization 🎨
 

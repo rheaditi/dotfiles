@@ -1,0 +1,26 @@
+# Brewfile - declarative Homebrew package list
+# Install everything with: brew bundle --file scripts/brew/Brewfile
+#
+# Keep this list curated. Group by purpose and add a short comment for anything
+# non-obvious. Casks are GUI apps; formulae are CLI tools/libraries.
+
+# --- Core CLI utilities -------------------------------------------------------
+brew "coreutils"   # GNU core utilities (macOS ships outdated BSD versions)
+brew "tree"        # Directory tree visualization
+brew "gnupg"       # GPG for signing commits / encryption
+
+# --- Languages / toolchains ---------------------------------------------------
+brew "go"          # Go toolchain (compiler, go tool, gofmt)
+
+# --- Shell & prompt -----------------------------------------------------------
+# (oh-my-zsh and prompts are handled by scripts/setup.zsh.sh)
+
+# --- Fonts --------------------------------------------------------------------
+# Fira Code: programming font with ligatures (used by VS Code + cmux/Ghostty).
+cask "font-fira-code"
+
+# --- Apps (casks) -------------------------------------------------------------
+# Docker Desktop is intentionally NOT installed here: its cask requires an
+# interactive sudo prompt (privileged helper) that hangs non-interactive runs.
+# See the "manual steps" section at the end of bootstrap.sh.
+# (none yet — add cask "<app>" entries here)

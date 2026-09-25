@@ -1,0 +1,18 @@
+# VS Code extensions to auto-install (one ID per line).
+# Lines starting with '#' and blank lines are ignored.
+# Find an extension's ID on its Marketplace page or via `code --list-extensions`.
+# Installed idempotently by scripts/editor/setup-vscode.sh.
+
+# Atom-style keybindings
+ms-vscode.atom-keybindings
+
+# Formatting & linting
+esbenp.prettier-vscode
+dbaeumer.vscode-eslint
+
+# Icons
+vscode-icons-team.vscode-icons
+
+# Markdown & editor config
+davidanson.vscode-markdownlint
+editorconfig.editorconfig

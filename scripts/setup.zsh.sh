@@ -1,53 +1,58 @@
 #!/usr/bin/env bash
 
-function setupOhMyZshPlugins() {
-  local plugin_dir="${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+# Main Zsh Shell Setup Script
+# Orchestrates zsh installation, Oh My Zsh setup, and prompt configuration
 
-  if [ ! -d "$plugin_dir" ]; then
-    echo "zsh-syntax-highlighting plugin not found; installing..."
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$plugin_dir"
-    echo "✅ zsh-syntax-highlighting plugin installed"
-  else
-    echo "☑️ zsh-syntax-highlighting plugin already exists at \"$plugin_dir\""
-  fi
+# Get the directory of this script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+# Source utility functions
+source "$SCRIPT_DIR/utils/logging.sh"
+
+# Execute zsh shell setup
+log-step "Starting zsh shell setup..."
+
+# Step 1: Install zsh shell
+log-info "Running zsh installation..."
+"$SCRIPT_DIR/zsh/install-zsh.sh" || {
+  log-error "Failed to install zsh. Aborting setup."
+  exit 1
 }
 
-function setupPurePrompt() {
-  local pure_dir="$HOME/.zsh/pure"
-
-  if [ ! -d "$pure_dir" ]; then
-    echo "pure-prompt not found; installing..."
-    mkdir -p "$HOME/.zsh"
-    rm -rf "$HOME/.zsh/pure"
-    git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
-    echo "✅ pure-prompt installed"
-  else
-    echo "☑️ pure-prompt already exists at \"$pure_dir\""
-  fi
+# Step 2: Install Oh My Zsh framework and plugins
+log-info "Running Oh My Zsh setup..."
+"$SCRIPT_DIR/zsh/install-oh-my-zsh.sh" || {
+  log-error "Failed to set up Oh My Zsh. Aborting setup."
+  exit 1
 }
 
-function setupZsh() {
-  if ! command -v zsh &> /dev/null; then
-    echo "zsh shell not found; installing..."
-
-    if [[ $OSTYPE == 'darwin'* ]]; then
-      brew install zsh
-    else
-      sudo apt update
-      sudo apt install -y zsh
-    fi
-    echo "✅ zsh installed"
-  fi
-
-  if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    echo "Installing Oh My Zsh..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-    echo "✅ Oh My Zsh installed"
-  else
-    echo "☑️ Oh My Zsh already exists at \"$HOME/.oh-my-zsh\""
-  fi
+# Step 3: Install prompt themes
+log-info "Running prompts setup..."
+"$SCRIPT_DIR/zsh/install-prompts.sh" || {
+  log-error "Failed to set up prompts. Aborting setup."
+  exit 1
 }
 
-setupZsh;
-setupOhMyZshPlugins;
-setupPurePrompt;
+# Step 4: Set zsh as default shell
+log-info "Running default shell setup..."
+"$SCRIPT_DIR/zsh/set-default-shell.sh" || {
+  log-error "Failed to set up default shell. Aborting setup."
+  exit 1
+}
+
+# Step 5: Setup zsh configuration
+log-info "Running zshrc configuration setup..."
+"$SCRIPT_DIR/zsh/setup-zshrc.sh" || {
+  log-error "Failed to set up zsh configuration. Aborting setup."
+  exit 1
+}
+
+log-success "Zsh shell setup completed successfully!"
+log-info "Installed components:"
+log-info "  ✅ zsh shell"
+log-info "  ✅ Oh My Zsh framework"
+log-info "  ✅ zsh-syntax-highlighting plugin"
+log-info "  ✅ Pure prompt and Starship prompt"
+log-info "  ✅ Default shell configuration"
+log-info "  ✅ Zsh configuration files"
