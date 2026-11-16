@@ -7,8 +7,10 @@ Host github.com
   UseKeychain yes
   IdentityFile ~/.ssh/id_ed25519_personal
 
-# Bitbucket: Atlassian work.
+# Bitbucket: Atlassian work
+
 Host bitbucket.org
+  HostName ssh.bitbucket.org
   AddKeysToAgent yes
   UseKeychain yes
   IdentityFile ~/.ssh/id_ed25519_atlassian

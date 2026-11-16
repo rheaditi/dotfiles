@@ -19,6 +19,14 @@ Keys are selected **per host**, so the right identity is used automatically:
 All hosts use `AddKeysToAgent yes` and `UseKeychain yes` so passphrases are
 stored in the macOS Keychain.
 
+## Bitbucket SSH endpoint
+
+`HostName ssh.bitbucket.org` redirects existing Bitbucket SSH remotes; no URL
+changes needed. Apply separately on devboxes and other machines.
+
+Test with `ssh -T git@bitbucket.org`. Verify any new host-key prompt against
+Bitbucket's official fingerprints before accepting.
+
 ## Notes
 
 - **`UseKeychain` is Apple-specific.** It only works with Apple's bundled
